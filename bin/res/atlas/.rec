@@ -1,0 +1,42 @@
+D .
+D ani
+D bg
+R D844EB7C bg_blue.jpg
+R 00458892 bg_dark.jpg
+D sound
+R 1DC3ABD8 destroy.wav
+R FF0B6E8D hit.wav
+D sprite
+D ui
+P FF120F91 btn_start.png
+P C7EB43F8 btn_start1.png
+P E3D8FD38 btn_start2.png
+D ani/effect
+P 535B888E electric1.png
+P 5FEBF471 electric2.png
+P 0CAECAE5 explode1.png
+P 05CF1E10 explode2.png
+P 9A2D5935 explode3.png
+P 45AF3D93 explode4.png
+D ani/left
+P 71F41054 cat_a_1.png
+P 9CFA4538 cat_a_2.png
+P 8A7F0C6C cat_a_3.png
+P 3D8B7EC2 cat_b_1.png
+P B3B37B62 cat_b_2.png
+P E5839024 cat_b_3.png
+P 795B9922 rat1.png
+P D063E63B rat2.png
+P 11E32027 rat3.png
+P EB577EA3 rat4.png
+D ani/right
+P 5D6B1981 cat_a_1.png
+P 2F504B4F cat_a_2.png
+P C44E3C71 cat_a_3.png
+P 711BB1CF cat_b_1.png
+P 542F17DD cat_b_2.png
+P A656E119 cat_b_3.png
+P 6EE96C84 rat1.png
+P 5832CCF5 rat2.png
+P 5CBE891E rat3.png
+P 5D2B7464 rat4.png

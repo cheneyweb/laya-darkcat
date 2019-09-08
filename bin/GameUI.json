@@ -1,0 +1,1 @@
+{"type":"Scene","props":{"width":640,"height":1336},"compId":2,"child":[{"type":"Button","props":{"y":600,"x":257,"var":"btnStart","stateNum":2,"skin":"ui/btn_start.png","name":"btnStart","labelSize":20,"labelPadding":"80","labelBold":true,"label":"点击开始"},"compId":3}],"loadList":["ui/btn_start.png"],"loadList3D":[]}
