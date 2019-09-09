@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":11,
-    "selecteID":16,
+    "selectedBox":2,
+    "selecteID":37,
     "searchKey":"Scene,game",
     "props":{"width":640,"sceneColor":"#ffffff","name":"game","height":1336},
     "nodeParent":-1,
-    "maxID":37,
+    "maxID":38,
     "label":"game",
     "isOpen":true,
     "isDirectory":true,
@@ -66,14 +66,13 @@
             "props":{"y":0,"x":-20,"width":20,"visible":false,"name":"wallLeft","height":1336},
             "nodeParent":2,
             "label":"wallLeft",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":11,
             "child":[
                 {
-                    "x":30,
                     "type":"BoxCollider",
                     "switchAble":true,
                     "searchKey":"BoxCollider",
@@ -89,7 +88,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"RigidBody",
                     "switchAble":true,
                     "searchKey":"RigidBody",
@@ -323,6 +321,20 @@
                     "child":[
                         ]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,guide",
+            "props":{"y":0,"x":0,"visible":false,"texture":"sprite/guide.png","pivotY":27.5,"pivotX":19.5,"name":"guide"},
+            "nodeParent":2,
+            "label":"guide",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":37,
+            "child":[
+                ]
         },
         {
             "x":15,

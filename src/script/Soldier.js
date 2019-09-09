@@ -31,7 +31,7 @@ export default class Soldier extends Laya.Script {
     }
 
     // 设定速度和动画
-    setVelocity(other) {
+    setVelocity(other, e) {
         let owner = this.owner
         // 触碰变速
         if (other) {
@@ -86,6 +86,12 @@ export default class Soldier extends Laya.Script {
                 this._velocity.y *= -1
                 this._velocity.x = Math.random() * this._velocityRange
                 this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+            }
+        }
+        else if (e) {
+            if (!this._mouseCatched) {
+                this._velocity.x = (e.stageX - owner.x) / 100
+                this._velocity.y = (e.stageY - owner.y) / 100
             }
         }
         // 抓捕击杀后变速

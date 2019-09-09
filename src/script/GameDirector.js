@@ -23,6 +23,7 @@ export default class GameDirector extends Laya.Script {
         this._createEnemyInterval = 500                         //创建敌人时间间隔
         this._createBulletInterval = 500                        //创建子弹时间间隔
         this.bg = this.owner.getChildByName("bg")               //背景
+        this.guide = this.owner.getChildByName("guide")         //鼠标指引
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
         this.weaponArr = []
         this.weaponArr.push(this.owner.getChildByName("weapon"))
@@ -61,16 +62,15 @@ export default class GameDirector extends Laya.Script {
     onStageClick(e) {
         //停止事件冒泡，提高性能
         e.stopPropagation()
+        this.guide.pos(e.stageX, e.stageY)
         //控制士兵朝点击位置移动
-        let speedControl = 200 * Math.random()
-        let vx = (e.stageX - this.soldier.x) / speedControl
-        let vy = (e.stageY - this.soldier.y) / speedControl
-        this.soldier.getComponent(Laya.RigidBody).setVelocity({ x: vx, y: vy })
+        this.soldier && this.soldier.getComponent(Laya.Script).setVelocity(null, e)
     }
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
     startGame() {
         this._started = true
+        this.guide.visible = true
         this._createEnemy()
         this._createSoldier()
     }
@@ -80,6 +80,7 @@ export default class GameDirector extends Laya.Script {
         this._started = false
         this._countDown = 10
         this._createEnemyInterval = 1000
+        this.guide.visible = false
         this.spriteBox.removeChildren()
         for (let weapon of this.weaponArr) {
             weapon.visible = false
