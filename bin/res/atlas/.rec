@@ -7,13 +7,18 @@ D sound
 R 1DC3ABD8 destroy.wav
 R FF0B6E8D hit.wav
 D sprite
-P F984AAEB bullet.png
+P FC9B09B8 bullet.png
+P F984AAEB bulletW.png
 P D14A7757 bullet的副本.png
 P 6C870C49 chip.png
 P C70AB919 ring.png
 P 28CBEF32 weapon.png
 P 3E44A300 weaponCenter.png
+P 60D8F4E7 weaponCenterG.png
+P E79F7003 weaponCenterW.png
 P 062E13AF weaponRing.png
+P DC45FFB9 weaponRingG.png
+P 9C5B6E1F weaponRingW.png
 D ui
 R C9031B07 btn_pick.png
 P 8F4D32D4 btn_pick1.png

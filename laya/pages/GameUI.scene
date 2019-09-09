@@ -46,7 +46,7 @@
             "x":15,
             "type":"Label",
             "searchKey":"Label,labelCountDown,labelCountDown",
-            "props":{"y":0,"x":160,"visible":false,"var":"labelCountDown","name":"labelCountDown","fontSize":40,"color":"#CC3333","bold":true,"align":"center"},
+            "props":{"y":20,"x":0,"width":640,"visible":false,"var":"labelCountDown","name":"labelCountDown","fontSize":40,"color":"#CC3333","bold":true,"align":"center"},
             "nodeParent":2,
             "label":"labelCountDown",
             "isDirectory":false,

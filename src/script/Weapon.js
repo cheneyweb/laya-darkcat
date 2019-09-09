@@ -9,6 +9,7 @@ export default class Weapon extends Laya.Script {
     }
 
     onUpdate() {
-        // this.owner.rotation++;
+        let ring = this.owner.getChildByName('ring')
+        ring.rotation++;
     }
 }

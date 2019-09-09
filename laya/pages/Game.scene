@@ -1,12 +1,11 @@
 {
-    "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":7,
+    "selecteID":14,
     "searchKey":"Scene,game",
     "props":{"width":640,"sceneColor":"#ffffff","name":"game","height":1336},
     "nodeParent":-1,
-    "maxID":33,
+    "maxID":37,
     "label":"game",
     "isOpen":true,
     "isDirectory":true,
@@ -15,38 +14,19 @@
     "compId":2,
     "child":[
         {
-            "x":15,
-            "type":"UIView",
-            "source":"GameUI.scene",
-            "searchKey":"UIView,gameUI",
-            "props":{"y":0,"x":0,"runtime":"view/GameUI.js","name":"gameUI"},
-            "nodeParent":2,
-            "label":"gameUI",
-            "isOpen":true,
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":7,
-            "child":[
-                ],
-            "$HIDDEN":true
-        },
-        {
-            "x":15,
-            "type":"Texture",
-            "searchKey":"Texture,bg",
-            "props":{"y":1,"x":0,"width":640,"skin":"bg/bg_dark.jpg","name":"bg","height":1336},
+            "type":"Sprite",
+            "searchKey":"Sprite,bg",
+            "props":{"y":0,"x":0,"width":640,"texture":"bg/bg_dark.jpg","name":"bg","height":1336},
             "nodeParent":2,
             "label":"bg",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":3,
+            "compId":34,
             "child":[
                 ]
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,spriteBox",
             "props":{"name":"spriteBox"},
@@ -60,7 +40,6 @@
                 ]
         },
         {
-            "x":15,
             "type":"Script",
             "switchAble":true,
             "source":"src/script/GameDirector.js",
@@ -77,13 +56,12 @@
                 ]
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,wallLeft",
-            "props":{"y":-1,"x":-20,"width":20,"visible":false,"name":"wallLeft","height":1336},
+            "props":{"y":0,"x":-20,"width":20,"visible":false,"name":"wallLeft","height":1336},
             "nodeParent":2,
             "label":"wallLeft",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
@@ -121,7 +99,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,wallTop",
             "props":{"y":320,"x":-80,"width":800,"name":"wallTop","height":20},
@@ -166,7 +143,6 @@
             "$HIDDEN":false
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,wallRight",
             "props":{"y":0,"x":640,"width":20,"name":"wallRight","height":1336},
@@ -210,7 +186,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,wallBottom",
             "props":{"y":1100,"x":-80,"width":800,"name":"wallBottom","height":20},
@@ -254,7 +229,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Animation",
             "searchKey":"Animation,aniBomb",
             "props":{"visible":false,"source":"ani/Bomb.ani","name":"aniBomb"},
@@ -269,7 +243,6 @@
             "$HIDDEN":true
         },
         {
-            "x":15,
             "type":"Animation",
             "searchKey":"Animation,aniEat",
             "props":{"visible":false,"source":"ani/Eat.ani","name":"aniEat"},
@@ -284,10 +257,9 @@
             "$HIDDEN":true
         },
         {
-            "x":15,
             "type":"Sprite",
             "searchKey":"Sprite",
-            "props":{"y":1100,"x":320,"presetID":1,"preset":"laya/pages/prefab/Weapon.prefab"},
+            "props":{"y":300,"x":320,"visible":false,"presetID":1,"preset":"laya/pages/prefab/Weapon.prefab"},
             "nodeParent":2,
             "label":"weapon",
             "isOpen":null,
@@ -308,7 +280,52 @@
                     "compId":32,
                     "child":[
                         ]
+                },
+                {
+                    "type":"Script",
+                    "switchAble":true,
+                    "source":"src/script/Weapon.js",
+                    "searchKey":"Script,Weapon",
+                    "removeAble":true,
+                    "props":{"presetID":3,"preset":"laya/pages/prefab/Weapon.prefab"},
+                    "nodeParent":31,
+                    "label":"Weapon",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":35,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite",
+                    "props":{"presetID":4,"preset":"laya/pages/prefab/Weapon.prefab"},
+                    "nodeParent":31,
+                    "label":"Sprite(Weapon)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":36,
+                    "child":[
+                        ]
                 }]
+        },
+        {
+            "type":"UIView",
+            "source":"GameUI.scene",
+            "searchKey":"UIView,gameUI",
+            "props":{"y":0,"x":0,"runtime":"view/GameUI.js","name":"gameUI"},
+            "nodeParent":2,
+            "label":"gameUI",
+            "isOpen":true,
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":7,
+            "child":[
+                ],
+            "$HIDDEN":true
         }],
     "animations":[
         {

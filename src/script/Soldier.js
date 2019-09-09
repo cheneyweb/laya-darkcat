@@ -31,16 +31,37 @@ export default class Soldier extends Laya.Script {
 
     // 设定速度和动画
     setVelocity(other) {
+        let owner = this.owner
         // 触碰变速
         if (other) {
-            if (other.label === "mouse") {
+            if (other.label == "bullet") {
+                let effect = Laya.Pool.getItemByCreateFun("effect", this._createEffect, this)
+                effect.pos(owner.x, owner.y)
+                owner.parent.addChild(effect)
+                effect.play(0, true)
+                if (--this._hp > 0) {
+                    // if (other.label == "soldier") {
+                    //     // this.aniZombi.texture = 'ani/rat4.png'
+                    //     // this.aniZombi.clear()
+                    // }
+                    // this.textLevel.changeText(`${this._level}`)
+                    // owner.getComponent(Laya.RigidBody).setVelocity({ x: -10, y: 0 })
+                    Laya.SoundManager.playSound("sound/hit.wav")
+                }
+                else {
+                    owner.removeSelf()
+                    Laya.SoundManager.playSound("sound/destroy.wav")
+                }
+                // GameUI.instance.addScore(1)
+            }
+            else if (other.label === "mouse") {
                 if (!this._mouseCatched) {
                     this.ani.source = 'ani/Eat.ani'
                     this._velocity = { x: 0, y: 0 }
                     this._mouseCatched = other.owner.getComponent(Laya.Script)
                     // 自身血量减少
                     if (--this._hp == 0) {
-                        this.owner.removeSelf()
+                        owner.removeSelf()
                     }
                 }
             }
@@ -80,5 +101,15 @@ export default class Soldier extends Laya.Script {
             this.ani.source = "ani/LCat0.ani"
         }
         this.rigidBody.setVelocity(this._velocity)
+    }
+    _createEffect() {
+        //使用对象池创建爆炸动画
+        let ani = new Laya.Animation()
+        ani.loadAnimation("ani/Bomb.ani")
+        ani.on(Laya.Event.COMPLETE, null, () => {
+            ani.removeSelf()
+            Laya.Pool.recover("effect", ani)
+        })
+        return ani
     }
 }

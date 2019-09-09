@@ -35,8 +35,13 @@ export default class GameUI extends Laya.Scene {
     }
 
     countDown(countDown) {
-        this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
+        if (countDown <= 0) {
+            this.labelCountDown.changeText(`发现变异基因!消灭程序启动!`);
+        } else {
+            this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
+        }
     }
+
     /**增加分数 */
     // addScore(value) {
     //     this._score += value;

@@ -15,7 +15,7 @@ export default class Bullet extends Laya.Script {
 
     onUpdate() {
         //如果子弹超出屏幕，则移除子弹
-        if (this.owner.x < -10 || this.owner.x > 640 || this.owner.y < -10) {
+        if (this.owner.x < 0 || this.owner.x > Laya.stage.width || this.owner.y < 0 || this.owner.y > Laya.stage.height) {
             this.owner.removeSelf()
         }
     }
