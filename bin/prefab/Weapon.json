@@ -1,1 +1,1 @@
-{"type":"Sprite","props":{"presetID":1,"isPresetRoot":true,"x":0,"y":0},"compId":4,"loadList":[],"loadList3D":[]}
+{"type":"Sprite","props":{"y":0,"x":0,"texture":"sprite/weaponRing.png","presetID":1,"pivotY":68.5,"pivotX":64,"name":"weapon","isPresetRoot":true},"compId":31,"child":[{"type":"Sprite","props":{"y":24,"x":26,"texture":"sprite/weaponCenter.png","presetID":2},"compId":32}],"loadList":["sprite/weaponRing.png","sprite/weaponCenter.png"],"loadList3D":[]}

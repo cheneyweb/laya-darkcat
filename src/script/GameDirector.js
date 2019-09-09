@@ -16,11 +16,11 @@ export default class GameDirector extends Laya.Script {
         this._started = false                                   //是否已经开始游戏
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
         this._lastCreateBulletTime = Date.now()                 //上次创建子弹时间
-        this._createEnemyInterval = 1000                        //创建敌人时间间隔
-        this._createBulletInterval = 100                        //创建子弹时间间隔  
+        this._createEnemyInterval = 500                        //创建敌人时间间隔
+        this._createBulletInterval = 100                        //创建子弹时间间隔
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
-        // this.weaponArr = []
-        // this.weaponArr.push(this.owner.getChildByName("weapon1"))
+        this.weaponArr = []
+        this.weaponArr.push(this.owner.getChildByName("weapon"))
         // this.weaponArr.push(this.owner.getChildByName("weapon2"))
     }
 
@@ -33,10 +33,10 @@ export default class GameDirector extends Laya.Script {
                 this._createEnemy()
             }
             //每间隔一段时间创建子弹
-            // if (now - this._lastCreateBulletTime > this._createBulletInterval) {
-            //     this._lastCreateBulletTime = now
-            //     this._createBullet()
-            // }
+            if (now - this._lastCreateBulletTime > this._createBulletInterval) {
+                this._lastCreateBulletTime = now
+                this._createBullet()
+            }
         }
     }
 
@@ -45,13 +45,16 @@ export default class GameDirector extends Laya.Script {
         e.stopPropagation()
         //创建士兵
         if (this._started) {
-            // this._createSoldier(e)
+            this._createSoldier(e)
         }
     }
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
     startGame() {
         this._started = true
+        for (let weapon of this.weaponArr) {
+            weapon.visible = true
+        }
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */
@@ -59,6 +62,9 @@ export default class GameDirector extends Laya.Script {
         this._started = false
         this._createEnemyInterval = 1000
         this.spriteBox.removeChildren()
+        for (let weapon of this.weaponArr) {
+            weapon.visible = false
+        }
     }
 
     /**提升难度 */
@@ -92,13 +98,13 @@ export default class GameDirector extends Laya.Script {
         //使用对象池创建士兵
         let soldier = Laya.Pool.getItemByCreateFun("soldier", this.soldier.create, this.soldier)
         soldier.pos(e.stageX, e.stageY)
-        soldier.getComponent(Laya.RigidBody).setVelocity({ x: -1, y: 0 })
+        // soldier.getComponent(Laya.RigidBody).setVelocity({ x: -1, y: 0 })
         this.spriteBox.addChild(soldier)
     }
 
     _createBullet() {
-        //获取所有敌人,x坐标从大到小排序，0首位最近
-        let enemyArr = [...this._store.state.enemyMap.keys()].sort((a, b) => b.x - a.x)
+        //获取所有敌人,y坐标从大到小排序，0首位最近
+        let enemyArr = [...this._store.state.enemyMap.keys()].sort((a, b) => b.y - a.y)
         //获取所有武器
         for (let i = 0; i < this.weaponArr.length; i++) {
             let weapon = this.weaponArr[i]
@@ -108,13 +114,13 @@ export default class GameDirector extends Laya.Script {
                 //使用对象池创建子弹
                 let bullet = Laya.Pool.getItemByCreateFun("bullet", this.bullet.create, this.bullet)
                 //设定子弹初始位置
-                bullet.pos(weapon.x - 60, weapon.y)
+                bullet.pos(weapon.x, weapon.y - 60)
                 //设定子弹初速度
-                let vx = (enemyTarget.x - bullet.x) / 30
-                let vy = (enemyTarget.y - bullet.y) / 30
+                let vx = (enemyTarget.x - bullet.x) / 35
+                let vy = (enemyTarget.y - bullet.y) / 35
                 //武器旋转角度
-                // let rotation = Math.atan(vy / vx) / (Math.PI / 180)
-                // weapon.rotation = rotation
+                let rotation = Math.atan(vy / vx) / (Math.PI / 180)
+                weapon.rotation = -rotation
                 bullet.getComponent(Laya.RigidBody).setVelocity({ x: vx, y: vy })
                 this.spriteBox.addChild(bullet)
             }

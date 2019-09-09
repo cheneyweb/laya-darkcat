@@ -10,13 +10,12 @@ export default class Bullet extends Laya.Script {
     }
 
     onTriggerEnter(other, self, contact) {
-        //如果被碰到，则移除子弹
         this.owner.removeSelf()
     }
 
     onUpdate() {
         //如果子弹超出屏幕，则移除子弹
-        if (this.owner.x < -10) {
+        if (this.owner.x < -10 || this.owner.x > 640 || this.owner.y < -10) {
             this.owner.removeSelf()
         }
     }

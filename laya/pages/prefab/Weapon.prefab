@@ -1,1 +1,40 @@
-{"type":"Sprite","props":{"presetPre":"laya/pages/prefab/Bullet.prefab","presetIDPre":1,"preset":"laya/pages/prefab/Weapon.prefab","presetID":1,"isPresetRoot":true,"x":0,"y":0},"compId":4,"child":[],"isAniNode":true,"nodeParent":2,"searchKey":"Sprite","label":"Sprite(Bullet)","isDirectory":false,"hasChild":false,"x":15}
+{
+    "x":0,
+    "type":"Sprite",
+    "selectedBox":31,
+    "selecteID":32,
+    "searchKey":"Sprite,weapon",
+    "props":{"y":0,"x":0,"texture":"sprite/weaponRing.png","presetID":1,"preset":"laya/pages/prefab/Weapon.prefab","pivotY":68.5,"pivotX":64,"name":"weapon","isPresetRoot":true},
+    "nodeParent":-1,
+    "maxID":33,
+    "label":"weapon",
+    "isOpen":true,
+    "isDirectory":true,
+    "isAniNode":true,
+    "hasChild":true,
+    "compId":31,
+    "child":[
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite",
+            "props":{"y":24,"x":26,"texture":"sprite/weaponCenter.png","presetID":2,"preset":"laya/pages/prefab/Weapon.prefab"},
+            "nodeParent":31,
+            "label":"Sprite(Weapon)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":32,
+            "child":[
+                ]
+        }],
+    "animations":[
+        {
+            "nodes":[
+                ],
+            "name":"ani1",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        }]
+}
