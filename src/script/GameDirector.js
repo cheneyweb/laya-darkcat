@@ -16,7 +16,7 @@ export default class GameDirector extends Laya.Script {
         this._started = false                                   //是否已经开始游戏
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
         this._lastCreateBulletTime = Date.now()                 //上次创建子弹时间
-        this._createEnemyInterval = 500                        //创建敌人时间间隔
+        this._createEnemyInterval = 500                         //创建敌人时间间隔
         this._createBulletInterval = 100                        //创建子弹时间间隔
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
         this.weaponArr = []
@@ -35,7 +35,7 @@ export default class GameDirector extends Laya.Script {
             //每间隔一段时间创建子弹
             if (now - this._lastCreateBulletTime > this._createBulletInterval) {
                 this._lastCreateBulletTime = now
-                this._createBullet()
+                // this._createBullet()
             }
         }
     }
@@ -44,9 +44,9 @@ export default class GameDirector extends Laya.Script {
         //停止事件冒泡，提高性能
         e.stopPropagation()
         //创建士兵
-        if (this._started) {
-            this._createSoldier(e)
-        }
+        // if (this._started) {
+        //     this._createSoldier(e)
+        // }
     }
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
@@ -55,6 +55,7 @@ export default class GameDirector extends Laya.Script {
         for (let weapon of this.weaponArr) {
             weapon.visible = true
         }
+        this._createSoldier()
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */
@@ -97,7 +98,11 @@ export default class GameDirector extends Laya.Script {
     _createSoldier(e) {
         //使用对象池创建士兵
         let soldier = Laya.Pool.getItemByCreateFun("soldier", this.soldier.create, this.soldier)
-        soldier.pos(e.stageX, e.stageY)
+        if (e) {
+            soldier.pos(e.stageX, e.stageY)
+        } else {
+            soldier.pos(100, 800)
+        }
         // soldier.getComponent(Laya.RigidBody).setVelocity({ x: -1, y: 0 })
         this.spriteBox.addChild(soldier)
     }
