@@ -1,18 +1,19 @@
+import GameUI from "../view/GameUI"
+
 /**
  * 士兵脚本，实现士兵自主移动
  */
 export default class Soldier extends Laya.Script {
     constructor() { super() }
     onEnable() {
-        this._velocity = { x: -2, y: 0 }                            //方向速度                    
-        this._velocityRange = 2.5                                   //速度范围
-        this._hp = 100                                              //初始生命值
-
+        this._hp = 10                                               //初始生命值
+        this._velocityRange = 2.5                                   //速度范围        
+        this._velocity = { x: 0, y: 0 }                             //初始速度
         this._mouseCatched = null                                   //当前捉住的老鼠
 
+        this.ani = this.owner.getChildByName("aniCat")              //运动动画        
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)
-        this.rigidBody.setVelocity(this._velocity)
-        this.ani = this.owner.getChildByName("aniCat")              //运动动画
+        this.setVelocity()
     }
 
     onUpdate() {
@@ -35,7 +36,7 @@ export default class Soldier extends Laya.Script {
         // 触碰变速
         if (other) {
             if (other.label == "bullet") {
-                let effect = Laya.Pool.getItemByCreateFun("effect", this._createEffect, this)
+                let effect = Laya.Pool.getItemByCreateFun("hit", this._createEffect, this)
                 effect.pos(owner.x, owner.y)
                 owner.parent.addChild(effect)
                 effect.play(0, true)
@@ -51,6 +52,7 @@ export default class Soldier extends Laya.Script {
                 else {
                     owner.removeSelf()
                     Laya.SoundManager.playSound("sound/destroy.wav")
+                    GameUI.instance.endGame()
                 }
                 // GameUI.instance.addScore(1)
             }
@@ -105,10 +107,10 @@ export default class Soldier extends Laya.Script {
     _createEffect() {
         //使用对象池创建爆炸动画
         let ani = new Laya.Animation()
-        ani.loadAnimation("ani/Bomb.ani")
+        ani.loadAnimation("ani/Hit.ani")
         ani.on(Laya.Event.COMPLETE, null, () => {
             ani.removeSelf()
-            Laya.Pool.recover("effect", ani)
+            Laya.Pool.recover("hit", ani)
         })
         return ani
     }

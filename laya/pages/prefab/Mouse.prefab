@@ -2,7 +2,6 @@
     "x":0,
     "type":"Sprite",
     "selectedBox":4,
-    "selecteID":9,
     "searchKey":"Sprite",
     "props":{"y":0,"x":0,"presetPre":"laya/pages/prefab/Cat.prefab","presetIDPre":1,"presetID":1,"preset":"laya/pages/prefab/Mouse.prefab","pivotY":14,"pivotX":20.5,"isPresetRoot":true},
     "nodeParent":-1,

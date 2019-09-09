@@ -15,7 +15,7 @@ export default class GameDirector extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
         this._started = false                                   //是否已经开始游戏
-        this._countDown = 5
+        this._countDown = 10
         this._lastCountDownTime = Date.now()
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
         this._lastCreateBulletTime = Date.now()                 //上次创建子弹时间
@@ -43,11 +43,6 @@ export default class GameDirector extends Laya.Script {
                     }
                 }
             }
-            //每间隔一段时间创建敌人
-            if (now - this._lastCreateEnemyTime > this._createEnemyInterval) {
-                this._lastCreateEnemyTime = now
-                this._createEnemy()
-            }
             //每间隔一段时间创建子弹
             if (now - this._lastCreateBulletTime > this._createBulletInterval) {
                 this._lastCreateBulletTime = now
@@ -55,24 +50,35 @@ export default class GameDirector extends Laya.Script {
                     this._createBullet()
                 }
             }
+            //每间隔一段时间创建敌人
+            // if (now - this._lastCreateEnemyTime > this._createEnemyInterval) {
+            //     this._lastCreateEnemyTime = now
+            //     this._createEnemy()
+            // }
         }
     }
 
     onStageClick(e) {
         //停止事件冒泡，提高性能
         e.stopPropagation()
+        //控制士兵朝点击位置移动
+        let speedControl = 200 * Math.random()
+        let vx = (e.stageX - this.soldier.x) / speedControl
+        let vy = (e.stageY - this.soldier.y) / speedControl
+        this.soldier.getComponent(Laya.RigidBody).setVelocity({ x: vx, y: vy })
     }
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
     startGame() {
         this._started = true
+        this._createEnemy()
         this._createSoldier()
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */
     stopGame() {
         this._started = false
-        this._countDown = 30        
+        this._countDown = 10
         this._createEnemyInterval = 1000
         this.spriteBox.removeChildren()
         for (let weapon of this.weaponArr) {
@@ -89,14 +95,16 @@ export default class GameDirector extends Laya.Script {
 
     _createEnemy() {
         //使用对象池创建敌人
-        if (this._store.state.enemyMap.size < 20) {
-            // for (let i = 0; i < 10; i++) {
-            let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
-            enemy.pos(enemy.width + 40, Math.random() * 500 + 320)
-            this.spriteBox.addChild(enemy)
-            this._store.actions.addEnemy(enemy)
-            // }
+        // if (this._store.state.enemyMap.size < 20) {
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
+                enemy.pos(enemy.width + 40, Math.random() * 500 + 320)
+                this.spriteBox.addChild(enemy)
+                this._store.actions.addEnemy(enemy)
+            }, Math.random() * 5000)
         }
+        // }
     }
 
     _createSoldier(e) {
@@ -107,7 +115,6 @@ export default class GameDirector extends Laya.Script {
         } else {
             this.soldier.pos(100, 800)
         }
-        // soldier.getComponent(Laya.RigidBody).setVelocity({ x: -1, y: 0 })
         this.spriteBox.addChild(this.soldier)
     }
 
