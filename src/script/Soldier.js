@@ -16,7 +16,7 @@ export default class Soldier extends Laya.Script {
     }
 
     onUpdate() {
-        if (this._mouseCatched && !this._mouseCatched._hp) {
+        if (this._mouseCatched && this._mouseCatched._hp <= 0) {
             this.setVelocity()
         }
     }
@@ -69,8 +69,8 @@ export default class Soldier extends Laya.Script {
         else {
             this._mouseCatched = null
             this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.y = Math.random() * this._velocityRange            
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            this._velocity.y = Math.random() * this._velocityRange
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
         }
         // 根据速度调整方向

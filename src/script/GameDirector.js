@@ -77,7 +77,7 @@ export default class GameDirector extends Laya.Script {
 
     _createEnemy() {
         //使用对象池创建敌人
-        if (this._store.state.enemyMap.size < 200) {
+        if (this._store.state.enemyMap.size < 10) {
             // for (let i = 0; i < 10; i++) {
             let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
             enemy.pos(enemy.width + 20, Math.random() * 500 + 320)

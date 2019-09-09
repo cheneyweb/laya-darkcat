@@ -6,7 +6,7 @@ export default class Enemy extends Laya.Script {
     constructor() { super() }
     onEnable() {
         this._level = 1                                         //敌人等级
-        this._hp = Math.round(Math.random() * 3) + 1            //血量
+        this._hp = Math.round(Math.random() * 3) + 2            //血量
         this._lastHurtTime = Date.now()                         //上次掉血时间
         this._hurtInterval = 1000                               //掉血时间间隔
         this._velocity = { x: 1, y: 0 }                         //方向速度     
@@ -35,7 +35,7 @@ export default class Enemy extends Laya.Script {
             // 血量持续减少,为零时触发死亡效果
             if (now - this._lastHurtTime > this._hurtInterval) {
                 this._lastHurtTime = now
-                if (--this._hp == 0) {
+                if (--this._hp <= 0) {
                     let effect = Laya.Pool.getItemByCreateFun("effect", this._createEffect, this)
                     effect.pos(owner.x, owner.y)
                     owner.parent.addChild(effect)
