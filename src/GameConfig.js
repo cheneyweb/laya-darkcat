@@ -25,7 +25,7 @@ GameConfig.alignH = "center";
 GameConfig.startScene = "Game.scene";
 GameConfig.sceneRoot = "";
 GameConfig.debug = false;
-GameConfig.stat = true;
+GameConfig.stat = false;
 GameConfig.physicsDebug = false;
 GameConfig.exportSceneToJson = true;
 

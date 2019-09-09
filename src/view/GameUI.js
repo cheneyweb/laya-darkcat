@@ -21,6 +21,8 @@ export default class GameUI extends Laya.Scene {
     /**开始游戏 */
     beginGame() {
         this.btnStart.visible = false;
+        this.labelCountDown.changeText('剩余被发现时间:30s');
+        this.labelCountDown.visible = true;
         this._score = 0;
         this._director.startGame();
     }
@@ -28,9 +30,13 @@ export default class GameUI extends Laya.Scene {
     /**停止游戏 */
     endGame() {
         this.btnStart.visible = true;
+        this.labelCountDown.visible = false;
         this._director.stopGame();
     }
 
+    countDown(countDown) {
+        this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
+    }
     /**增加分数 */
     // addScore(value) {
     //     this._score += value;

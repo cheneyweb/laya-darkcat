@@ -15,6 +15,9 @@ P 28CBEF32 weapon.png
 P 3E44A300 weaponCenter.png
 P 062E13AF weaponRing.png
 D ui
+R C9031B07 btn_pick.png
+P 8F4D32D4 btn_pick1.png
+P B809B535 btn_pick2.png
 P FF120F91 btn_start.png
 P C7EB43F8 btn_start1.png
 P E3D8FD38 btn_start2.png

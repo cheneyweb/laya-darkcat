@@ -1,3 +1,4 @@
+import GameUI from "../view/GameUI"
 /**
  * 游戏导演控制类
  */
@@ -14,8 +15,11 @@ export default class GameDirector extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
         this._started = false                                   //是否已经开始游戏
+        this._countDown = 30
+        this._lastCountDownTime = Date.now()
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
         this._lastCreateBulletTime = Date.now()                 //上次创建子弹时间
+        this._countDownInterval = 1000
         this._createEnemyInterval = 500                         //创建敌人时间间隔
         this._createBulletInterval = 100                        //创建子弹时间间隔
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
@@ -27,6 +31,11 @@ export default class GameDirector extends Laya.Script {
     onUpdate() {
         let now = Date.now()
         if (this._started) {
+            //倒计时
+            if (now - this._lastCountDownTime >= this._countDownInterval) {
+                this._lastCountDownTime = now
+                GameUI.instance.countDown(this._countDown--)
+            }
             //每间隔一段时间创建敌人
             if (now - this._lastCreateEnemyTime > this._createEnemyInterval) {
                 this._lastCreateEnemyTime = now
