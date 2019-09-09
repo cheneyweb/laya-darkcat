@@ -62,9 +62,12 @@ export default class GameDirector extends Laya.Script {
     onStageClick(e) {
         //停止事件冒泡，提高性能
         e.stopPropagation()
-        this.guide.pos(e.stageX, e.stageY)
-        //控制士兵朝点击位置移动
-        this.soldier && this.soldier.getComponent(Laya.Script).setVelocity(null, e)
+        if (this._started) {
+            //显示鼠标指引
+            this.guide.pos(e.stageX, e.stageY)
+            //控制士兵朝点击位置移动
+            this.soldier && this.soldier.getComponent(Laya.Script).setVelocity(null, e)
+        }
     }
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
