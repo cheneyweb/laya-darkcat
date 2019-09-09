@@ -4,8 +4,8 @@
 export default class Soldier extends Laya.Script {
     constructor() { super() }
     onEnable() {
-        this._velocity = { x: -1, y: 0 }                            //方向速度                    
-        this._velocityRange = 1.5                                   //速度范围
+        this._velocity = { x: -2, y: 0 }                            //方向速度                    
+        this._velocityRange = 2.5                                   //速度范围
         this._hp = 100                                              //初始生命值
 
         this._mouseCatched = null                                   //当前捉住的老鼠
@@ -16,9 +16,9 @@ export default class Soldier extends Laya.Script {
     }
 
     onUpdate() {
-        if (this._mouseCatched && this._mouseCatched._hp <= 0) {
-            this.setVelocity()
-        }
+        // if (this._mouseCatched && this._mouseCatched._hp <= 0) {
+        //     this.setVelocity()
+        // }
     }
 
     onTriggerEnter(other, self, contact) {
@@ -69,7 +69,7 @@ export default class Soldier extends Laya.Script {
         else {
             this._mouseCatched = null
             this._velocity.x = Math.random() * this._velocityRange
-            this._velocity.y = Math.random() * this._velocityRange            
+            this._velocity.y = Math.random() * this._velocityRange
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
         }

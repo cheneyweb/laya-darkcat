@@ -12,11 +12,14 @@ export default class Enemy extends Laya.Script {
         this._velocity = { x: 1, y: 0 }                         //方向速度     
         this._velocityRange = 1.5                               //速度范围               
         this._isCatched = false                                 //是否被抓住
+        this._soldier = null
 
-        this.rigidBody = this.owner.getComponent(Laya.RigidBody)
-        this.rigidBody.setVelocity(this._velocity)
-        //运动动画
-        this.ani = this.owner.getChildByName("aniMouse")
+        this.owner.visible = true                               //初始可见
+
+        this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
+        this.ani = this.owner.getChildByName("aniMouse")        //运动动画
+        this.setVelocity()                                      //初始速度
+        
         //等级文本
         // this.textLevel = this.owner.getChildByName("textLevel")
         // this.textLevel.text = `${this._level}`
@@ -40,6 +43,7 @@ export default class Enemy extends Laya.Script {
                     effect.pos(owner.x, owner.y)
                     owner.parent.addChild(effect)
                     effect.play(0, true)
+                    this._soldier.setVelocity()
                     owner.removeSelf()
                     Laya.SoundManager.playSound("sound/destroy.wav")
                 }
@@ -87,8 +91,8 @@ export default class Enemy extends Laya.Script {
                 }
                 // GameUI.instance.addScore(1)
             } else if (other.label == "soldier") {// 没有被抓捕或被抓捕的是自己
-                let mouseCatched = other.owner.getComponent(Laya.Script)._mouseCatched
-                if (!mouseCatched || mouseCatched == this) {
+                this._soldier = other.owner.getComponent(Laya.Script)
+                if (!this._soldier._mouseCatched || this._soldier._mouseCatched == this) {
                     this._velocity = { x: 0, y: 0 }
                     this._isCatched = true
                     owner.visible = false
