@@ -19,13 +19,13 @@ export default class GameDirector extends Laya.Script {
         this._fakeCount = 5                                     //初始伪装次数
         this._fieldCount = 2                                    //初始化防护罩次数
         this._enemyCount = 10                                   //敌人数量
-        this._countDown = 10                                    //被发现倒计时
+        this._countDown = 30                                    //被发现倒计时
         this._lastCountDownTime = Date.now()                    //上次倒计时时间
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
         this._lastCreateBulletTime = Date.now()                 //上次创建子弹时间
         this._countDownInterval = 1000                          //倒计时时间间隔
         this._createEnemyInterval = 500                         //创建敌人时间间隔
-        this._createBulletInterval = 500                        //创建子弹时间间隔
+        this._createBulletInterval = 3000                       //创建子弹时间间隔
         this.bg = this.owner.getChildByName("bg")               //背景
         this.guide = this.owner.getChildByName("guide")         //鼠标指引
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
@@ -41,11 +41,13 @@ export default class GameDirector extends Laya.Script {
             if (now - this._lastCountDownTime >= this._countDownInterval) {
                 this._lastCountDownTime = now
                 GameUI.instance.countDown(this._countDown--)
-                if (this._countDown < 0) {
+                if (--this._countDown == 0) {
                     this.bg.texture = "bg/bg_blue.jpg"
                     for (let weapon of this.weaponArr) {
                         weapon.visible = true
                     }
+                    //播放背景音乐
+                    Laya.SoundManager.playMusic("sound/alert.mp3")
                 }
             }
             //每间隔一段时间创建子弹

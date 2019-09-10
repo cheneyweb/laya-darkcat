@@ -5,11 +5,11 @@
     "searchKey":"View",
     "props":{"sceneWidth":600,"sceneHeight":400,"sceneColor":"#ffffff"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":4,
     "label":"View",
-    "isDirectory":false,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {
@@ -33,7 +33,7 @@
                     "keyframes":{
                         "skin":[
                             {
-                                "value":"ani/right/cat_a_1.png",
+                                "value":"ani/right/cat_0_1.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -41,7 +41,7 @@
                                 "index":0
                             },
                             {
-                                "value":"ani/right/cat_a_2.png",
+                                "value":"ani/right/cat_0_2.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -49,7 +49,7 @@
                                 "index":1
                             },
                             {
-                                "value":"ani/right/cat_a_3.png",
+                                "value":"ani/right/cat_0_3.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,

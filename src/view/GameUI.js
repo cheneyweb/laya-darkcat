@@ -10,6 +10,8 @@ export default class GameUI extends Laya.Scene {
         Laya.MouseManager.multiTouchEnabled = false;
         //加载场景文件
         this.loadScene("GameUI.scene");
+        //播放背景音乐
+        Laya.SoundManager.playMusic("sound/bg.mp3")
     }
 
     onEnable() {
@@ -33,12 +35,11 @@ export default class GameUI extends Laya.Scene {
 
         this.btnFake.label = `伪装 X${this._director._fakeCount}`
         this.btnField.label = `防护罩 X${this._director._fieldCount}`
-
         this._director.startGame();
     }
 
     /**停止游戏 */
-    endGame() {
+    endGame() {        
         this.btnGift.visible = false;
         this.btnField.visible = false;
         this.btnFake.visible = false;
@@ -52,6 +53,8 @@ export default class GameUI extends Laya.Scene {
             // Laya.Pool.recover("hit", ani)
             this.die.visible = false
             this.btnStart.visible = true;
+            //播放背景音乐
+            Laya.SoundManager.playMusic("sound/bg.mp3")
         })
     }
 
