@@ -18,6 +18,7 @@ export default class GameDirector extends Laya.Script {
         this._giftCount = 30                                    //初始狗尾巴草数量
         this._fakeCount = 5                                     //初始伪装次数
         this._fieldCount = 2                                    //初始化防护罩次数
+        this._enemyCount = 10                                   //敌人数量
         this._countDown = 10                                    //被发现倒计时
         this._lastCountDownTime = Date.now()                    //上次倒计时时间
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
@@ -119,7 +120,7 @@ export default class GameDirector extends Laya.Script {
     _createEnemy() {
         //使用对象池创建敌人
         // if (this._store.state.enemyMap.size < 20) {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < this._enemyCount; i++) {
             setTimeout(() => {
                 let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
                 enemy.pos(enemy.width + 40, Math.random() * 500 + 320)
