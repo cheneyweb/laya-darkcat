@@ -78,21 +78,21 @@ export default class Enemy extends Laya.Script {
             this.setVelocity()
         }
         // 移动到下边界
-        if (this.owner.y > (Laya.stage.height - this._store.state.downRange)) {
+        else if (this.owner.y > (Laya.stage.height - this._store.state.downRange)) {
             this._velocity.y *= -1
             this._velocity.x = Math.random() * this._velocityRange
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
             this.setVelocity()
         }
         // 移动到左边界
-        if (this.owner.x < 0) {
+        else if (this.owner.x < 0) {
             this._velocity.x *= -1
             this._velocity.y = Math.random() * this._velocityRange
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
             this.setVelocity()
         }
         // 移动到右边界
-        if (this.owner.x > Laya.stage.width) {
+        else if (this.owner.x > Laya.stage.width) {
             this._velocity.x *= -1
             this._velocity.y = Math.random() * this._velocityRange
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
