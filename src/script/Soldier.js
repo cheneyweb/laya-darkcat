@@ -6,7 +6,7 @@ import GameUI from "../view/GameUI"
 export default class Soldier extends Laya.Script {
     constructor() { super() }
     onEnable() {
-        this._hp = 10                                               //初始生命值
+        this._hp = 100                                               //初始生命值
         this._velocityRange = 2.5                                   //速度范围        
         this._velocity = { x: 0, y: 0 }                             //初始速度
         this._mouseCatched = null                                   //当前捉住的老鼠
@@ -20,6 +20,8 @@ export default class Soldier extends Laya.Script {
         // if (this._mouseCatched && this._mouseCatched._hp <= 0) {
         //     this.setVelocity()
         // }
+        //如果走到边界
+        this.checkRange()
     }
 
     onTriggerEnter(other, self, contact) {
@@ -28,6 +30,38 @@ export default class Soldier extends Laya.Script {
 
     onDisable() {
         Laya.Pool.recover("soldier", this.owner)
+    }
+
+    // 检查边界
+    checkRange() {
+        // 移动到上边界
+        if (this.owner.y < 320) {
+            this._velocity.y *= -1
+            this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()
+        }
+        // 移动到下边界
+        if (this.owner.y > (Laya.stage.height - 220)) {
+            this._velocity.y *= -1
+            this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()            
+        }
+        // 移动到左边界
+        if (this.owner.x < 0) {
+            this._velocity.x *= -1
+            this._velocity.y = Math.random() * this._velocityRange
+            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()            
+        }
+        // 移动到右边界
+        if (this.owner.x > Laya.stage.width) {
+            this._velocity.x *= -1
+            this._velocity.y = Math.random() * this._velocityRange
+            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()            
+        }
     }
 
     // 设定速度和动画
@@ -67,26 +101,6 @@ export default class Soldier extends Laya.Script {
                     }
                 }
             }
-            else if (other.label === "wallRight") {
-                this._velocity.x *= -1
-                this._velocity.y = Math.random() * this._velocityRange
-                this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-            }
-            else if (other.label === "wallLeft") {
-                this._velocity.x *= -1
-                this._velocity.y = Math.random() * this._velocityRange
-                this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-            }
-            else if (other.label === "wallTop") {
-                this._velocity.y *= -1
-                this._velocity.x = Math.random() * this._velocityRange
-                this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            }
-            else if (other.label === "wallBottom") {
-                this._velocity.y *= -1
-                this._velocity.x = Math.random() * this._velocityRange
-                this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            }
         }
         else if (e) {
             if (!this._mouseCatched) {
@@ -110,6 +124,7 @@ export default class Soldier extends Laya.Script {
         }
         this.rigidBody.setVelocity(this._velocity)
     }
+
     _createEffect() {
         //使用对象池创建爆炸动画
         let ani = new Laya.Animation()

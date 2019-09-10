@@ -49,8 +49,8 @@ export default class Enemy extends Laya.Script {
                 }
             }
         }
-        //让持续盒子旋转
-        // this.owner.rotation++;
+        //如果走到边界
+        this.checkRange()
     }
 
     onTriggerEnter(other, self, contact) {
@@ -66,6 +66,38 @@ export default class Enemy extends Laya.Script {
         Laya.store.actions.delEnemy(this.owner)
     }
 
+    // 检查边界
+    checkRange() {
+        // 移动到上边界
+        if (this.owner.y < 320) {
+            this._velocity.y *= -1
+            this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()
+        }
+        // 移动到下边界
+        if (this.owner.y > (Laya.stage.height - 220)) {
+            this._velocity.y *= -1
+            this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()
+        }
+        // 移动到左边界
+        if (this.owner.x < 0) {
+            this._velocity.x *= -1
+            this._velocity.y = Math.random() * this._velocityRange
+            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()
+        }
+        // 移动到右边界
+        if (this.owner.x > Laya.stage.width) {
+            this._velocity.x *= -1
+            this._velocity.y = Math.random() * this._velocityRange
+            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+            this.setVelocity()
+        }
+    }
+
     // 设定速度和动画
     setVelocity(other) {
         // 触碰变速
@@ -79,28 +111,7 @@ export default class Enemy extends Laya.Script {
                     owner.visible = false
                 }
             }
-            else if (other.label === "wallRight") {
-                this._velocity.x *= -1
-                this._velocity.y = Math.random() * this._velocityRange
-                this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-            }
-            else if (other.label === "wallLeft") {
-                this._velocity.x *= -1
-                this._velocity.y = Math.random() * this._velocityRange
-                this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-            }
-            else if (other.label === "wallTop") {
-                this._velocity.y *= -1
-                this._velocity.x = Math.random() * this._velocityRange
-                this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            }
-            else if (other.label === "wallBottom") {
-                this._velocity.y *= -1
-                this._velocity.x = Math.random() * this._velocityRange
-                this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            }
         }
-
         // 根据速度调整方向
         if (this._velocity.x > 0) {
             this.ani.source = "ani/RMouse0.ani"
