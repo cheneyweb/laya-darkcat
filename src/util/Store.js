@@ -61,6 +61,8 @@ class Store {
  */
 const store = new Store({
     state: {
+        upRange: 320,
+        downRange: 220,
         player: { nickname: 'cheney' },
         enemyMap: new Map(),
         bulletMap: new Map()
