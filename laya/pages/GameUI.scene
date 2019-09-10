@@ -101,7 +101,7 @@
             "x":15,
             "type":"Animation",
             "searchKey":"Animation,die,die",
-            "props":{"y":0,"x":0,"width":640,"visible":false,"var":"die","source":"ani/Die.ani","name":"die","height":1336},
+            "props":{"y":442,"x":0,"width":640,"visible":false,"var":"die","source":"ani/Die.ani","name":"die","height":451},
             "nodeParent":2,
             "label":"die",
             "isDirectory":false,
