@@ -33,7 +33,7 @@
                     "keyframes":{
                         "skin":[
                             {
-                                "value":"ani/right/cat_0_1.png",
+                                "value":"ani/right/cat_1_1.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -41,7 +41,7 @@
                                 "index":0
                             },
                             {
-                                "value":"ani/right/cat_0_2.png",
+                                "value":"ani/right/cat_1_2.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -49,7 +49,7 @@
                                 "index":1
                             },
                             {
-                                "value":"ani/right/cat_0_3.png",
+                                "value":"ani/right/cat_1_3.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
