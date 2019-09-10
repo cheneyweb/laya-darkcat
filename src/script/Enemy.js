@@ -5,6 +5,9 @@ import GameUI from "../view/GameUI"
 export default class Enemy extends Laya.Script {
     constructor() { super() }
     onEnable() {
+        this._upRange = 320                                     //上安全区
+        this._downRange = 220                                   //下安全区
+        
         this._level = 1                                         //敌人等级
         this._hp = Math.round(Math.random() * 3) + 2            //血量
         this._lastHurtTime = Date.now()                         //上次掉血时间
@@ -69,14 +72,14 @@ export default class Enemy extends Laya.Script {
     // 检查边界
     checkRange() {
         // 移动到上边界
-        if (this.owner.y < 320) {
+        if (this.owner.y < this._upRange) {
             this._velocity.y *= -1
             this._velocity.x = Math.random() * this._velocityRange
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
             this.setVelocity()
         }
         // 移动到下边界
-        if (this.owner.y > (Laya.stage.height - 220)) {
+        if (this.owner.y > (Laya.stage.height - this._downRange)) {
             this._velocity.y *= -1
             this._velocity.x = Math.random() * this._velocityRange
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
