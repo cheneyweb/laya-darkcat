@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":8,
+    "selecteID":11,
     "searchKey":"Scene",
     "props":{"width":640,"sceneColor":"#ffffff","height":1336},
     "nodeParent":-1,
-    "maxID":9,
+    "maxID":12,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -18,17 +18,16 @@
             "x":15,
             "type":"Button",
             "searchKey":"Button,btnStart,btnStart",
-            "props":{"y":566,"x":167,"width":305,"var":"btnStart","stateNum":"2","name":"btnStart","labelSize":30,"labelPadding":"185","labelColors":"black,grey,grey","labelBold":true,"label":"点击开始","height":340},
+            "props":{"y":566,"x":167,"width":305,"var":"btnStart","stateNum":"2","name":"btnStart","labelSize":30,"labelPadding":"185","labelColors":"white,black","labelBold":true,"label":"点击开始","height":340},
             "nodeParent":2,
             "label":"btnStart",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":4,
             "child":[
                 {
-                    "x":30,
                     "type":"Animation",
                     "searchKey":"Animation",
                     "props":{"source":"ani/PickMe.ani","autoPlay":true},
@@ -53,6 +52,48 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":8,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,btnField",
+            "props":{"y":1160,"x":472,"stateNum":"2","skin":"ui/btn_field.png","name":"btnField","labelSize":20,"labelPadding":"75","labelColors":"white,black","label":"防护罩"},
+            "nodeParent":2,
+            "label":"btnField",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":9,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,btnFake",
+            "props":{"y":1160,"x":257,"stateNum":"2","skin":"ui/btn_fake.png","name":"btnFake","labelSize":20,"labelPadding":"75","labelColors":"white,black","label":"伪装"},
+            "nodeParent":2,
+            "label":"btnFake",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":10,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,btnGift",
+            "props":{"y":1160,"x":41,"stateNum":"2","skin":"ui/btn_gift.png","name":"btnGift","labelSize":20,"labelPadding":"75","labelColors":"white,black","label":"尾巴草"},
+            "nodeParent":2,
+            "label":"btnGift",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":11,
             "child":[
                 ]
         }],
