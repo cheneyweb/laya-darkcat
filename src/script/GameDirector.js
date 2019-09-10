@@ -15,11 +15,14 @@ export default class GameDirector extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
         this._started = false                                   //是否已经开始游戏
-        this._countDown = 10
-        this._lastCountDownTime = Date.now()
+        this._giftCount = 30                                    //初始狗尾巴草数量
+        this._fakeCount = 5                                     //初始伪装次数
+        this._fieldCount = 2                                    //初始化防护罩次数
+        this._countDown = 10                                    //被发现倒计时
+        this._lastCountDownTime = Date.now()                    //上次倒计时时间
         this._lastCreateEnemyTime = Date.now()                  //上次刷新敌人时间
         this._lastCreateBulletTime = Date.now()                 //上次创建子弹时间
-        this._countDownInterval = 1000
+        this._countDownInterval = 1000                          //倒计时时间间隔
         this._createEnemyInterval = 500                         //创建敌人时间间隔
         this._createBulletInterval = 500                        //创建子弹时间间隔
         this.bg = this.owner.getChildByName("bg")               //背景
@@ -64,9 +67,13 @@ export default class GameDirector extends Laya.Script {
         e.stopPropagation()
         if (this._started) {
             //显示鼠标指引
-            this.guide.pos(e.stageX, e.stageY)
-            //控制士兵朝点击位置移动
-            this.soldier && this.soldier.getComponent(Laya.Script).setVelocity(null, e)
+            if (this._giftCount > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
+                this.guide.pos(e.stageX, e.stageY)
+                //控制士兵朝点击位置移动
+                this.cat && this.cat.getComponent(Laya.Script).setVelocity(null, e)
+                //更新狗尾巴草库存
+                GameUI.instance.giftCount(--this._giftCount)
+            }
         }
     }
 
@@ -82,8 +89,12 @@ export default class GameDirector extends Laya.Script {
     stopGame() {
         this._started = false
         this._countDown = 10
+        this._giftCount = 30
+        this._fakeCount = 5
+        this._fieldCount = 2
         this._createEnemyInterval = 1000
         this.guide.visible = false
+        this.bg.texture = "bg/bg_dark.jpg"
         this.spriteBox.removeChildren()
         for (let weapon of this.weaponArr) {
             weapon.visible = false
@@ -95,6 +106,14 @@ export default class GameDirector extends Laya.Script {
         if (this._createEnemyInterval > 600) {
             this._createEnemyInterval -= 10
         }
+    }
+
+    /**开启伪装 */
+    openFake() {
+    }
+
+    /**开启防护罩 */
+    openField() {
     }
 
     _createEnemy() {
@@ -113,13 +132,14 @@ export default class GameDirector extends Laya.Script {
 
     _createSoldier(e) {
         //使用对象池创建士兵
-        this.soldier = Laya.Pool.getItemByCreateFun("soldier", this.soldier.create, this.soldier)
+        // this.cat = Laya.Pool.getItemByCreateFun("soldier", this.soldier.create, this.soldier)
+        this.cat = this.soldier.create()
         if (e) {
-            this.soldier.pos(e.stageX, e.stageY)
+            this.cat.pos(e.stageX, e.stageY)
         } else {
-            this.soldier.pos(100, 800)
+            this.cat.pos(Laya.stage.width / 2, Laya.stage.height / 2)
         }
-        this.spriteBox.addChild(this.soldier)
+        this.spriteBox.addChild(this.cat)
     }
 
     _createBullet() {
@@ -129,7 +149,7 @@ export default class GameDirector extends Laya.Script {
         for (let i = 0; i < this.weaponArr.length; i++) {
             let weapon = this.weaponArr[i]
             // let enemyTarget = enemyArr[i]
-            let enemyTarget = this.soldier
+            let enemyTarget = this.cat
             //武器准备好且敌人出现了
             if (enemyTarget) {
                 //使用对象池创建子弹

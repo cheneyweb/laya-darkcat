@@ -16,29 +16,70 @@ export default class GameUI extends Laya.Scene {
         this._director = GameDirector.instance;
         //点击开始游戏
         this.btnStart.on(Laya.Event.CLICK, this, this.beginGame);
+        //点击伪装
+        this.btnFake.on(Laya.Event.CLICK, this, this.openFake);
+        //点击防护罩
+        this.btnField.on(Laya.Event.CLICK, this, this.openField);
     }
 
     /**开始游戏 */
     beginGame() {
         this.btnStart.visible = false;
+        this.btnField.visible = false;
+        this.btnFake.visible = false;
+        this.btnGift.visible = true;
         this.labelCountDown.changeText('剩余被发现时间:30s');
         this.labelCountDown.visible = true;
-        this._score = 0;
+
+        this.btnFake.label = `伪装 X${this._director._fakeCount}`
+        this.btnField.label = `防护罩 X${this._director._fieldCount}`
+
         this._director.startGame();
     }
 
     /**停止游戏 */
     endGame() {
-        this.btnStart.visible = true;
+        this.btnGift.visible = false;
+        this.btnField.visible = false;
+        this.btnFake.visible = false;
         this.labelCountDown.visible = false;
         this._director.stopGame();
+
+        this.die.visible = true
+        this.die.play(0, false)
+        this.die.on(Laya.Event.COMPLETE, null, () => {
+            // ani.removeSelf()
+            // Laya.Pool.recover("hit", ani)
+            this.die.visible = false
+            this.btnStart.visible = true;
+        })
     }
 
     countDown(countDown) {
         if (countDown <= 0) {
             this.labelCountDown.changeText(`发现变异基因!消灭程序启动!`);
+            this.btnField.visible = true;
+            this.btnFake.visible = true;
         } else {
             this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
+        }
+    }
+
+    giftCount(giftCount) {
+        this.btnGift.label = `狗尾巴草 X${giftCount}`
+    }
+
+    openFake() {
+        if (this._director._fakeCount > 0) {
+            this.btnFake.label = `伪装 X${--this._director._fakeCount}`
+            this._director.openFake()
+        }
+    }
+
+    openField() {
+        if (this._director._fieldCount > 0) {
+            this.btnField.label = `防护罩 X${--this._director._fieldCount}`
+            this._director.openField()
         }
     }
 

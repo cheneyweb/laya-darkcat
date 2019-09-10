@@ -8,7 +8,7 @@ export default class Soldier extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                    //全局状态
         
-        this._hp = 100                                               //初始生命值
+        this._hp = 10                                               //初始生命值
         this._velocityRange = 2.5                                   //速度范围        
         this._velocity = { x: 0, y: 0 }                             //初始速度
         this._mouseCatched = null                                   //当前捉住的老鼠
@@ -31,7 +31,7 @@ export default class Soldier extends Laya.Script {
     }
 
     onDisable() {
-        Laya.Pool.recover("soldier", this.owner)
+        // Laya.Pool.recover("soldier", this.owner)
     }
 
     // 检查边界
@@ -99,7 +99,7 @@ export default class Soldier extends Laya.Script {
                     this._mouseCatched = other.owner.getComponent(Laya.Script)
                     // 自身血量减少
                     if (--this._hp == 0) {
-                        owner.removeSelf()
+                        // owner.removeSelf()
                     }
                 }
             }
