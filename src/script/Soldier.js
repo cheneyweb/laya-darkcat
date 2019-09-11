@@ -14,7 +14,7 @@ export default class Soldier extends Laya.Script {
         this._velocityRange = 2.5                                   //速度范围
         this._velocity = { x: 0, y: 0 }                             //初始速度
         this._isTease = false                                       //是否正在玩耍
-        this._teaseTimeOut = 2000                                   //玩耍动画时间
+        this._teaseTimeOut = 1500                                   //玩耍动画时间
         this._teaseTimeStart = Date.now()                           //上次玩耍时间
         this._mouseCatched = null                                   //当前捉住的老鼠
 
@@ -99,20 +99,25 @@ export default class Soldier extends Laya.Script {
             //     }
             //     // GameUI.instance.addScore(1)
             // }
-            // else 
+            // else
             if (other.label === "mouse") {
                 if (!this._mouseCatched) {
                     this.ani.source = `ani/${this._orientation}/Eat${this._level}.ani`
+                    this._velocityTemp = this._velocity
                     this._velocity = { x: 0, y: 0 }
                     this._mouseCatched = other.owner.getComponent(Laya.Script)
                     Laya.SoundManager.playSound("sound/hit.wav")
                 }
             } else if (other.label === "guide") {
-                this.ani.source = `ani/tease/Cat${this._level}.ani`
-                this._isTease = true
-                this._teaseTimeStart = Date.now()
-                this._velocity = { x: 0, y: 0 }
-                // Laya.SoundManager.playSound("sound/hit.wav")
+                console.log(other.owner.visible)
+                if (other.owner.visible) {
+                    other.owner.visible = false
+                    this.ani.source = `ani/tease/Cat${this._level}.ani`
+                    this._isTease = true
+                    this._teaseTimeStart = Date.now()
+                    this._velocity = { x: 0, y: 0 }
+                    // Laya.SoundManager.playSound("sound/hit.wav")
+                }
             }
         }
         // 引导
@@ -125,10 +130,16 @@ export default class Soldier extends Laya.Script {
         // 击杀
         else {
             this._mouseCatched = null
-            this._velocity.x = Math.random() * this._velocityRange
-            this._velocity.y = Math.random() * this._velocityRange
-            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+            if (this._velocityTemp) {
+                this._velocity = this._velocityTemp
+            }
+            else {
+                this._velocity.x = Math.random() * this._velocityRange
+                this._velocity.y = Math.random() * this._velocityRange
+                this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+                this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+            }
+
         }
         // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {

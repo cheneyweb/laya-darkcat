@@ -58,7 +58,7 @@ export default class Enemy extends Laya.Script {
     onDisable() {
         //敌人被移除时，回收敌人，方便下次复用，减少对象创建开销
         Laya.Pool.recover("enemy", this.owner)
-        // Laya.store.actions.delEnemy(this.owner)
+        Laya.store.actions.delEnemy(this.owner)
     }
 
     // 检查边界

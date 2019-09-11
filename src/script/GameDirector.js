@@ -70,7 +70,7 @@ export default class GameDirector extends Laya.Script {
         e.stopPropagation()
         if (this._started) {
             //显示鼠标指引
-            if (e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
+            if (this._store.state.enemyMap.size > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
                 this.guide.pos(e.stageX, e.stageY)
                 this.guide.visible = true
                 //控制朝指引方向移动
@@ -110,7 +110,7 @@ export default class GameDirector extends Laya.Script {
             let areaHeight = Laya.stage.height - this._store.state.upRange - this._store.state.downRange
             enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
             this.spriteBox.addChild(enemy)
-            // this._store.actions.addEnemy(enemy)
+            this._store.actions.addEnemy(enemy)
         }
         // }
     }
