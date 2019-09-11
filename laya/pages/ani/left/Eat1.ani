@@ -34,7 +34,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":-55,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,
@@ -43,7 +43,7 @@
                             }],
                         "x":[
                             {
-                                "value":-60,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,
@@ -66,6 +66,24 @@
                                 "target":4,
                                 "key":"skin",
                                 "index":1
+                            }],
+                        "anchorY":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"anchorY",
+                                "index":0
+                            }],
+                        "anchorX":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"anchorX",
+                                "index":0
                             }]
                     }
                 }],

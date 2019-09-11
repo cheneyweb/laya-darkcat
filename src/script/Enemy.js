@@ -8,8 +8,8 @@ export default class Enemy extends Laya.Script {
         this._store = Laya.store                                //全局状态
 
         this._orientation = 'right'                             //当前方向
-        this._level = 1                                         //初始等级
-        this._hp = Math.round(Math.random() * 2) + 2            //血量
+        // this._level = 1                                         //初始等级
+        this._hp = 2//Math.round(Math.random() * 2) + 2            //血量
         this._lastHurtTime = Date.now()                         //上次掉血时间
         this._hurtInterval = 1000                               //掉血时间间隔
         this._velocity = { x: 1, y: 0 }                         //方向速度 

@@ -5,11 +5,12 @@
     "searchKey":"View",
     "props":{"sceneWidth":600,"sceneHeight":400,"sceneColor":"#ffffff"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":4,
     "label":"View",
-    "isDirectory":false,
+    "isOpen":null,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {
@@ -33,7 +34,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":-84.5,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -42,7 +43,7 @@
                             }],
                         "x":[
                             {
-                                "value":-80.5,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -65,6 +66,24 @@
                                 "target":3,
                                 "key":"skin",
                                 "index":1
+                            }],
+                        "anchorY":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"anchorY",
+                                "index":0
+                            }],
+                        "anchorX":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"anchorX",
+                                "index":0
                             }]
                     }
                 }],

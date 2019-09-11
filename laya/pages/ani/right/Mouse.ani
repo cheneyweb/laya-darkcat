@@ -74,6 +74,24 @@
                                 "target":3,
                                 "key":"skin",
                                 "index":2
+                            }],
+                        "anchorY":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"anchorY",
+                                "index":0
+                            }],
+                        "anchorX":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"anchorX",
+                                "index":0
                             }]
                     }
                 }],
