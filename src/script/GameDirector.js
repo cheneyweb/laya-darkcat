@@ -75,7 +75,7 @@ export default class GameDirector extends Laya.Script {
                 this.guide.pos(e.stageX, e.stageY)
                 this.guide.visible = true
                 //控制朝指引方向移动
-                this.cat && this.cat.getComponent(Laya.Script).setVelocity(null, e)
+                this.cat && this.cat.getComponent(Laya.Script).guide(e)
             }
         }
     }

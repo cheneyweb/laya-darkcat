@@ -12,15 +12,16 @@ export default class Enemy extends Laya.Script {
         this._hp = 2//Math.round(Math.random() * 2) + 2            //血量
         this._lastHurtTime = Date.now()                         //上次掉血时间
         this._hurtInterval = 1000                               //掉血时间间隔
-        this._velocity = { x: 1, y: 0 }                         //方向速度 
-        this._velocityRange = 1.5                               //速度范围               
+        this._velocity = { x: 0, y: 0 }                         //方向速度
+        this._velocityBase = 0.5                                //基础速度
+        this._velocityRange = 1                                 //速度范围               
         this._isCatched = false                                 //是否被抓住
         this._soldier = null
 
 
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
         this.ani = this.owner.getChildByName("aniMouse")        //运动动画
-        this.setVelocity()                                      //初始速度
+        this.free()                                             //初始速度
 
         this.owner.visible = true                               //初始可见
     }
@@ -38,7 +39,7 @@ export default class Enemy extends Laya.Script {
                     effect.pos(owner.x, owner.y)
                     owner.parent.addChild(effect)
                     effect.play(0, true)
-                    this._soldier.setVelocity()
+                    this._soldier.free()
                     owner.removeSelf()
                     Laya.SoundManager.playSound("sound/destroy.wav")
                 }
@@ -49,7 +50,7 @@ export default class Enemy extends Laya.Script {
     }
 
     onTriggerEnter(other, self, contact) {
-        this.setVelocity(other)
+        this._setVelocity(other)
     }
 
     // onTriggerExit(other, self, contact) {
@@ -66,35 +67,44 @@ export default class Enemy extends Laya.Script {
         // 移动到上边界
         if (this.owner.y < this._store.state.upRange) {
             this._velocity.y *= -1
-            this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            this.setVelocity()
+            this._setVelocity()
         }
         // 移动到下边界
         else if (this.owner.y > (Laya.stage.height - this._store.state.downRange)) {
             this._velocity.y *= -1
-            this._velocity.x = Math.random() * this._velocityRange
+            this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            this.setVelocity()
+            this._setVelocity()
         }
         // 移动到左边界
         else if (this.owner.x < 0) {
             this._velocity.x *= -1
-            this._velocity.y = Math.random() * this._velocityRange
+            this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-            this.setVelocity()
+            this._setVelocity()
         }
         // 移动到右边界
         else if (this.owner.x > Laya.stage.width) {
             this._velocity.x *= -1
-            this._velocity.y = Math.random() * this._velocityRange
+            this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-            this.setVelocity()
+            this._setVelocity()
         }
     }
 
+    // 自由
+    free() {
+        this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
+        this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
+        this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+        this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+        this._setVelocity()
+    }
+
     // 设定速度和动画
-    setVelocity(other) {
+    _setVelocity(other) {
         // 触碰变速
         if (other) {
             let owner = this.owner
