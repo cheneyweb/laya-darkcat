@@ -34,7 +34,7 @@ export default class Enemy extends Laya.Script {
             if (now - this._lastHurtTime > this._hurtInterval) {
                 this._lastHurtTime = now
                 if (--this._hp <= 0) {
-                    let effect = Laya.Pool.getItemByCreateFun("effect", this._createEffect, this)
+                    let effect = Laya.Pool.getItemByCreateFun("explode", this._createEffect, this)
                     effect.pos(owner.x, owner.y)
                     owner.parent.addChild(effect)
                     effect.play(0, true)
@@ -116,10 +116,10 @@ export default class Enemy extends Laya.Script {
     _createEffect() {
         //使用对象池创建爆炸动画
         let ani = new Laya.Animation()
-        ani.loadAnimation("ani/Bomb.ani")
+        ani.loadAnimation("ani/Explode.ani")
         ani.on(Laya.Event.COMPLETE, null, () => {
             ani.removeSelf()
-            Laya.Pool.recover("effect", ani)
+            Laya.Pool.recover("explode", ani)
         })
         return ani
     }

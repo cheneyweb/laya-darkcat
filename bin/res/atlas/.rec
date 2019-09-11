@@ -3,7 +3,7 @@ D ani
 D bg
 R D844EB7C bg_blue.jpg
 R 00458892 bg_dark.jpg
-P 0ED19863 bg_white.png
+R DA528249 bg_white.jpg
 D level
 P D7B20736 level_01.png
 P D6BCDC43 level_02.png
@@ -27,7 +27,6 @@ R FF0B6E8D hit.wav
 D sprite
 P FC9B09B8 bullet.png
 P F984AAEB bulletW.png
-P 6C870C49 chip.png
 P F41CC02F guardCenter.png
 P D53229F5 guardRing.png
 P 1816B6DF guide.png
@@ -187,6 +186,7 @@ R 7A9F7C34 die_83.jpg
 R CE0578D7 die_84.jpg
 R 4EC9EF73 die_85.jpg
 D ani/effect
+P 6C870C49 chip.png
 P 535B888E electric1.png
 P 5FEBF471 electric2.png
 P A0FAE8FE explode0.png

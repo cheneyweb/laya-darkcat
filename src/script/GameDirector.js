@@ -81,14 +81,14 @@ export default class GameDirector extends Laya.Script {
     /**开始游戏，通过激活本脚本方式开始游戏*/
     startGame() {
         this._started = true
-        this.bg.texture = "bg/bg_dark.png"
+        this.bg.visible = true
         this._createSoldier()
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */
     stopGame() {
         this._started = false
-        this.bg.texture = "bg/bg_white.png"
+        this.bg.visible = false
         this.spriteBox.removeChildren()
     }
 
