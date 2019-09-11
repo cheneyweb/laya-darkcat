@@ -5,11 +5,11 @@
     "searchKey":"View",
     "props":{"sceneWidth":600,"sceneHeight":400,"sceneColor":"#ffffff"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":4,
     "label":"View",
-    "isDirectory":false,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {
@@ -31,6 +31,24 @@
                 {
                     "target":3,
                     "keyframes":{
+                        "y":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":0
+                            }],
+                        "x":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":0
+                            }],
                         "skin":[
                             {
                                 "value":"ani/surround/surround_13.png",
@@ -887,6 +905,24 @@
                                 "target":3,
                                 "key":"skin",
                                 "index":106
+                            }],
+                        "anchorY":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"anchorY",
+                                "index":0
+                            }],
+                        "anchorX":[
+                            {
+                                "value":0.5,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"anchorX",
+                                "index":0
                             }]
                     }
                 }],

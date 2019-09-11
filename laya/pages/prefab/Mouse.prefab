@@ -2,11 +2,10 @@
     "x":0,
     "type":"Sprite",
     "selectedBox":4,
-    "selecteID":6,
     "searchKey":"Sprite",
     "props":{"presetPre":"laya/pages/prefab/Cat.prefab","presetIDPre":1,"presetID":1,"preset":"laya/pages/prefab/Mouse.prefab","isPresetRoot":true},
     "nodeParent":-1,
-    "maxID":11,
+    "maxID":13,
     "label":"Sprite(Mouse)",
     "isOpen":true,
     "isDirectory":true,
@@ -30,38 +29,6 @@
         },
         {
             "x":15,
-            "type":"BoxCollider",
-            "switchAble":true,
-            "searchKey":"BoxCollider",
-            "removeAble":true,
-            "props":{"y":0,"x":0,"width":41,"presetID":3,"preset":"laya/pages/prefab/Mouse.prefab","label":"mouse","height":28},
-            "nodeParent":4,
-            "label":"BoxCollider(Mouse)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":6,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"RigidBody",
-            "switchAble":true,
-            "searchKey":"RigidBody",
-            "removeAble":true,
-            "props":{"type":"kinematic","presetID":4,"preset":"laya/pages/prefab/Mouse.prefab","group":-1},
-            "nodeParent":4,
-            "label":"RigidBody(Mouse)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":7,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"Script",
             "switchAble":true,
             "source":"src/script/Enemy.js",
@@ -74,6 +41,38 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":9,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"BoxCollider",
+            "switchAble":true,
+            "searchKey":"BoxCollider",
+            "removeAble":true,
+            "props":{"y":-14,"x":-20.5,"width":41,"presetID":6,"preset":"laya/pages/prefab/Mouse.prefab","label":"mouse","height":28,"friction":0},
+            "nodeParent":4,
+            "label":"BoxCollider(Mouse)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":11,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"RigidBody",
+            "switchAble":true,
+            "searchKey":"RigidBody",
+            "removeAble":true,
+            "props":{"type":"kinematic","presetID":7,"preset":"laya/pages/prefab/Mouse.prefab","group":-1},
+            "nodeParent":4,
+            "label":"RigidBody(Mouse)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":12,
             "child":[
                 ]
         }],
