@@ -14,6 +14,7 @@ export default class GameDirector extends Laya.Script {
         this._store = Laya.store                                //全局状态
         this._started = false                                   //是否已经开始游戏
         this._enemyCount = 3                                    //敌人数量
+        this._clickCount = 0                                    //屏幕点击次数
 
         this.bg = this.owner.getChildByName("bg")               //背景
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
@@ -70,7 +71,7 @@ export default class GameDirector extends Laya.Script {
         e.stopPropagation()
         if (this._started) {
             //显示鼠标指引
-            if (this._store.state.enemyMap.size > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
+            if (this._clickCount++ > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
                 this.guide.pos(e.stageX, e.stageY)
                 this.guide.visible = true
                 //控制朝指引方向移动
@@ -83,7 +84,6 @@ export default class GameDirector extends Laya.Script {
     startGame() {
         this._started = true
         this.bg.visible = true
-        this.guide.visible = true
         this._createSoldier()
         //播放背景音乐
         Laya.SoundManager.playMusic("sound/bg.mp3")

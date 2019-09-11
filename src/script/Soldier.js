@@ -109,7 +109,6 @@ export default class Soldier extends Laya.Script {
                     Laya.SoundManager.playSound("sound/hit.wav")
                 }
             } else if (other.label === "guide") {
-                console.log(other.owner.visible)
                 if (other.owner.visible) {
                     other.owner.visible = false
                     this.ani.source = `ani/tease/Cat${this._level}.ani`
