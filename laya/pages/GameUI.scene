@@ -87,7 +87,7 @@
             "x":15,
             "type":"Button",
             "searchKey":"Button,btnShare,btnShare",
-            "props":{"y":120,"x":20,"visible":false,"var":"btnShare","stateNum":"2","skin":"ui/btn_share.png","name":"btnShare","labelSize":15,"labelPadding":"25","labelColors":"white,black","label":"分享"},
+            "props":{"y":125,"x":20,"visible":false,"var":"btnShare","stateNum":"2","skin":"ui/btn_share.png","name":"btnShare","labelSize":15,"labelPadding":"25","labelColors":"white,black","label":"分享"},
             "nodeParent":2,
             "label":"btnShare",
             "isDirectory":false,
