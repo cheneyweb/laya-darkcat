@@ -65,7 +65,7 @@ const store = new Store({
         downRange: 220,
         player: { nickname: 'cheney' },
         enemyMap: new Map(),
-        bulletMap: new Map()
+        // bulletMap: new Map()
     },
     actions: {
         // 玩家登录

@@ -7,29 +7,22 @@ export default class Enemy extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
 
-        this._level = 1                                         //敌人等级
+        this._orientation = 'right'                             //当前方向
+        this._level = 1                                         //初始等级
         this._hp = Math.round(Math.random() * 2) + 2            //血量
         this._lastHurtTime = Date.now()                         //上次掉血时间
         this._hurtInterval = 1000                               //掉血时间间隔
-        this._velocity = { x: 1, y: 0 }                         //方向速度     
+        this._velocity = { x: 1, y: 0 }                         //方向速度 
         this._velocityRange = 1.5                               //速度范围               
         this._isCatched = false                                 //是否被抓住
         this._soldier = null
 
-        this.owner.visible = true                               //初始可见
 
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
         this.ani = this.owner.getChildByName("aniMouse")        //运动动画
         this.setVelocity()                                      //初始速度
 
-        //等级文本
-        // this.textLevel = this.owner.getChildByName("textLevel")
-        // this.textLevel.text = `${this._level}`
-
-        // this.aniZombi = this.owner.getChildByName("aniZombi")
-        //僵尸动画
-        // this.aniZombi = this.owner.getChildByName("aniZombi")
-        // this.aniZombi.play(0, true)
+        this.owner.visible = true                               //初始可见
     }
 
     onUpdate() {
@@ -59,8 +52,8 @@ export default class Enemy extends Laya.Script {
         this.setVelocity(other)
     }
 
-    onTriggerExit(other, self, contact) {
-    }
+    // onTriggerExit(other, self, contact) {
+    // }
 
     onDisable() {
         //敌人被移除时，回收敌人，方便下次复用，减少对象创建开销
@@ -115,11 +108,8 @@ export default class Enemy extends Laya.Script {
             }
         }
         // 根据速度调整方向
-        if (this._velocity.x > 0) {
-            this.ani.source = "ani/RMouse0.ani"
-        } else if (this._velocity.x < 0) {
-            this.ani.source = "ani/LMouse0.ani"
-        }
+        this._orientation = this._velocity.x > 0 ? 'right' : 'left'
+        this.ani.source = `ani/${this._orientation}/Mouse.ani`
         this.rigidBody.setVelocity(this._velocity)
     }
 

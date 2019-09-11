@@ -1,17 +1,9 @@
 D .
 D ani
-R 82378AEC 《僵尸猫末日》游戏素材-动物-猫12(Cats12)_爱给网_aigei_com 2.png
-P EDD955C9 《僵尸猫末日》游戏素材-动物-猫13(Cats13)_爱给网_aigei_com 2.png
-P BA0162D8 《僵尸猫末日》游戏素材-动物-猫13(Cats13)_爱给网_aigei_com 2的副本 2.png
-P 7D1388ED 《僵尸猫末日》游戏素材-动物-猫13(Cats13)_爱给网_aigei_com 2的副本.png
-P 6A5909B6 《僵尸猫末日》游戏素材-动物-猫13(Cats13)_爱给网_aigei_com.png
-R F5BA1A04 《僵尸猫末日》游戏素材-动物-猫1_4_8(Cats1_4__爱给网_aigei_com.png
-R 795715BD 《僵尸猫末日》游戏素材-动物-猫2_7(Cats2_7)_爱给网_aigei_com.png
-R 0ADD9303 《僵尸猫末日》游戏素材-动物-猫5(Cats5)_爱给网_aigei_com.png
-R 3C779424 《僵尸猫末日》游戏素材-动物-猫6(Cats6)_爱给网_aigei_com.png
 D bg
 R D844EB7C bg_blue.jpg
 R 00458892 bg_dark.jpg
+P 0ED19863 bg_white.png
 D level
 P D7B20736 level_01.png
 P D6BCDC43 level_02.png
@@ -35,12 +27,10 @@ R FF0B6E8D hit.wav
 D sprite
 P FC9B09B8 bullet.png
 P F984AAEB bulletW.png
-P D14A7757 bullet的副本.png
 P 6C870C49 chip.png
 P F41CC02F guardCenter.png
 P D53229F5 guardRing.png
 P 1816B6DF guide.png
-P EF444924 guide的副本.png
 P C70AB919 ring.png
 P 28CBEF32 weapon.png
 P 3E44A300 weaponCenter.png
@@ -49,26 +39,49 @@ P E79F7003 weaponCenterW.png
 P 062E13AF weaponRing.png
 P DC45FFB9 weaponRingG.png
 P 9C5B6E1F weaponRingW.png
-D ui
-P C5942E5C btn_fake.png
+D tmp
+P 86406EEC btn_cat1.png
+P 100D27D0 btn_cat2.png
 P EBF86ACB btn_fake0.png
 P 015F0FE0 btn_fake0的副本.png
 P 745B2039 btn_fake1.png
-P CB5C6331 btn_field.png
-P 96A6AB7A btn_gift.png
 P 99777F29 btn_gift0.png
 P 9BFC2642 btn_gift1.png
-R C9031B07 btn_pick.png
-P 8F4D32D4 btn_pick1.png
-P B809B535 btn_pick2.png
-P FF120F91 btn_start.png
+P AAE2B859 btn_mouse1.png
+P 51DFE99F btn_mouse2.png
 P C7EB43F8 btn_start1.png
 P E3D8FD38 btn_start2.png
+P F56C3B65 btn_tease1.png
+P 9A084D79 btn_tease2.png
 P 6D761F2C btnField1.png
 P 28CBEF32 btnField2.png
 P 8E00E9CE btnGuard0.png
 P 7FF614EB btnGuard1.png
+P D14A7757 bullet的副本.png
+P 542F17DD cat_b_2.png
+P D53229F5 guardRing.png
+P EF444924 guide的副本.png
+P 5832CCF5 rat2.png
+P 9C5B6E1F weaponRingW.png
+R 82378AEC 《僵尸猫末日》游戏素材-动物-猫12(Cats12)_爱给网_aigei_com 2.png
+R F5BA1A04 《僵尸猫末日》游戏素材-动物-猫1_4_8(Cats1_4__爱给网_aigei_com.png
+R 795715BD 《僵尸猫末日》游戏素材-动物-猫2_7(Cats2_7)_爱给网_aigei_com.png
+R 0ADD9303 《僵尸猫末日》游戏素材-动物-猫5(Cats5)_爱给网_aigei_com.png
+R 3C779424 《僵尸猫末日》游戏素材-动物-猫6(Cats6)_爱给网_aigei_com.png
 P EF444924 《僵尸猫末日》游戏素材-动物-金色狗尾草(golden_se_爱给网_aigei_com.png
+D ui
+P 6B203CD9 btn_cat.png
+P C5942E5C btn_fake.png
+P CB5C6331 btn_field.png
+P 96A6AB7A btn_gift.png
+P 6F3CB6F3 btn_gold.png
+P C7C10D48 btn_mouse.png
+R C9031B07 btn_pick.png
+P 8F4D32D4 btn_pick1.png
+P B809B535 btn_pick2.png
+P 3C8A88F3 btn_share.png
+P FF120F91 btn_start.png
+P B55D06F8 btn_tease.png
 D ani/center
 P 053041A0 cat_2_1.png
 P F0774A84 cat_2_2.png
@@ -94,6 +107,11 @@ P FBE78107 eat_9_1.png
 P 8BEC6E42 eat_9_2.png
 P 11BF5B17 eat_9_3.png
 D ani/die
+P AEA8015E cat_1_1.png
+P 193E970A cat_1_2.png
+P DB9ED40B killCat1.png
+P 08EB61A6 killCat2.png
+D ani/ed
 R DDCE93E7 die_12.jpg
 R E1F596EC die_13.jpg
 R E0EA2F21 die_14.jpg
@@ -169,8 +187,6 @@ R 7A9F7C34 die_83.jpg
 R CE0578D7 die_84.jpg
 R 4EC9EF73 die_85.jpg
 D ani/effect
-P 193E970A blood1.png
-P AEA8015E blood2.png
 P 535B888E electric1.png
 P 5FEBF471 electric2.png
 P A0FAE8FE explode0.png
@@ -178,8 +194,11 @@ P 2B3A7C28 explode1.png
 P A68ACA2F explode2.png
 P C4417DA6 explode3.png
 P DA1250E7 explode4.png
-P DB9ED40B killCat1.png
-P 08EB61A6 killCat2.png
+D ani/evolution
+P EDD955C9 cat_12_1.png
+P 6A5909B6 cat_12_2.png
+P BA0162D8 cat_12_3.png
+P 7D1388ED cat_12_4.png
 D ani/left
 P 0B65445A cat_10_1.png
 P D9F6645D cat_10_2.png

@@ -18,73 +18,61 @@ export default class GameUI extends Laya.Scene {
         this._director = GameDirector.instance;
         //点击开始游戏
         this.btnStart.on(Laya.Event.CLICK, this, this.beginGame);
-        //点击伪装
-        this.btnFake.on(Laya.Event.CLICK, this, this.openFake);
-        //点击防护罩
-        this.btnField.on(Laya.Event.CLICK, this, this.openField);
+        //点击释放食物
+        this.btnFood.on(Laya.Event.CLICK, this, this._director.releaseFood);
+        //点击赚取金币
+        this.btnGold.on(Laya.Event.CLICK, this, this.earnGold);
+        //点击分享
+        this.btnShare.on(Laya.Event.CLICK, this, this.share);
     }
 
     /**开始游戏 */
     beginGame() {
         this.btnStart.visible = false;
-        this.btnField.visible = false;
-        this.btnFake.visible = false;
-        this.btnGift.visible = true;
-        this.labelCountDown.changeText('剩余被发现时间:30s');
-        this.labelCountDown.visible = true;
-
-        this.btnFake.label = `伪装 X${this._director._fakeCount}`
-        this.btnField.label = `防护罩 X${this._director._fieldCount}`
+        this.btnFood.visible = true;
+        this.btnGold.visible = true;
+        this.btnShare.visible = true;
+        // this.labelTip.changeText('剩余被发现时间:30s');
+        // this.labelTip.visible = true;
         this._director.startGame();
     }
 
     /**停止游戏 */
-    endGame() {        
-        this.btnGift.visible = false;
-        this.btnField.visible = false;
-        this.btnFake.visible = false;
-        this.labelCountDown.visible = false;
+    endGame() {
+        this.btnStart.visible = true;
+        this.btnFood.visible = false;
+        this.btnGold.visible = false;
+        this.btnShare.visible = false;
+        // this.labelTip.visible = false;
         this._director.stopGame();
 
-        this.die.visible = true
-        this.die.play(0, false)
-        this.die.on(Laya.Event.COMPLETE, null, () => {
-            // ani.removeSelf()
-            // Laya.Pool.recover("hit", ani)
-            this.die.visible = false
-            this.btnStart.visible = true;
-            //播放背景音乐
-            Laya.SoundManager.playMusic("sound/bg.mp3")
-        })
+        // this.die.visible = true
+        // this.die.play(0, false)
+        // this.die.on(Laya.Event.COMPLETE, null, () => {
+        //     // ani.removeSelf()
+        //     // Laya.Pool.recover("hit", ani)
+        //     this.die.visible = false
+        //     this.btnStart.visible = true;
+        //     //播放背景音乐
+        //     Laya.SoundManager.playMusic("sound/bg.mp3")
+        // })
     }
 
-    countDown(countDown) {
-        if (countDown <= 0) {
-            this.labelCountDown.changeText(`发现变异基因!消灭程序启动!`);
-            this.btnField.visible = true;
-            this.btnFake.visible = true;
-        } else {
-            this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
-        }
+    earnGold() {
     }
 
-    giftCount(giftCount) {
-        this.btnGift.label = `狗尾巴草 X${giftCount}`
+    share() {
     }
 
-    openFake() {
-        if (this._director._fakeCount > 0) {
-            this.btnFake.label = `伪装 X${--this._director._fakeCount}`
-            this._director.openFake()
-        }
-    }
-
-    openField() {
-        if (this._director._fieldCount > 0) {
-            this.btnField.label = `防护罩 X${--this._director._fieldCount}`
-            this._director.openField()
-        }
-    }
+    // countDown(countDown) {
+    //     if (countDown <= 0) {
+    //         this.labelCountDown.changeText(`发现变异基因!消灭程序启动!`);
+    //         this.btnField.visible = true;
+    //         this.btnFake.visible = true;
+    //     } else {
+    //         this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
+    //     }
+    // }
 
     /**增加分数 */
     // addScore(value) {
