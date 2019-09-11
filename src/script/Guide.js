@@ -8,7 +8,8 @@ export default class Guide extends Laya.Script {
 
     onTriggerEnter(other, self, contact) {
         if (other.label == "soldier") {
-            // this.owner.visible = false
+            this.owner.visible = false
+            this.owner.pos(0, 0)
         }
     }
 

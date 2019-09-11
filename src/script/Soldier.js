@@ -109,14 +109,11 @@ export default class Soldier extends Laya.Script {
                     Laya.SoundManager.playSound("sound/hit.wav")
                 }
             } else if (other.label === "guide") {
-                if (other.owner.visible) {
-                    other.owner.visible = false
-                    this.ani.source = `ani/tease/Cat${this._level}.ani`
-                    this._isTease = true
-                    this._teaseTimeStart = Date.now()
-                    this._velocity = { x: 0, y: 0 }
-                    // Laya.SoundManager.playSound("sound/hit.wav")
-                }
+                this.ani.source = `ani/tease/Cat${this._level}.ani`
+                this._isTease = true
+                this._teaseTimeStart = Date.now()
+                this._velocity = { x: 0, y: 0 }
+                // Laya.SoundManager.playSound("sound/tease.wav")
             }
         }
         // 引导
