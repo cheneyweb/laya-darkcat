@@ -17,7 +17,7 @@ export default class GameUI extends Laya.Scene {
         //点击开始游戏
         this.btnStart.on(Laya.Event.CLICK, this, this.beginGame);
         //点击释放食物
-        this.btnFood.on(Laya.Event.CLICK, this, this._director.releaseFood);
+        this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood);
         //点击赚取金币
         this.btnGold.on(Laya.Event.CLICK, this, this.earnGold);
         //点击分享
@@ -54,6 +54,10 @@ export default class GameUI extends Laya.Scene {
         //     //播放背景音乐
         //     Laya.SoundManager.playMusic("sound/bg.mp3")
         // })
+    }
+
+    releaseFood() {
+        this._director.releaseFood()
     }
 
     earnGold() {

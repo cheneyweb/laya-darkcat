@@ -5,7 +5,6 @@ import GameUI from "../view/GameUI"
 export default class GameDirector extends Laya.Script {
     /** @prop {name:enemy,tips:"敌人预置对象",type:Prefab}*/
     /** @prop {name:soldier,tips:"士兵预置对象",type:Prefab}*/
-    /** @prop {name:guide,tips:"指引预置对象",type:Prefab}*/
     constructor() {
         super()
         GameDirector.instance = this
@@ -18,6 +17,7 @@ export default class GameDirector extends Laya.Script {
 
         this.bg = this.owner.getChildByName("bg")               //背景
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
+        this.guide = this.owner.getChildByName("guide")         //狗尾巴草指引
 
         // this._giftCount = 30                                    //初始狗尾巴草数量        
         // this._fakeCount = 5                                     //初始伪装次数
@@ -70,8 +70,9 @@ export default class GameDirector extends Laya.Script {
         e.stopPropagation()
         if (this._started) {
             //显示鼠标指引
-            if (this._giftCount > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
-                this._createGuide(e)
+            if (e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
+                this.guide.pos(e.stageX, e.stageY)
+                this.guide.visible = true
                 //控制朝指引方向移动
                 this.cat && this.cat.getComponent(Laya.Script).setVelocity(null, e)
             }
@@ -82,6 +83,7 @@ export default class GameDirector extends Laya.Script {
     startGame() {
         this._started = true
         this.bg.visible = true
+        this.guide.visible = true
         this._createSoldier()
         //播放背景音乐
         Laya.SoundManager.playMusic("sound/bg.mp3")
@@ -91,6 +93,7 @@ export default class GameDirector extends Laya.Script {
     stopGame() {
         this._started = false
         this.bg.visible = false
+        this.guide.visible = false
         this.spriteBox.removeChildren()
     }
 
@@ -103,12 +106,11 @@ export default class GameDirector extends Laya.Script {
         //使用对象池创建敌人
         // if (this._store.state.enemyMap.size < 20) {
         for (let i = 0; i < this._enemyCount; i++) {
-            setTimeout(() => {
-                let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
-                enemy.pos(0, Math.random() * 500 + this._store.state.upRange)
-                this.spriteBox.addChild(enemy)
-                this._store.actions.addEnemy(enemy)
-            }, Math.random() * 5000)
+            let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
+            let areaHeight = Laya.stage.height - this._store.state.upRange - this._store.state.downRange
+            enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
+            this.spriteBox.addChild(enemy)
+            // this._store.actions.addEnemy(enemy)
         }
         // }
     }
@@ -123,13 +125,6 @@ export default class GameDirector extends Laya.Script {
             this.cat.pos(Laya.stage.width / 2, Laya.stage.height / 2)
         }
         this.spriteBox.addChild(this.cat)
-    }
-
-    _createGuide(e) {
-        //使用对象池创建指引
-        let guide = Laya.Pool.getItemByCreateFun("guide", this.guide.create, this.guide)
-        guide.pos(e.stageX, e.stageY)
-        this.spriteBox.addChild(guide)
     }
 
     // _createBullet() {

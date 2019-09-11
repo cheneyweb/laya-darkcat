@@ -13,6 +13,9 @@ export default class Soldier extends Laya.Script {
         // this._hp = 30                                               //初始生命值        
         this._velocityRange = 2.5                                   //速度范围
         this._velocity = { x: 0, y: 0 }                             //初始速度
+        this._isTease = false                                       //是否正在玩耍
+        this._teaseTimeOut = 2000                                   //玩耍动画时间
+        this._teaseTimeStart = Date.now()                           //上次玩耍时间
         this._mouseCatched = null                                   //当前捉住的老鼠
 
         this.ani = this.owner.getChildByName("aniCat")              //运动动画
@@ -23,6 +26,11 @@ export default class Soldier extends Laya.Script {
     onUpdate() {
         //如果走到边界
         this.checkRange()
+        //是否玩耍结束
+        if (this._isTease && Date.now() - this._teaseTimeStart > this._teaseTimeOut) {
+            this._isTease = false
+            this.setVelocity()
+        }
     }
 
     onTriggerEnter(other, self, contact) {
@@ -101,6 +109,8 @@ export default class Soldier extends Laya.Script {
                 }
             } else if (other.label === "guide") {
                 this.ani.source = `ani/tease/Cat${this._level}.ani`
+                this._isTease = true
+                this._teaseTimeStart = Date.now()
                 this._velocity = { x: 0, y: 0 }
                 // Laya.SoundManager.playSound("sound/hit.wav")
             }
@@ -121,8 +131,10 @@ export default class Soldier extends Laya.Script {
             this._velocity.y *= Math.random() > 0.5 ? 1 : -1
         }
         // 根据速度调整方向
-        this._orientation = this._velocity.x > 0 ? 'right' : 'left'
-        this.ani.source = `ani/${this._orientation}/Cat${this._level}.ani`
+        if (this._velocity.x || this._velocity.y) {
+            this._orientation = this._velocity.x > 0 ? 'right' : 'left'
+            this.ani.source = `ani/${this._orientation}/Cat${this._level}.ani`
+        }
         this.rigidBody.setVelocity(this._velocity)
     }
 
