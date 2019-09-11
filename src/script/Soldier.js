@@ -135,7 +135,6 @@ export default class Soldier extends Laya.Script {
                 this._velocity.x *= Math.random() > 0.5 ? 1 : -1
                 this._velocity.y *= Math.random() > 0.5 ? 1 : -1
             }
-
         }
         // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {
