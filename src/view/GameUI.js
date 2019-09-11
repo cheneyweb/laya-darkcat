@@ -30,9 +30,13 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.visible = true;
         this.btnGold.visible = true;
         this.btnShare.visible = true;
+
         // this.labelTip.changeText('剩余被发现时间:30s');
         // this.labelTip.visible = true;
-        this._director.startGame();
+
+        this.labelLaw.visible = false
+        this.labelCopyright.visible = false
+        this._director.startGame()
     }
 
     /**停止游戏 */
@@ -42,7 +46,10 @@ export default class GameUI extends Laya.Scene {
         this.btnGold.visible = false;
         this.btnShare.visible = false;
         // this.labelTip.visible = false;
-        this._director.stopGame();
+
+        this.labelLaw.visible = false
+        this.labelCopyright.visible = false
+        this._director.stopGame()
 
         // this.die.visible = true
         // this.die.play(0, false)

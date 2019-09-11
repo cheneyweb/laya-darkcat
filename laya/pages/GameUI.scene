@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":4,
+    "selecteID":17,
     "searchKey":"Scene",
     "props":{"width":640,"sceneColor":"#ffffff","height":1336},
     "nodeParent":-1,
-    "maxID":16,
+    "maxID":18,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -18,7 +18,7 @@
             "x":15,
             "type":"Button",
             "searchKey":"Button,btnStart,btnStart",
-            "props":{"y":566,"x":166,"width":305,"var":"btnStart","stateNum":"2","name":"btnStart","labelSize":30,"labelPadding":"185","labelColors":"white,black","labelBold":true,"label":"点击领养","height":340},
+            "props":{"y":460,"x":167,"width":305,"var":"btnStart","stateNum":"2","name":"btnStart","labelSize":30,"labelPadding":"185","labelColors":"white,black","labelBold":true,"label":"点击领养","height":340},
             "nodeParent":2,
             "label":"btnStart",
             "isOpen":false,
@@ -94,6 +94,34 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":15,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "searchKey":"Label,labelLaw,labelLaw",
+            "props":{"y":1000,"x":197,"var":"labelLaw","text":"抵制不良游戏,拒绝盗版游戏\\n注意自我保护,谨防受骗上当\\n适度游戏益脑,沉迷游戏伤身\\n合理安排时间,享受健康生活","name":"labelLaw","fontSize":20,"color":"grey","align":"center"},
+            "nodeParent":2,
+            "label":"labelLaw",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":16,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "searchKey":"Label,labelCopyright,labelCopyright",
+            "props":{"y":1120,"x":197,"var":"labelCopyright","text":"Copyright © 2019-2020 by .","name":"labelCopyright","fontSize":20,"color":"grey"},
+            "nodeParent":2,
+            "label":"labelCopyright",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":17,
             "child":[
                 ]
         }],
