@@ -10,8 +10,6 @@ export default class GameUI extends Laya.Scene {
         Laya.MouseManager.multiTouchEnabled = false;
         //加载场景文件
         this.loadScene("GameUI.scene");
-        //播放背景音乐
-        Laya.SoundManager.playMusic("sound/bg.mp3")
     }
 
     onEnable() {

@@ -16,6 +16,9 @@ export default class GameDirector extends Laya.Script {
         this._started = false                                   //是否已经开始游戏
         this._enemyCount = 3                                    //敌人数量
 
+        this.bg = this.owner.getChildByName("bg")               //背景
+        this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
+
         // this._giftCount = 30                                    //初始狗尾巴草数量        
         // this._fakeCount = 5                                     //初始伪装次数
         // this._fieldCount = 2                                    //初始化防护罩次数
@@ -26,9 +29,6 @@ export default class GameDirector extends Laya.Script {
         // this._countDownInterval = 1000                          //倒计时时间间隔
         // this._createEnemyInterval = 500                         //创建敌人时间间隔
         // this._createBulletInterval = 3000                       //创建子弹时间间隔
-
-        this.bg = this.owner.getChildByName("bg")               //背景
-        this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
         // this.weaponArr = []
         // this.weaponArr.push(this.owner.getChildByName("weapon"))
         // this.weaponArr.push(this.owner.getChildByName("weapon2"))
@@ -83,6 +83,8 @@ export default class GameDirector extends Laya.Script {
         this._started = true
         this.bg.visible = true
         this._createSoldier()
+        //播放背景音乐
+        Laya.SoundManager.playMusic("sound/bg.mp3")
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */
