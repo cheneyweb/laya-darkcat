@@ -14,6 +14,7 @@ export default class Soldier extends Laya.Script {
         this._velocityBase = 1                                      //基础速度
         this._velocityRange = 1.5                                   //速度范围
         this._mouseCatched = null                                   //当前捉住的老鼠
+        this._isEvolution = false                                   //是否正在进化
 
         this.aniCat = this.owner.getChildByName("aniCat")           //运动动画
         this.aniEat = this.owner.getChildByName("aniEat")           //捕食动画
@@ -93,6 +94,7 @@ export default class Soldier extends Laya.Script {
             GameUI.instance.updateExp(res.player.progressValue)
             // 升级
             if (res.player.level != this._level) {
+                this._isEvolution = true
                 Laya.SoundManager.playSound("sound/alert.mp3")
                 // 更换背景
                 GameUI.instance.changeGameBG("bg/bg_blue.jpg")
@@ -103,11 +105,9 @@ export default class Soldier extends Laya.Script {
                 evolution.play(0, false)
                 // 停止移动
                 this._velocity = { x: 0, y: 0 }
-                this._setVelocity()
                 this._level = res.player.level
-            } else {
-                this.free()
             }
+            this._setVelocity()
         })
     }
 
@@ -120,13 +120,17 @@ export default class Soldier extends Laya.Script {
         this._setVelocity()
     }
 
+    // 是否可指引移动
+    isRemovable() {
+        return !this._mouseCatched && !this._isEvolution
+    }
     // 指引移动
     guide(e) {
-        if (!this._mouseCatched) {
+        if (!this._mouseCatched && !this._isEvolution) {
             this._velocity.x = (e.stageX - this.owner.x) / 100
             this._velocity.y = (e.stageY - this.owner.y) / 100
+            this._setVelocity()
         }
-        this._setVelocity()
     }
 
     // 检查边界
@@ -180,7 +184,7 @@ export default class Soldier extends Laya.Script {
             GameUI.instance.changeGameBG("bg/bg_dark.jpg")
             // 恢复移动
             this.free()
-
+            this._isEvolution = false
             ani.removeSelf()
             Laya.Pool.recover("evolution", ani)
         })

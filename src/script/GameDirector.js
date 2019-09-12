@@ -29,10 +29,15 @@ export default class GameDirector extends Laya.Script {
         if (this._started) {
             //显示鼠标指引
             if (this._clickCount++ > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
-                this.guide.pos(e.stageX, e.stageY)
-                this.guide.visible = true
-                //控制朝指引方向移动
-                this.cat && this.cat.getComponent(Laya.Script).guide(e)
+                if (this.cat) {
+                    let catScript = this.cat.getComponent(Laya.Script)
+                    if (catScript.isRemovable()) {
+                        this.guide.pos(e.stageX, e.stageY)
+                        this.guide.visible = true
+                        //控制朝指引方向移动
+                        catScript.guide(e)
+                    }
+                }
             }
         }
     }
