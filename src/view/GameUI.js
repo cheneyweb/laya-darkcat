@@ -67,14 +67,25 @@ export default class GameUI extends Laya.Scene {
         // })
     }
 
-    releaseFood() {
-        this._director.releaseFood()
+    async releaseFood() {
+        let res = await Laya.store.actions.buy()
+        if (!res.err) {
+            this.labelGold.changeText(`猫币：x${res.gold}`)
+            this._director.releaseFood()
+        } else {
+            this.btnFood.label = res.msg
+        }
     }
 
-    earnGold() {
+    async earnGold() {
+        let res = await Laya.store.actions.earn()
+        if (!res.err) {
+            this.labelGold.changeText(`猫币：x${res.player.gold}`)
+            this.btnFood.label = res.price
+        }
     }
 
-    share() {
+    async share() {
     }
 
     // countDown(countDown) {
