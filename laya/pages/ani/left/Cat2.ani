@@ -42,7 +42,15 @@
                                 "index":0
                             },
                             {
-                                "value":-89.5,
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":1
+                            },
+                            {
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -59,7 +67,15 @@
                                 "index":0
                             },
                             {
-                                "value":-41,
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":1
+                            },
+                            {
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,

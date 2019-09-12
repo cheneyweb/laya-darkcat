@@ -65,8 +65,7 @@ const store = new Store({
         downRange: 220,
 
         token: null,
-        player: { exp: 0, level: 0, gold: 0 },
-        progressValue: 0,
+        player: { exp: 0, level: 0, gold: 0, progressValue: 0 },
         enemyMap: new Map()
     },
     actions: {
@@ -76,7 +75,6 @@ const store = new Store({
             let res = await store.axios.post('/xserver/player/login', player)
             store.state.player = res.player
             store.state.token = res.token
-            store.progressValue = res.progressValue
             store.pSetItem('player', res.player)
         },
         // 玩家领取猫币
@@ -102,7 +100,6 @@ const store = new Store({
             let res = await store.axios.get('/xserver/player/eat')
             store.state.player = res.player
             store.pSetItem('player', store.state.player)
-            store.progressValue = res.progressValue
             // 如果升级了需要更新token
             if (res.token) {
                 store.state.token = res.token

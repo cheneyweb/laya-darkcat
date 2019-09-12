@@ -25,6 +25,7 @@ export default class GameUI extends Laya.Scene {
 
         // 通过全局状态恢复数据
         this.labelGold.changeText(`猫币：x${Laya.store.state.player.gold}`)
+        this.updateExp(Laya.store.state.player.progressValue)
     }
 
     /**开始游戏 */
@@ -42,7 +43,6 @@ export default class GameUI extends Laya.Scene {
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
 
-        this.updateExp(Laya.store.state.progressValue)
         this._director.startGame()
     }
 

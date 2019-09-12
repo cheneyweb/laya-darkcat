@@ -81,11 +81,12 @@ export default class Soldier extends Laya.Script {
         if (isEat) {
             Laya.store.actions.eat().then((res) => {
                 // 更新经验值
-                GameUI.instance.updateExp(res.progressValue)
+                GameUI.instance.updateExp(res.player.progressValue)
                 // 升级
                 if (res.player.level != this._level) {
                     // Laya.Tween.to()
                     this._level = res.player.level
+                    console.log(this._level)
                 }
             })
         }

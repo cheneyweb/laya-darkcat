@@ -26,6 +26,7 @@ function initPlayer(inparam) {
     inparam.exp = 0
     inparam.level = 1
     inparam.gold = 100
+    delete inparam.progressValue
 }
 
 function calcProgressValue(player) {
@@ -59,7 +60,8 @@ router.post('/login', async (ctx, next) => {
         player = { ...inparam, _id: res.insertedId }
     }
     const token = jwt.sign(_.pick(player, ['_id', 'level']), config.auth.secret)
-    ctx.body = { player, token, progressValue: calcProgressValue(player) }
+    player.progressValue = calcProgressValue(player)
+    ctx.body = { player, token }
 })
 
 /**
@@ -108,15 +110,17 @@ router.get('/eat', async (ctx, next) => {
         { $inc: { exp: expInc } },
         { returnOriginal: false }
     )
-    let resData = { player: res.value, progressValue: calcProgressValue(res.value) }
+    res.value.progressValue = calcProgressValue(res.value)
+    let resData = { player: res.value }
     // 如果经验值满足条件，增加玩家等级
     if (res.value.exp >= LevelConfig[res.value.level].expMax) {
         res = await mongodb.collection('player').findOneAndUpdate(
-            { _id: token._id },
-            { $inc: { level: 1 }, $set: { exp: 0 } },
+            { _id: ObjectId(token._id) },
+            { $set: { exp: 0 }, $inc: { level: 1 } },
             { returnOriginal: false }
         )
-        resData.progressValue = 0
+        resData = { player: res.value }
+        resData.player.progressValue = 0
         resData.token = jwt.sign(_.pick(res.value, ['_id', 'level']), config.auth.secret)
     }
     ctx.body = resData
