@@ -72,6 +72,11 @@ export default class GameUI extends Laya.Scene {
         // })
     }
 
+    /**更换游戏背景 */
+    changeGameBG() {
+        this._director.bg.texture = "bg/bg_blue.jpg"
+    }
+
     async releaseFood() {
         if (Laya.store.state.enemyMap.size < 10) {
             Laya.SoundManager.playSound("sound/hit.wav")

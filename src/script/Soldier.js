@@ -24,7 +24,7 @@ export default class Soldier extends Laya.Script {
             this.aniEat.visible = false
             this.aniCat.visible = true
             // 食物爆炸
-            Laya.SoundManager.playSound("sound/destroy.wav")            
+            Laya.SoundManager.playSound("sound/destroy.wav")
             let explode = Laya.Pool.getItemByCreateFun("explode", this._createExplode, this)
             explode.pos(this.owner.x, this.owner.y)
             this.owner.parent.addChild(explode)
@@ -32,7 +32,7 @@ export default class Soldier extends Laya.Script {
             // 猫恢复自由
             this.free(true)
         })
-        
+
         // 玩耍结束
         this.aniTease.on(Laya.Event.COMPLETE, null, () => {
             this.aniTease.visible = false
@@ -54,7 +54,7 @@ export default class Soldier extends Laya.Script {
         // 捕食
         if (other.label === "mouse") {
             if (!this._mouseCatched) {
-                Laya.SoundManager.playSound("sound/mouse.mp3")                
+                Laya.SoundManager.playSound("sound/mouse.mp3")
                 this.aniEat.source = `ani/${this._orientation}/Eat${this._level}.ani`
                 this.aniCat.visible = false
                 this.aniEat.visible = true
@@ -67,7 +67,7 @@ export default class Soldier extends Laya.Script {
         }
         // 玩耍
         else if (other.label === "guide") {
-            Laya.SoundManager.playSound("sound/cat.mp3")            
+            Laya.SoundManager.playSound("sound/cat.mp3")
             this.aniTease.source = `ani/tease/Cat${this._level}.ani`
             this.aniCat.visible = false
             this.aniTease.visible = true
@@ -79,6 +79,53 @@ export default class Soldier extends Laya.Script {
 
     onDisable() {
         // Laya.Pool.recover("soldier", this.owner)
+    }
+
+    // 恢复自由
+    free(isEat) {
+        // 捕食成功
+        if (isEat) {
+            this._mouseCatched = null
+            // 若之前缓存了速度方向
+            if (this._velocityTemp) {
+                this._velocity = this._velocityTemp
+                this._velocityTemp = null
+            }
+            Laya.store.actions.eat().then((res) => {
+                // 更新经验值
+                GameUI.instance.updateExp(res.player.progressValue)
+                // 升级
+                if (res.player.level != this._level) {
+                    Laya.SoundManager.playSound("sound/alert.mp3")
+                    // 更换背景
+                    GameUI.instance.changeGameBG()
+                    // 进化动画
+                    let evolution = Laya.Pool.getItemByCreateFun("evolution", this._createEvolution, this)
+                    evolution.pos(this.owner.x, this.owner.y)
+                    this.owner.parent.addChild(evolution)
+                    evolution.play(0, false)
+                    
+                    this._level = res.player.level
+                }
+            })
+        }
+        // 恢复自由 
+        else {
+            this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
+            this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
+            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
+        }
+        this._setVelocity()
+    }
+
+    // 指引移动
+    guide(e) {
+        if (!this._mouseCatched) {
+            this._velocity.x = (e.stageX - this.owner.x) / 100
+            this._velocity.y = (e.stageY - this.owner.y) / 100
+        }
+        this._setVelocity()
     }
 
     // 检查边界
@@ -113,45 +160,6 @@ export default class Soldier extends Laya.Script {
         }
     }
 
-    // 恢复自由
-    free(isEat) {
-        this._mouseCatched = null
-        // 捕食成功
-        if (isEat) {
-            Laya.store.actions.eat().then((res) => {
-                // 更新经验值
-                GameUI.instance.updateExp(res.player.progressValue)
-                // 升级
-                if (res.player.level != this._level) {
-                    // Laya.Tween.to()
-                    this._level = res.player.level
-                }
-            })
-        }
-        // 若之前缓存了速度方向
-        if (this._velocityTemp) {
-            this._velocity = this._velocityTemp
-            this._velocityTemp = null
-        }
-        // 恢复自由 
-        else {
-            this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
-            this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
-            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-        }
-        this._setVelocity()
-    }
-
-    // 指引移动
-    guide(e) {
-        if (!this._mouseCatched) {
-            this._velocity.x = (e.stageX - this.owner.x) / 100
-            this._velocity.y = (e.stageY - this.owner.y) / 100
-        }
-        this._setVelocity()
-    }
-
     // 设定速度和动画
     _setVelocity() {
         // 根据速度调整方向
@@ -168,7 +176,7 @@ export default class Soldier extends Laya.Script {
         ani.loadAnimation("ani/Hit.ani")
         ani.on(Laya.Event.COMPLETE, null, () => {
             ani.removeSelf()
-            Laya.Pool.recover("hit", ani)
+            Laya.Pool.recover("evolution", ani)
         })
         return ani
     }
@@ -184,13 +192,14 @@ export default class Soldier extends Laya.Script {
         return ani
     }
 
-    // _createBomb() {
-    //     let ani = new Laya.Animation()
-    //     ani.loadAnimation("ani/Bomb.ani")
-    //     ani.on(Laya.Event.COMPLETE, null, () => {
-    //         ani.removeSelf()
-    //         Laya.Pool.recover("bomb", ani)
-    //     })
-    //     return ani
-    // }
+    _createBomb() {
+        //使用对象池创建进化动画        
+        let ani = new Laya.Animation()
+        ani.loadAnimation("ani/Bomb.ani")
+        ani.on(Laya.Event.COMPLETE, null, () => {
+            ani.removeSelf()
+            Laya.Pool.recover("bomb", ani)
+        })
+        return ani
+    }
 }
