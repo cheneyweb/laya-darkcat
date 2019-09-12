@@ -68,7 +68,6 @@ export default class Soldier extends Laya.Script {
         }
         // 玩耍
         else if (other.label === "guide") {
-            Laya.SoundManager.playSound("sound/cat.mp3")
             this.aniTease.source = `ani/tease/Cat${this._level}.ani`
             this.aniCat.visible = false
             this.aniTease.visible = true
