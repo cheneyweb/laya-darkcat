@@ -14,7 +14,6 @@ export default class GameUI extends Laya.Scene {
 
     onEnable() {
         this._director = GameDirector.instance;
-
         //点击释放食物
         this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood);
         //点击赚取金币
@@ -35,6 +34,7 @@ export default class GameUI extends Laya.Scene {
             Laya.Handler.create(this, (e) => {
                 // 直接开始游戏
                 if (Laya.store.state.player.level > 1 || Laya.store.state.player.exp > 0) {
+                    this._director._clickCount++
                     this.beginGame()
                 }
                 //点击开始游戏
