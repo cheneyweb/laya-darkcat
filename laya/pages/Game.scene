@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":48,
-    "selecteID":49,
+    "selectedBox":2,
+    "selecteID":7,
     "searchKey":"Scene,game",
     "props":{"width":640,"texture":"bg/bg_white.jpg","sceneColor":"#ffffff","name":"game","height":1336},
     "nodeParent":-1,
@@ -138,7 +138,7 @@
             "compId":7,
             "child":[
                 ],
-            "$HIDDEN":true
+            "$HIDDEN":false
         }],
     "animations":[
         {

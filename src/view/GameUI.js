@@ -34,6 +34,7 @@ export default class GameUI extends Laya.Scene {
         // this.labelTip.changeText('剩余被发现时间:30s');
         // this.labelTip.visible = true;
 
+        this.progressExp.visible = true
         this.labelGold.visible = true
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
@@ -48,6 +49,7 @@ export default class GameUI extends Laya.Scene {
         this.btnShare.visible = false;
         // this.labelTip.visible = false;
 
+        this.progressExp.visible = false
         this.labelGold.visible = false
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
