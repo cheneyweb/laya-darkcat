@@ -7,17 +7,17 @@ export default class Enemy extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
 
-        this._orientation = 'right'                             //当前方向
         // this._level = 1                                         //初始等级
-        this._hp = 2//Math.round(Math.random() * 2) + 2            //血量
-        this._lastHurtTime = Date.now()                         //上次掉血时间
-        this._hurtInterval = 1000                               //掉血时间间隔
+        // this._hp = 1//Math.round(Math.random() * 2) + 2         //血量
+        // this._lastHurtTime = Date.now()                         //上次掉血时间
+        // this._hurtInterval = 1000                               //掉血时间间隔
+        // this._isCatched = false                                 //是否被抓住
+
+        this._orientation = 'right'                             //当前方向
         this._velocity = { x: 0, y: 0 }                         //方向速度
         this._velocityBase = 0.5                                //基础速度
         this._velocityRange = 1                                 //速度范围               
-        this._isCatched = false                                 //是否被抓住
         this._soldier = null
-
 
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
         this.ani = this.owner.getChildByName("aniMouse")        //运动动画
@@ -27,24 +27,24 @@ export default class Enemy extends Laya.Script {
     }
 
     onUpdate() {
-        let now = Date.now()
-        let owner = this.owner
+        // let now = Date.now()
+        // let owner = this.owner
         //如果被抓住
-        if (this._isCatched) {
-            // 血量持续减少,为零时触发死亡效果
-            if (now - this._lastHurtTime > this._hurtInterval) {
-                this._lastHurtTime = now
-                if (--this._hp <= 0) {
-                    let effect = Laya.Pool.getItemByCreateFun("explode", this._createEffect, this)
-                    effect.pos(owner.x, owner.y)
-                    owner.parent.addChild(effect)
-                    effect.play(0, true)
-                    this._soldier.free(true)
-                    owner.removeSelf()
-                    Laya.SoundManager.playSound("sound/destroy.wav")
-                }
-            }
-        }
+        // if (this._isCatched) {
+        //     // 血量持续减少,为零时触发死亡效果
+        //     if (now - this._lastHurtTime > this._hurtInterval) {
+        //         this._lastHurtTime = now
+        //         if (--this._hp <= 0) {
+        //             let effect = Laya.Pool.getItemByCreateFun("explode", this._createEffect, this)
+        //             effect.pos(owner.x, owner.y)
+        //             owner.parent.addChild(effect)
+        //             effect.play(0, true)
+        //             // this._soldier.free(true)
+        //             owner.removeSelf()
+        //             Laya.SoundManager.playSound("sound/destroy.wav")
+        //         }
+        //     }
+        // }
         //如果走到边界
         this.checkRange()
     }
@@ -112,8 +112,9 @@ export default class Enemy extends Laya.Script {
                 this._soldier = other.owner.getComponent(Laya.Script)
                 if (!this._soldier._mouseCatched || this._soldier._mouseCatched == this) {
                     this._velocity = { x: 0, y: 0 }
-                    this._isCatched = true
-                    owner.visible = false
+                    // this._isCatched = true
+                    // owner.visible = false
+                    owner.removeSelf()
                 }
             }
         }
@@ -123,14 +124,14 @@ export default class Enemy extends Laya.Script {
         this.rigidBody.setVelocity(this._velocity)
     }
 
-    _createEffect() {
-        //使用对象池创建爆炸动画
-        let ani = new Laya.Animation()
-        ani.loadAnimation("ani/Explode.ani")
-        ani.on(Laya.Event.COMPLETE, null, () => {
-            ani.removeSelf()
-            Laya.Pool.recover("explode", ani)
-        })
-        return ani
-    }
+    // _createEffect() {
+    //     //使用对象池创建爆炸动画
+    //     let ani = new Laya.Animation()
+    //     ani.loadAnimation("ani/Explode.ani")
+    //     ani.on(Laya.Event.COMPLETE, null, () => {
+    //         ani.removeSelf()
+    //         Laya.Pool.recover("explode", ani)
+    //     })
+    //     return ani
+    // }
 }

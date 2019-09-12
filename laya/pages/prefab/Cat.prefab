@@ -2,10 +2,11 @@
     "x":0,
     "type":"Sprite",
     "selectedBox":4,
+    "selecteID":13,
     "searchKey":"Sprite",
     "props":{"presetID":1,"preset":"laya/pages/prefab/Cat.prefab","isPresetRoot":true},
     "nodeParent":-1,
-    "maxID":11,
+    "maxID":14,
     "label":"Sprite(Cat)",
     "isOpen":true,
     "isDirectory":true,
@@ -26,6 +27,21 @@
             "compId":5,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Animation",
+            "searchKey":"Animation,aniEat",
+            "props":{"y":0,"x":0,"visible":false,"source":"ani/left/Eat1.ani","presetID":6,"preset":"laya/pages/prefab/Cat.prefab","name":"aniEat"},
+            "nodeParent":4,
+            "label":"aniEat",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":12,
+            "child":[
+                ],
+            "$HIDDEN":true
         },
         {
             "x":15,
@@ -75,6 +91,21 @@
             "compId":9,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Animation",
+            "searchKey":"Animation,aniTease",
+            "props":{"visible":false,"source":"ani/tease/Cat1.ani","presetID":7,"preset":"laya/pages/prefab/Cat.prefab","name":"aniTease"},
+            "nodeParent":4,
+            "label":"aniTease",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":13,
+            "child":[
+                ],
+            "$HIDDEN":true
         }],
     "animations":[
         {

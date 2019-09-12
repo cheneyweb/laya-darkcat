@@ -15,11 +15,26 @@ export default class Soldier extends Laya.Script {
         this._velocityBase = 1                                      //基础速度
         this._velocityRange = 1.5                                   //速度范围
         this._isTease = false                                       //是否正在玩耍
-        this._teaseTimeOut = 1000                                   //玩耍动画时间
+        this._teaseTimeOut = 300                                    //玩耍动画时间
         this._teaseTimeStart = Date.now()                           //上次玩耍时间
         this._mouseCatched = null                                   //当前捉住的老鼠
 
-        this.ani = this.owner.getChildByName("aniCat")              //运动动画
+        this.aniCat = this.owner.getChildByName("aniCat")           //运动动画
+        this.aniEat = this.owner.getChildByName("aniEat")           //捕食动画
+        this.aniTease = this.owner.getChildByName("aniTease")       //玩耍动画
+
+        this.aniEat.on(Laya.Event.COMPLETE, null, () => {
+            this.aniEat.visible = false
+            this.aniCat.visible = true
+
+            let explode = this._createExplode()
+            explode.pos(this.owner.x, this.owner.y)
+            this.owner.parent.addChild(explode)
+            explode.play(0, false)
+
+            this.free(true)
+        })
+
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)
         this.free()
     }
@@ -119,7 +134,11 @@ export default class Soldier extends Laya.Script {
             // 捕食
             if (other.label === "mouse") {
                 if (!this._mouseCatched) {
-                    this.ani.source = `ani/${this._orientation}/Eat${this._level}.ani`
+                    this.aniEat.source = `ani/${this._orientation}/Eat${this._level}.ani`
+                    this.aniCat.visible = false
+                    this.aniEat.visible = true
+                    this.aniEat.play(0, false)
+
                     this._velocityTemp = this._velocity
                     this._velocity = { x: 0, y: 0 }
                     this._mouseCatched = other.owner.getComponent(Laya.Script)
@@ -128,7 +147,7 @@ export default class Soldier extends Laya.Script {
             }
             // 玩耍
             else if (other.label === "guide") {
-                this.ani.source = `ani/tease/Cat${this._level}.ani`
+                this.aniCat.source = `ani/tease/Cat${this._level}.ani`
                 this._isTease = true
                 this._teaseTimeStart = Date.now()
                 this._velocity = { x: 0, y: 0 }
@@ -138,7 +157,7 @@ export default class Soldier extends Laya.Script {
         // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {
             this._orientation = this._velocity.x > 0 ? 'right' : 'left'
-            this.ani.source = `ani/${this._orientation}/Cat${this._level}.ani`
+            this.aniCat.source = `ani/${this._orientation}/Cat${this._level}.ani`
         }
         this.rigidBody.setVelocity(this._velocity)
     }
@@ -150,6 +169,17 @@ export default class Soldier extends Laya.Script {
         ani.on(Laya.Event.COMPLETE, null, () => {
             ani.removeSelf()
             Laya.Pool.recover("hit", ani)
+        })
+        return ani
+    }
+
+    _createExplode() {
+        //使用对象池创建爆炸动画
+        let ani = new Laya.Animation()
+        ani.loadAnimation("ani/Explode.ani")
+        ani.on(Laya.Event.COMPLETE, null, () => {
+            ani.removeSelf()
+            Laya.Pool.recover("explode", ani)
         })
         return ani
     }
