@@ -35,14 +35,11 @@ export default class Enemy extends Laya.Script {
             if (now - this._lastHurtTime > this._hurtInterval) {
                 this._lastHurtTime = now
                 if (--this._hp <= 0) {
-                    Laya.store.actions.eat().then((res)=>{
-                        console.log(res)
-                    })
                     let effect = Laya.Pool.getItemByCreateFun("explode", this._createEffect, this)
                     effect.pos(owner.x, owner.y)
                     owner.parent.addChild(effect)
                     effect.play(0, true)
-                    this._soldier.free()
+                    this._soldier.free(true)
                     owner.removeSelf()
                     Laya.SoundManager.playSound("sound/destroy.wav")
                 }

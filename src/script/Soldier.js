@@ -75,12 +75,27 @@ export default class Soldier extends Laya.Script {
     }
 
     // 恢复自由
-    free() {
+    free(isEat) {
         this._mouseCatched = null
+        // 捕食成功
+        if (isEat) {
+            Laya.store.actions.eat().then((res) => {
+                // 更新经验值
+                GameUI.instance.updateExp(res.progressValue)
+                // 升级
+                if (res.player.level != this._level) {
+                    // Laya.Tween.to()
+                    this._level = res.player.level
+                }
+            })
+        }
+        // 玩耍结束
         if (this._velocityTemp) {
             this._velocity = this._velocityTemp
             this._velocityTemp = null
-        } else {
+        }
+        // 恢复自由 
+        else {
             this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
             this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
             this._velocity.x *= Math.random() > 0.5 ? 1 : -1
@@ -138,4 +153,14 @@ export default class Soldier extends Laya.Script {
         })
         return ani
     }
+
+    // _createBomb() {
+    //     let ani = new Laya.Animation()
+    //     ani.loadAnimation("ani/Bomb.ani")
+    //     ani.on(Laya.Event.COMPLETE, null, () => {
+    //         ani.removeSelf()
+    //         Laya.Pool.recover("bomb", ani)
+    //     })
+    //     return ani
+    // }
 }

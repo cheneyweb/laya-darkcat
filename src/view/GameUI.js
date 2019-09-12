@@ -22,6 +22,9 @@ export default class GameUI extends Laya.Scene {
         this.btnGold.on(Laya.Event.CLICK, this, this.earnGold);
         //点击分享
         this.btnShare.on(Laya.Event.CLICK, this, this.share);
+
+        // 通过全局状态恢复数据
+        this.labelGold.changeText(`猫币：x${Laya.store.state.player.gold}`)
     }
 
     /**开始游戏 */
@@ -38,6 +41,8 @@ export default class GameUI extends Laya.Scene {
         this.labelGold.visible = true
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
+
+        this.updateExp(Laya.store.state.progressValue)
         this._director.startGame()
     }
 
@@ -70,7 +75,7 @@ export default class GameUI extends Laya.Scene {
     async releaseFood() {
         let res = await Laya.store.actions.buy()
         if (!res.err) {
-            this.labelGold.changeText(`猫币：x${res.gold}`)
+            this.labelGold.changeText(`猫币：x${res.player.gold}`)
             this._director.releaseFood()
         } else {
             this.btnFood.label = res.msg
@@ -86,6 +91,11 @@ export default class GameUI extends Laya.Scene {
     }
 
     async share() {
+    }
+
+    updateExp(value) {
+        console.log(value)
+        this.progressExp.value = value
     }
 
     // countDown(countDown) {
