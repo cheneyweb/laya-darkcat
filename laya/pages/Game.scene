@@ -113,7 +113,7 @@
             "source":"src/script/GameDirector.js",
             "searchKey":"Script,GameDirector",
             "removeAble":true,
-            "props":{"soldier":"@Prefab:prefab/Cat.prefab","mouse":"@Prefab:prefab/Mouse.prefab","guide":"@Prefab:prefab/Guide.prefab","enemy":"@Prefab:prefab/Mouse.prefab","enabled":true,"cat":"@Prefab:prefab/Cat.prefab"},
+            "props":{"soldier":"@Prefab:prefab/Cat.prefab","mouse":"@Prefab:prefab/Mouse.prefab","enemy":"@Prefab:prefab/Mouse.prefab","enabled":true,"cat":"@Prefab:prefab/Cat.prefab"},
             "nodeParent":2,
             "label":"GameDirector",
             "isDirectory":false,

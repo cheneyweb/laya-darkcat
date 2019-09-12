@@ -14,8 +14,7 @@ export default class GameUI extends Laya.Scene {
 
     onEnable() {
         this._director = GameDirector.instance;
-        //点击开始游戏
-        this.btnStart.on(Laya.Event.CLICK, this, this.beginGame);
+
         //点击释放食物
         this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood);
         //点击赚取金币
@@ -26,6 +25,25 @@ export default class GameUI extends Laya.Scene {
         // 通过全局状态恢复数据
         this.labelGold.changeText(`猫币：x${Laya.store.state.player.gold}`)
         this.updateExp(Laya.store.state.player.progressValue)
+
+        this.btnStart.label = '加载中...'
+        Laya.loader.load([
+            "res/atlas/ani/left.atlas",
+            "res/atlas/ani/right.atlas",
+            "res/atlas/ani/tease.atlas",
+            "res/atlas/ani/effect.atlas"],
+            Laya.Handler.create(this, (e) => {
+                // 直接开始游戏
+                if (Laya.store.state.player.level > 1 || Laya.store.state.player.exp > 0) {
+                    this.beginGame()
+                }
+                //点击开始游戏
+                else {
+                    this.btnStart.label = '点击领养'
+                    this.btnStart.on(Laya.Event.CLICK, this, this.beginGame);
+                }
+            }),
+            Laya.Handler.create(this, (e) => { this.btnStart.label = `加载中 ${(e * 100).toFixed(2)}%` }, null, false))
     }
 
     /**开始游戏 */
@@ -34,9 +52,6 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.visible = true;
         this.btnGold.visible = true;
         this.btnShare.visible = true;
-
-        // this.labelTip.changeText('剩余被发现时间:30s');
-        // this.labelTip.visible = true;
 
         this.progressExp.visible = true
         this.labelGold.visible = true
@@ -52,24 +67,12 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.visible = false;
         this.btnGold.visible = false;
         this.btnShare.visible = false;
-        // this.labelTip.visible = false;
 
         this.progressExp.visible = false
         this.labelGold.visible = false
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
         this._director.stopGame()
-
-        // this.die.visible = true
-        // this.die.play(0, false)
-        // this.die.on(Laya.Event.COMPLETE, null, () => {
-        //     // ani.removeSelf()
-        //     // Laya.Pool.recover("hit", ani)
-        //     this.die.visible = false
-        //     this.btnStart.visible = true;
-        //     //播放背景音乐
-        //     Laya.SoundManager.playMusic("sound/bg.mp3")
-        // })
     }
 
     /**更换游戏背景 */
@@ -104,24 +107,4 @@ export default class GameUI extends Laya.Scene {
     updateExp(value) {
         this.progressExp.value = value
     }
-
-    // countDown(countDown) {
-    //     if (countDown <= 0) {
-    //         this.labelCountDown.changeText(`发现变异基因!消灭程序启动!`);
-    //         this.btnField.visible = true;
-    //         this.btnFake.visible = true;
-    //     } else {
-    //         this.labelCountDown.changeText(`剩余被发现时间:${countDown}s`);
-    //     }
-    // }
-
-    /**增加分数 */
-    // addScore(value) {
-    //     this._score += value;
-    //     this.labelScore.changeText(`分数:${this._score}`);
-    //     //随着分数越高，难度增大
-    //     if (this._score % 20 == 0) {
-    //         this._director.adjustLevel()
-    //     }
-    // }
 }

@@ -190,7 +190,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":36,
@@ -263,7 +263,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":37,
@@ -336,7 +336,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":38,
@@ -409,7 +409,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":39,
@@ -482,7 +482,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":40,
@@ -555,7 +555,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":41,
@@ -628,7 +628,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":42,
@@ -684,7 +684,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":43,
@@ -757,7 +757,7 @@
                                 "index":0
                             },
                             {
-                                "value":"sprite/chip.png",
+                                "value":"ani/effect/chip.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":44,
