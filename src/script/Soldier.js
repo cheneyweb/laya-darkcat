@@ -29,8 +29,8 @@ export default class Soldier extends Laya.Script {
             explode.pos(this.owner.x, this.owner.y)
             this.owner.parent.addChild(explode)
             explode.play(0, false)
-            // 猫恢复自由
-            this.free(true)
+            // 同步服务
+            this.afterEat()
         })
 
         // 玩耍结束
@@ -81,41 +81,42 @@ export default class Soldier extends Laya.Script {
         // Laya.Pool.recover("soldier", this.owner)
     }
 
-    // 恢复自由
-    free(isEat) {
-        // 捕食成功
-        if (isEat) {
-            this._mouseCatched = null
-            // 若之前缓存了速度方向
-            if (this._velocityTemp) {
-                this._velocity = this._velocityTemp
-                this._velocityTemp = null
+    afterEat() {
+        this._mouseCatched = null
+        // 若之前缓存了速度方向
+        if (this._velocityTemp) {
+            this._velocity = this._velocityTemp
+            this._velocityTemp = null
+        }
+        Laya.store.actions.eat().then((res) => {
+            // 更新经验值
+            GameUI.instance.updateExp(res.player.progressValue)
+            // 升级
+            if (res.player.level != this._level) {
+                Laya.SoundManager.playSound("sound/alert.mp3")
+                // 更换背景
+                GameUI.instance.changeGameBG("bg/bg_blue.jpg")
+                // 进化动画
+                let evolution = Laya.Pool.getItemByCreateFun("evolution", this._createEvolution, this)
+                evolution.pos(this.owner.x, this.owner.y)
+                this.owner.parent.addChild(evolution)
+                evolution.play(0, false)
+                // 停止移动
+                this._velocity = { x: 0, y: 0 }
+                this._setVelocity()
+                this._level = res.player.level
+            } else {
+                this.free()
             }
-            Laya.store.actions.eat().then((res) => {
-                // 更新经验值
-                GameUI.instance.updateExp(res.player.progressValue)
-                // 升级
-                if (res.player.level != this._level) {
-                    Laya.SoundManager.playSound("sound/alert.mp3")
-                    // 更换背景
-                    GameUI.instance.changeGameBG()
-                    // 进化动画
-                    let evolution = Laya.Pool.getItemByCreateFun("evolution", this._createEvolution, this)
-                    evolution.pos(this.owner.x, this.owner.y)
-                    this.owner.parent.addChild(evolution)
-                    evolution.play(0, false)
-                    
-                    this._level = res.player.level
-                }
-            })
-        }
-        // 恢复自由 
-        else {
-            this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
-            this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
-            this._velocity.x *= Math.random() > 0.5 ? 1 : -1
-            this._velocity.y *= Math.random() > 0.5 ? 1 : -1
-        }
+        })
+    }
+
+    // 恢复自由
+    free() {
+        this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
+        this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
+        this._velocity.x *= Math.random() > 0.5 ? 1 : -1
+        this._velocity.y *= Math.random() > 0.5 ? 1 : -1
         this._setVelocity()
     }
 
@@ -173,8 +174,13 @@ export default class Soldier extends Laya.Script {
     _createEvolution() {
         //使用对象池创建进化动画
         let ani = new Laya.Animation()
-        ani.loadAnimation("ani/Hit.ani")
+        ani.loadAnimation("ani/Bomb.ani")
         ani.on(Laya.Event.COMPLETE, null, () => {
+            // 更换背景
+            GameUI.instance.changeGameBG("bg/bg_dark.jpg")
+            // 恢复移动
+            this.free()
+
             ani.removeSelf()
             Laya.Pool.recover("evolution", ani)
         })
@@ -188,17 +194,6 @@ export default class Soldier extends Laya.Script {
         ani.on(Laya.Event.COMPLETE, null, () => {
             ani.removeSelf()
             Laya.Pool.recover("explode", ani)
-        })
-        return ani
-    }
-
-    _createBomb() {
-        //使用对象池创建进化动画        
-        let ani = new Laya.Animation()
-        ani.loadAnimation("ani/Bomb.ani")
-        ani.on(Laya.Event.COMPLETE, null, () => {
-            ani.removeSelf()
-            Laya.Pool.recover("bomb", ani)
         })
         return ani
     }

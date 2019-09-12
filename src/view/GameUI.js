@@ -73,8 +73,8 @@ export default class GameUI extends Laya.Scene {
     }
 
     /**更换游戏背景 */
-    changeGameBG() {
-        this._director.bg.texture = "bg/bg_blue.jpg"
+    changeGameBG(bg) {
+        this._director.bg.texture = bg
     }
 
     async releaseFood() {
