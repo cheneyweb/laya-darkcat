@@ -9,8 +9,8 @@ export default class Soldier extends Laya.Script {
         this._store = Laya.store                                    //全局状态
 
         this._orientation = 'left'                                  //当前方向        
-        this._level = 1                                             //初始等级
-        // this._hp = 30                                               //初始生命值
+        this._level = this._store.state.player.level                //初始等级
+        // this._hp = 30                                            //初始生命值
         this._velocity = { x: 0, y: 0 }                             //初始速度        
         this._velocityBase = 1                                      //基础速度
         this._velocityRange = 1.5                                   //速度范围
@@ -86,7 +86,6 @@ export default class Soldier extends Laya.Script {
                 if (res.player.level != this._level) {
                     // Laya.Tween.to()
                     this._level = res.player.level
-                    console.log(this._level)
                 }
             })
         }
