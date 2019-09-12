@@ -74,6 +74,7 @@ export default class GameUI extends Laya.Scene {
 
     async releaseFood() {
         if (Laya.store.state.enemyMap.size < 10) {
+            Laya.SoundManager.playSound("sound/hit.wav")
             let res = await Laya.store.actions.buy()
             if (!res.err) {
                 this.labelGold.changeText(`猫币：x${res.player.gold}`)

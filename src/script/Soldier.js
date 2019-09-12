@@ -24,11 +24,11 @@ export default class Soldier extends Laya.Script {
             this.aniEat.visible = false
             this.aniCat.visible = true
             // 食物爆炸
+            Laya.SoundManager.playSound("sound/destroy.wav")            
             let explode = Laya.Pool.getItemByCreateFun("explode", this._createExplode, this)
             explode.pos(this.owner.x, this.owner.y)
             this.owner.parent.addChild(explode)
             explode.play(0, false)
-            Laya.SoundManager.playSound("sound/destroy.wav")
             // 猫恢复自由
             this.free(true)
         })
@@ -54,6 +54,7 @@ export default class Soldier extends Laya.Script {
         // 捕食
         if (other.label === "mouse") {
             if (!this._mouseCatched) {
+                Laya.SoundManager.playSound("sound/mouse.mp3")                
                 this.aniEat.source = `ani/${this._orientation}/Eat${this._level}.ani`
                 this.aniCat.visible = false
                 this.aniEat.visible = true
@@ -62,17 +63,16 @@ export default class Soldier extends Laya.Script {
                 this._velocityTemp = this._velocity
                 this._velocity = { x: 0, y: 0 }
                 this._mouseCatched = other.owner.getComponent(Laya.Script)
-                Laya.SoundManager.playSound("sound/mouse.mp3")
             }
         }
         // 玩耍
         else if (other.label === "guide") {
+            Laya.SoundManager.playSound("sound/cat.mp3")            
             this.aniTease.source = `ani/tease/Cat${this._level}.ani`
             this.aniCat.visible = false
             this.aniTease.visible = true
             this.aniTease.play(0, false)
             this._velocity = { x: 0, y: 0 }
-            Laya.SoundManager.playSound("sound/cat.mp3")
         }
         this._setVelocity()
     }
