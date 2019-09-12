@@ -96,7 +96,6 @@ export default class GameUI extends Laya.Scene {
     }
 
     updateExp(value) {
-        console.log(value)
         this.progressExp.value = value
     }
 

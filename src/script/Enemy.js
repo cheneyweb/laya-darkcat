@@ -7,12 +7,6 @@ export default class Enemy extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
 
-        // this._level = 1                                         //初始等级
-        // this._hp = 1//Math.round(Math.random() * 2) + 2         //血量
-        // this._lastHurtTime = Date.now()                         //上次掉血时间
-        // this._hurtInterval = 1000                               //掉血时间间隔
-        // this._isCatched = false                                 //是否被抓住
-
         this._orientation = 'right'                             //当前方向
         this._velocity = { x: 0, y: 0 }                         //方向速度
         this._velocityBase = 0.5                                //基础速度
@@ -21,36 +15,24 @@ export default class Enemy extends Laya.Script {
 
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
         this.ani = this.owner.getChildByName("aniMouse")        //运动动画
-        this.free()                                             //初始速度
-
         this.owner.visible = true                               //初始可见
+
+        this.free()                                             //初始速度        
     }
 
     onUpdate() {
-        // let now = Date.now()
-        // let owner = this.owner
-        //如果被抓住
-        // if (this._isCatched) {
-        //     // 血量持续减少,为零时触发死亡效果
-        //     if (now - this._lastHurtTime > this._hurtInterval) {
-        //         this._lastHurtTime = now
-        //         if (--this._hp <= 0) {
-        //             let effect = Laya.Pool.getItemByCreateFun("explode", this._createEffect, this)
-        //             effect.pos(owner.x, owner.y)
-        //             owner.parent.addChild(effect)
-        //             effect.play(0, true)
-        //             // this._soldier.free(true)
-        //             owner.removeSelf()
-        //             Laya.SoundManager.playSound("sound/destroy.wav")
-        //         }
-        //     }
-        // }
         //如果走到边界
         this.checkRange()
     }
 
     onTriggerEnter(other, self, contact) {
-        this._setVelocity(other)
+        let owner = this.owner
+        if (other.label == "soldier") {// 没有被抓捕或被抓捕的是自己
+            this._soldier = other.owner.getComponent(Laya.Script)
+            if (!this._soldier._mouseCatched || this._soldier._mouseCatched == this) {
+                owner.removeSelf()
+            }
+        }
     }
 
     // onTriggerExit(other, self, contact) {
@@ -103,35 +85,10 @@ export default class Enemy extends Laya.Script {
         this._setVelocity()
     }
 
-    // 设定速度和动画
-    _setVelocity(other) {
-        // 触碰变速
-        if (other) {
-            let owner = this.owner
-            if (other.label == "soldier") {// 没有被抓捕或被抓捕的是自己
-                this._soldier = other.owner.getComponent(Laya.Script)
-                if (!this._soldier._mouseCatched || this._soldier._mouseCatched == this) {
-                    this._velocity = { x: 0, y: 0 }
-                    // this._isCatched = true
-                    // owner.visible = false
-                    owner.removeSelf()
-                }
-            }
-        }
-        // 根据速度调整方向
+    // 设定速度和动画,根据速度调整方向
+    _setVelocity() {
         this._orientation = this._velocity.x > 0 ? 'right' : 'left'
         this.ani.source = `ani/${this._orientation}/Mouse.ani`
         this.rigidBody.setVelocity(this._velocity)
     }
-
-    // _createEffect() {
-    //     //使用对象池创建爆炸动画
-    //     let ani = new Laya.Animation()
-    //     ani.loadAnimation("ani/Explode.ani")
-    //     ani.on(Laya.Event.COMPLETE, null, () => {
-    //         ani.removeSelf()
-    //         Laya.Pool.recover("explode", ani)
-    //     })
-    //     return ani
-    // }
 }
