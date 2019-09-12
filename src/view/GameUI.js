@@ -73,12 +73,14 @@ export default class GameUI extends Laya.Scene {
     }
 
     async releaseFood() {
-        let res = await Laya.store.actions.buy()
-        if (!res.err) {
-            this.labelGold.changeText(`猫币：x${res.player.gold}`)
-            this._director.releaseFood()
-        } else {
-            this.btnFood.label = res.msg
+        if (Laya.store.state.enemyMap.size < 10) {
+            let res = await Laya.store.actions.buy()
+            if (!res.err) {
+                this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                this._director.releaseFood()
+            } else {
+                this.btnFood.label = res.msg
+            }
         }
     }
 
