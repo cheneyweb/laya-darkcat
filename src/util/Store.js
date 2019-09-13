@@ -87,6 +87,10 @@ const store = new Store({
                         store.pSetItem('player', loginRes.player)
                     })
                 }).catch(console.error)
+                
+                wx.showShareMenu({
+                    withShareTicket: true
+                })
                 // let button = wx.createUserInfoButton({
                 // 	type: 'text',
                 // 	text: '获取用户信息',

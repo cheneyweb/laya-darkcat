@@ -91,8 +91,8 @@ router.get('/earn', async (ctx, next) => {
             ShareMap[playerToday] = 0
         }
         if (ShareMap[playerToday] || ShareMap[playerToday] == 0) {
-            if (ShareMap[`${token._id}${today}`] < 3) {
-                ShareMap[`${token._id}${today}`]++
+            if (ShareMap[`${token._id}${playerToday}`] < 3) {
+                ShareMap[`${token._id}${playerToday}`]++
                 goldInc = 50
             }
         }

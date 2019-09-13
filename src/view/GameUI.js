@@ -51,6 +51,24 @@ export default class GameUI extends Laya.Scene {
                 }
             }),
             Laya.Handler.create(this, (e) => { this.btnStart.label = `加载中 ${(e * 100).toFixed(2)}%` }, null, false))
+
+        if (Laya.Browser.onMiniGame) {
+            wx.onShareAppMessage(function () {
+                Laya.store.actions.earn('share').then(res => {
+                    if (!res.err) {
+                        this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                        this.btnFood.label = res.price
+                    }
+                })
+                return {
+                    title: '这猫长这样我也是醉了...',
+                    imageUrl: canvas.toTempFilePathSync({
+                        destWidth: 500,
+                        destHeight: 400
+                    })
+                }
+            })
+        }
     }
 
     /**开始游戏 */
@@ -112,22 +130,19 @@ export default class GameUI extends Laya.Scene {
 
     share() {
         if (Laya.Browser.onMiniGame) {
-            wx.onShareAppMessage(function () {
-                Laya.store.actions.earn('ad').then(res => {
-                    if (!res.err) {
-                        this.labelGold.changeText(`猫币：x${res.player.gold}`)
-                        this.btnFood.label = res.price
-                    }
+            wx.shareAppMessage({
+                title: '这猫长这样我也是醉了...',
+                imageUrl: canvas.toTempFilePathSync({
+                    destWidth: 500,
+                    destHeight: 400
                 })
-                return {
-                    title: '这猫长这样我也是醉了...',
-                    imageUrl: canvas.toTempFilePathSync({
-                        destWidth: 500,
-                        destHeight: 400
-                    })
+            })
+            Laya.store.actions.earn('share').then(res => {
+                if (!res.err) {
+                    this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                    this.btnFood.label = res.price
                 }
             })
-            wx.shareAppMessage({ title: '这猫长这样我也是醉了...' })
         }
     }
 
