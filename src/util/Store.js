@@ -115,13 +115,12 @@ const store = new Store({
                     store.state.token = loginRes.token
                     store.pSetItem('player', loginRes.player)
                 })
-
             }
         },
         // 玩家领取猫币
-        earn() {
+        earn(type) {
             return new Promise((resolve, reject) => {
-                store.axios.get('/xserver/player/earn').then(res => {
+                store.axios.get(`/xserver/player/earn?type=${type}`).then(res => {
                     if (!res.err) {
                         store.state.player = res.player
                         resolve(res)

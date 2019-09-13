@@ -6,6 +6,9 @@ const Router = require('koa-router')
 const router = new Router()
 const ObjectId = require('mongodb').ObjectID
 
+const ShareMap = {}
+const AdMap = {}
+
 // 等级配置
 const LevelConfig = {
     1: { expMax: 3, price: 5 },
@@ -79,15 +82,39 @@ router.post('/login', async (ctx, next) => {
 router.get('/earn', async (ctx, next) => {
     const token = ctx.tokenVerify
     const mongodb = global.mongodb
-    let goldInc = 50
+    const inparam = ctx.request.query
+    let goldInc = 0
+    if (inparam.type == 'share') {
+        // 每日前3次分享可领取
+        let playerToday = `${token._id}${new Date().Format('yyMMdd')}`
+        if (!ShareMap[playerToday]) {
+            ShareMap[playerToday] = 0
+        }
+        if (ShareMap[playerToday] || ShareMap[playerToday] == 0) {
+            if (ShareMap[`${token._id}${today}`] < 3) {
+                ShareMap[`${token._id}${today}`]++
+                goldInc = 50
+            }
+        }
+    } else if (inparam.type == 'ad') {
+        // 大于30秒可领取
+        if (!AdMap[token._id] || AdMap[token._id] - Date.now() > 30000) {
+            AdMap[token._id] = Date.now()
+            goldInc = 100
+        }
+    }
     // 增加玩家金币，返回变更后数据
-    let res = await mongodb.collection('player').findOneAndUpdate(
-        { _id: ObjectId(token._id) },
-        { $inc: { gold: goldInc } },
-        { returnOriginal: false }
-    )
     let price = `${LevelConfig[token.level].price}猫币/只`
-    ctx.body = res.value ? { player: res.value, price } : { err: true, msg: '登录失效!' }
+    if (goldInc > 0) {
+        let res = await mongodb.collection('player').findOneAndUpdate(
+            { _id: ObjectId(token._id) },
+            { $inc: { gold: goldInc } },
+            { returnOriginal: false }
+        )
+        ctx.body = res.value ? { player: res.value, price } : { err: true, msg: '登录失效!' }
+    } else {
+        ctx.body = { err: true, msg: '分享上限！' }
+    }
 })
 
 /**
@@ -134,5 +161,26 @@ router.get('/eat', async (ctx, next) => {
     }
     ctx.body = resData
 })
+
+Date.prototype.Format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1, // 月份
+        "d+": this.getDate(), // 日
+        "h+": this.getHours(), // 小时
+        "m+": this.getMinutes(), // 分
+        "s+": this.getSeconds(), // 秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+        "S": this.getMilliseconds()
+        // 毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "")
+            .substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) :
+                (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
 
 module.exports = router
