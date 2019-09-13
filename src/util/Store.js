@@ -87,9 +87,18 @@ const store = new Store({
                         store.pSetItem('player', loginRes.player)
                     })
                 }).catch(console.error)
-                
+
                 wx.showShareMenu({
                     withShareTicket: true
+                })
+                wx.onShareAppMessage(() => {
+                    return {
+                        title: '这猫长这样我也是醉了...',
+                        imageUrl: canvas.toTempFilePathSync({
+                            destWidth: 500,
+                            destHeight: 400
+                        })
+                    }
                 })
                 // let button = wx.createUserInfoButton({
                 // 	type: 'text',
