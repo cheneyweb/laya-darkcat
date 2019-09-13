@@ -78,13 +78,13 @@ const store = new Store({
             // 微信小游戏平台
             if (Laya.Browser.onMiniGame) {
                 wx.cloud.init()
-                wx.cloud.callFunction({ name: 'login', data: {} }).then( async res => {
+                wx.cloud.callFunction({ name: 'login', data: {} }).then( async wxRes => {
                     let player = store.pGetItem('player') || store.state.player
-                    player.openid = res.result.openid
-                    let res = await store.axios.post('/xserver/player/login', player)
-                    store.state.player = res.player
-                    store.state.token = res.token
-                    store.pSetItem('player', res.player)
+                    player.openid = wxRes.result.openid
+                    let loginRes = await store.axios.post('/xserver/player/login', player)
+                    store.state.player = loginRes.player
+                    store.state.token = loginRes.token
+                    store.pSetItem('player', loginRes.player)
                 }).catch(console.error)
                 // let button = wx.createUserInfoButton({
                 // 	type: 'text',
