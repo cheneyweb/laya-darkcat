@@ -17,11 +17,13 @@
     "compressImageNoteList": [
         ""
     ],
-    "compressJs": false,
+    "compressJs": true,
     "compressJsFilter": [
-        "$basePath/**/*.js"
+        "$basePath/**/*.js",
+        "!$basePath/wxf/**/*.*"
     ],
     "compressJsNoteList": [
+        "",
         ""
     ],
     "version": true,
@@ -58,5 +60,5 @@
     "compile": true,
     "onlyIndexJS": true,
     "projectType": "js",
-    "pubTime": 1568380729747
+    "pubTime": 1568384769617
 }

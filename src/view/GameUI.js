@@ -87,28 +87,31 @@ export default class GameUI extends Laya.Scene {
         this._director.bg.texture = bg
     }
 
-    async releaseFood() {
+    releaseFood() {
         if (Laya.store.state.enemyMap.size < 10) {
             Laya.SoundManager.playSound("sound/hit.wav")
-            let res = await Laya.store.actions.buy()
+            Laya.store.actions.buy().then(res => {
+                if (!res.err) {
+                    this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                    this._director.releaseFood()
+                } else {
+                    this.btnFood.label = res.msg
+                }
+            })
+        }
+    }
+
+    earnGold() {
+        Laya.store.actions.earn().then(res => {
             if (!res.err) {
                 this.labelGold.changeText(`猫币：x${res.player.gold}`)
-                this._director.releaseFood()
-            } else {
-                this.btnFood.label = res.msg
+                this.btnFood.label = res.price
             }
-        }
+        })
+
     }
 
-    async earnGold() {
-        let res = await Laya.store.actions.earn()
-        if (!res.err) {
-            this.labelGold.changeText(`猫币：x${res.player.gold}`)
-            this.btnFood.label = res.price
-        }
-    }
-
-    async share() {
+    share() {
     }
 
     updateExp(value) {

@@ -74,17 +74,18 @@ const store = new Store({
     },
     actions: {
         // 玩家登录
-        async login() {
+        login() {
             // 微信小游戏平台
             if (Laya.Browser.onMiniGame) {
                 wx.cloud.init()
-                wx.cloud.callFunction({ name: 'login', data: {} }).then( async wxRes => {
+                wx.cloud.callFunction({ name: 'login', data: {} }).then(wxRes => {
                     let player = store.pGetItem('player') || store.state.player
                     player.openid = wxRes.result.openid
-                    let loginRes = await store.axios.post('/xserver/player/login', player)
-                    store.state.player = loginRes.player
-                    store.state.token = loginRes.token
-                    store.pSetItem('player', loginRes.player)
+                    store.axios.post('/xserver/player/login', player).then(loginRes => {
+                        store.state.player = loginRes.player
+                        store.state.token = loginRes.token
+                        store.pSetItem('player', loginRes.player)
+                    })
                 }).catch(console.error)
                 // let button = wx.createUserInfoButton({
                 // 	type: 'text',
@@ -109,40 +110,52 @@ const store = new Store({
             // WEB平台 
             else {
                 let player = store.pGetItem('player') || store.state.player
-                let res = await store.axios.post('/xserver/player/login', player)
-                store.state.player = res.player
-                store.state.token = res.token
-                store.pSetItem('player', res.player)
+                store.axios.post('/xserver/player/login', player).then(loginRes => {
+                    store.state.player = loginRes.player
+                    store.state.token = loginRes.token
+                    store.pSetItem('player', loginRes.player)
+                })
+
             }
         },
         // 玩家领取猫币
-        async earn() {
-            let res = await store.axios.get('/xserver/player/earn')
-            if (!res.err) {
-                store.state.player = res.player
-                store.pSetItem('player', store.state.player)
-            }
-            return res
+        earn() {
+            return new Promise((resolve, reject) => {
+                store.axios.get('/xserver/player/earn').then(res => {
+                    if (!res.err) {
+                        store.state.player = res.player
+                        resolve(res)
+                        store.pSetItem('player', store.state.player)
+                    }
+                })
+            })
+
         },
         // 玩家购买
-        async buy() {
-            let res = await store.axios.get('/xserver/player/buy')
-            if (!res.err) {
-                store.state.player = res.player
-                store.pSetItem('player', store.state.player)
-            }
-            return res
+        buy() {
+            return new Promise((resolve, reject) => {
+                store.axios.get('/xserver/player/buy').then(res => {
+                    if (!res.err) {
+                        store.state.player = res.player
+                        resolve(res)
+                        store.pSetItem('player', store.state.player)
+                    }
+                })
+            })
         },
         // 玩家捕食
-        async eat() {
-            let res = await store.axios.get('/xserver/player/eat')
-            store.state.player = res.player
-            store.pSetItem('player', store.state.player)
-            // 如果升级了需要更新token
-            if (res.token) {
-                store.state.token = res.token
-            }
-            return res
+        eat() {
+            return new Promise((resolve, reject) => {
+                store.axios.get('/xserver/player/eat').then(res => {
+                    store.state.player = res.player
+                    resolve(res)
+                    store.pSetItem('player', store.state.player)
+                    // 如果升级了需要更新token
+                    if (res.token) {
+                        store.state.token = res.token
+                    }
+                })
+            })
         },
         // 添加敌人
         addEnemy(enemy) {
