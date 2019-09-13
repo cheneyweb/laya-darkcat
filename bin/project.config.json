@@ -1,5 +1,5 @@
 {
-	"description": "项目配置文件。",
+	"description": "僵尸猫",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
@@ -9,8 +9,8 @@
 	},
 	"compileType": "game",
 	"libVersion": "game",
-	"appid": "wx9170ca1ff6f31088",
-	"projectname": "layaWXTest",
+	"appid": "wxdb378e959f12dcbf",
+	"projectname": "僵尸猫",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -28,5 +28,6 @@
 			"current": -1,
 			"list": []
 		}
-	}
+	},
+	"cloudfunctionRoot": "./wxf/"
 }

@@ -29,9 +29,11 @@
         "$basePath/**/*.*",
         "!$basePath/*.html",
         "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json}",
-        "!$basePath/layaforqq/**/*.*"
+        "!$basePath/layaforqq/**/*.*",
+        "!$basePath/wxf/**/*.*"
     ],
     "versionNoteList": [
+        "",
         "",
         "",
         "",
@@ -56,5 +58,5 @@
     "compile": true,
     "onlyIndexJS": true,
     "projectType": "js",
-    "pubTime": 1568360704800
+    "pubTime": 1568379487907
 }

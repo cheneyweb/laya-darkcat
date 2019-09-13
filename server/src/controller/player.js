@@ -26,6 +26,7 @@ function initPlayer(inparam) {
     inparam.exp = 0
     inparam.level = 1
     inparam.gold = 100
+    delete inparam._id
     delete inparam.progressValue
 }
 
@@ -45,11 +46,19 @@ router.post('/login', async (ctx, next) => {
     const mongodb = global.mongodb
     ctx.body = { err: false }
     let player
-    // 查询玩家是否存在，不存在则自动创建
-    if (inparam._id) {
+    // 微信小游戏平台
+    if (inparam.openid) {
+        player = await mongodb.collection('player').findOne({ openid: inparam.openid })
+        if (!player) {
+            initPlayer(inparam)
+            res = await mongodb.collection('player').insertOne(inparam)
+            player = { ...inparam, _id: res.insertedId }
+        }
+    }
+    // WEB平台，查询玩家是否存在，不存在则自动创建
+    else if (inparam._id) {
         player = await mongodb.collection('player').findOne({ _id: ObjectId(inparam._id) })
         if (!player) {
-            delete inparam._id
             initPlayer(inparam)
             res = await mongodb.collection('player').insertOne(inparam)
             player = { ...inparam, _id: res.insertedId }
