@@ -7,14 +7,13 @@ export default class Enemy extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                //全局状态
 
-        this._orientation = 'right'                             //当前方向
         this._velocity = { x: 0, y: 0 }                         //方向速度
         this._velocityBase = 0.5                                //基础速度
         this._velocityRange = 1                                 //速度范围               
         this._soldier = null
 
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
-        this.ani = this.owner.getChildByName("aniMouse")        //运动动画
+        this.aniMouse = this.owner.getChildByName("aniMouse")   //运动动画
         this.owner.visible = true                               //初始可见
 
         this.free()                                             //初始速度        
@@ -87,8 +86,7 @@ export default class Enemy extends Laya.Script {
 
     // 设定速度和动画,根据速度调整方向
     _setVelocity() {
-        this._orientation = this._velocity.x > 0 ? 'right' : 'left'
-        this.ani.source = `ani/${this._orientation}/Mouse.ani`
+        this.aniMouse.scaleX = this._velocity.x > 0 ? 1 : -1
         this.rigidBody.setVelocity(this._velocity)
     }
 }

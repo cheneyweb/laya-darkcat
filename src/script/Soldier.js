@@ -8,7 +8,6 @@ export default class Soldier extends Laya.Script {
     onEnable() {
         this._store = Laya.store                                    //全局状态
 
-        this._orientation = 'left'                                  //当前方向        
         this._level = this._store.state.player.level                //初始等级
         this._velocity = { x: 0, y: 0 }                             //初始速度        
         this._velocityBase = 1                                      //基础速度
@@ -56,7 +55,8 @@ export default class Soldier extends Laya.Script {
         if (other.label === "mouse") {
             if (!this._mouseCatched) {
                 Laya.SoundManager.playSound("sound/mouse.mp3")
-                this.aniEat.source = `ani/${this._orientation}/Eat${this._level}.ani`
+                this.aniEat.scaleX = this._velocity.x > 0 ? -1 : 1
+                this.aniEat.source = `ani/eat/Eat${this._level}.ani`
                 this.aniCat.visible = false
                 this.aniEat.visible = true
                 this.aniEat.play(0, false)
@@ -168,8 +168,8 @@ export default class Soldier extends Laya.Script {
     _setVelocity() {
         // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {
-            this._orientation = this._velocity.x > 0 ? 'right' : 'left'
-            this.aniCat.source = `ani/${this._orientation}/Cat${this._level}.ani`
+            this.aniCat.scaleX = this._velocity.x > 0 ? -1 : 1
+            this.aniCat.source = `ani/cat/Cat${this._level}.ani`
         }
         this.rigidBody.setVelocity(this._velocity)
     }
