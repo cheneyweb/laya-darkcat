@@ -27,9 +27,9 @@ export default class GameUI extends Laya.Scene {
 
         this.btnStart.label = '加载中...'
         Laya.loader.load([
-            "res/atlas/ani/left.atlas",
-            "res/atlas/ani/right.atlas",
-            "res/atlas/ani/tease.atlas",
+            // "res/atlas/ani/left.atlas",
+            // "res/atlas/ani/right.atlas",
+            // "res/atlas/ani/tease.atlas",
             "res/atlas/ani/effect.atlas"],
             Laya.Handler.create(this, (e) => {
                 // 直接开始游戏
