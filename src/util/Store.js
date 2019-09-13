@@ -78,7 +78,7 @@ const store = new Store({
             // 微信小游戏平台
             if (Laya.Browser.onMiniGame) {
                 wx.cloud.init()
-                wx.cloud.callFunction({ name: 'login', data: {} }).then(res => {
+                wx.cloud.callFunction({ name: 'login', data: {} }).then( async res => {
                     let player = store.pGetItem('player') || store.state.player
                     player.openid = res.result.openid
                     let res = await store.axios.post('/xserver/player/login', player)
