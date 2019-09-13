@@ -45,6 +45,21 @@
         },
         {
             "x":15,
+            "type":"Animation",
+            "searchKey":"Animation,aniTease",
+            "props":{"y":0,"x":0,"visible":false,"source":"ani/tease/Cat1.ani","presetID":7,"preset":"laya/pages/prefab/Cat.prefab","name":"aniTease"},
+            "nodeParent":4,
+            "label":"aniTease",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":13,
+            "child":[
+                ],
+            "$HIDDEN":true
+        },
+        {
+            "x":15,
             "type":"BoxCollider",
             "switchAble":true,
             "searchKey":"BoxCollider",
@@ -91,21 +106,6 @@
             "compId":9,
             "child":[
                 ]
-        },
-        {
-            "x":15,
-            "type":"Animation",
-            "searchKey":"Animation,aniTease",
-            "props":{"visible":false,"source":"ani/tease/Cat1.ani","presetID":7,"preset":"laya/pages/prefab/Cat.prefab","name":"aniTease"},
-            "nodeParent":4,
-            "label":"aniTease",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":13,
-            "child":[
-                ],
-            "$HIDDEN":true
         }],
     "animations":[
         {

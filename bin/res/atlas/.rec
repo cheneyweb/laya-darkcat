@@ -1,8 +1,8 @@
 D .
 D ani
 D bg
-R D844EB7C bg_blue.jpg
-R 00458892 bg_dark.jpg
+R 74646693 bg_blue.jpg
+R 2C7D9559 bg_dark.jpg
 R 923BE1DB bg_white.jpg
 D sound
 R D3E42109 alert.mp3
@@ -14,11 +14,11 @@ R 8ECFCC5C mouse.mp3
 D sprite
 P 1816B6DF guide.png
 D ui
-P 6B203CD9 btn_cat.png
-P EBBB1A61 btn_gold.png
-P 923F0506 btn_mouse.png
-P 8F4D32D4 btn_pick.png
-P DEF7BEFB btn_share.png
+P B848757A btn_cat.png
+P B2966422 btn_gold.png
+P 2952D9CC btn_mouse.png
+P 4334DEA1 btn_pick.png
+P 81F03DD8 btn_share.png
 P 6135872F progress$bar.png
 P 39374AE5 progress.png
 D ani/cat
@@ -108,10 +108,10 @@ P A68ACA2F explode2.png
 P C4417DA6 explode3.png
 P DA1250E7 explode4.png
 D ani/evolution
-P FDD82B2B cat_12_1.png
-P 45A122A6 cat_12_2.png
-P 2C3A2CBD cat_12_3.png
-P A6FF92BD cat_12_4.png
+P D5F5EB71 cat_12_1.png
+P 4D8C7A0A cat_12_2.png
+P 15D20707 cat_12_3.png
+P 0E45719B cat_12_4.png
 D ani/food
 P CE8179F5 cat1.png
 P CAD8955C cat2.png
@@ -121,8 +121,8 @@ P EB1BEA6B rat2.png
 P 6BC8673E rat3.png
 P 519C9FED rat4.png
 D ani/tease
-P 2F671565 tease_10_1.png
-P D9A46DE1 tease_10_2.png
+P D22B4197 tease_10_1.png
+P 980072A2 tease_10_2.png
 P 6FB817CF tease_11_1.png
 P E5D3F87B tease_11_2.png
 P 8498D936 tease_12_1.png
@@ -139,10 +139,10 @@ P 044AE5D2 tease_5_1.png
 P 0C6CEF5B tease_5_2.png
 P 406D2C77 tease_6_1.png
 P 8DDEB9C9 tease_6_2.png
-P 4B3B29BC tease_7_1.png
-P 40BD9CFD tease_7_2.png
-P C706132C tease_8_1.png
-P 540A00AA tease_8_2.png
+P 98289D71 tease_7_1.png
+P B63DCB59 tease_7_2.png
+P 18FC26D0 tease_8_1.png
+P 07E5433B tease_8_2.png
 P F33585E7 tease_9_1.png
 P A4858BC1 tease_9_2.png
 P A24115B7 tease_9_3.png

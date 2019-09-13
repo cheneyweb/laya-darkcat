@@ -54,9 +54,9 @@ export default class Soldier extends Laya.Script {
         // 捕食
         if (other.label === "mouse") {
             if (!this._mouseCatched) {
+
                 Laya.SoundManager.playSound("sound/mouse.mp3")
                 this.aniEat.scaleX = this._velocity.x > 0 ? -1 : 1
-                this.aniEat.source = `ani/eat/Eat${this._level}.ani`
                 this.aniCat.visible = false
                 this.aniEat.visible = true
                 this.aniEat.play(0, false)
@@ -68,7 +68,6 @@ export default class Soldier extends Laya.Script {
         }
         // 玩耍
         else if (other.label === "guide") {
-            this.aniTease.source = `ani/tease/Cat${this._level}.ani`
             this.aniCat.visible = false
             this.aniTease.visible = true
             this.aniTease.play(0, false)
@@ -105,6 +104,10 @@ export default class Soldier extends Laya.Script {
                 // 停止移动
                 this._velocity = { x: 0, y: 0 }
                 this._level = res.player.level
+                // 更换动画源
+                this.aniCat.source = `ani/cat/Cat${this._level}.ani`
+                this.aniEat.source = `ani/eat/Eat${this._level}.ani`
+                this.aniTease.source = `ani/tease/Cat${this._level}.ani`
             }
             this._setVelocity()
         })
@@ -169,7 +172,6 @@ export default class Soldier extends Laya.Script {
         // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {
             this.aniCat.scaleX = this._velocity.x > 0 ? -1 : 1
-            this.aniCat.source = `ani/cat/Cat${this._level}.ani`
         }
         this.rigidBody.setVelocity(this._velocity)
     }

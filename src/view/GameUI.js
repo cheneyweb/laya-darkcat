@@ -30,12 +30,14 @@ export default class GameUI extends Laya.Scene {
         // Laya.MiniAdpter.nativefiles = [
         //     "res/atlas/ani/effect.atlas",
         // ]
-        // Laya.URL.basePath = "https://localhost:5501/"        
+        // Laya.URL.basePath = "https://localhost:5501/"
         Laya.loader.load([
-            // "res/atlas/ani/left.atlas",
-            // "res/atlas/ani/right.atlas",
+            // "res/atlas/ani/cat.atlas",
+            // "res/atlas/ani/eat.atlas",
             // "res/atlas/ani/tease.atlas",
-            "res/atlas/ani/effect.atlas"],
+            // "res/atlas/ani/food.atlas",
+            "res/atlas/ani/effect.atlas",
+            "res/atlas/ani/evolution.atlas"],
             Laya.Handler.create(this, (e) => {
                 // 直接开始游戏
                 if (Laya.store.state.player.level > 1 || Laya.store.state.player.exp > 0) {
