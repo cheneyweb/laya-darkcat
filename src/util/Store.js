@@ -4,7 +4,7 @@
 class Axios {
     constructor() {
         new Laya.HttpRequest()
-        this.domain = 'http://darkcat.xserver.top'
+        this.domain = 'https://darkcat.xserver.top'
         // this.domain = 'http://localhost:3002'
     }
     get(url) {
