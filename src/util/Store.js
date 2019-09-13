@@ -49,7 +49,11 @@ class Store {
         return Laya.LocalStorage.clear()
     }
     pGetItem(key) {
-        return JSON.parse(Laya.LocalStorage.getItem(key))
+        if (Laya.LocalStorage.getItem(key)) {
+            return JSON.parse(Laya.LocalStorage.getItem(key))
+        } else {
+            return null
+        }
     }
     pSetItem(key, obj) {
         return Laya.LocalStorage.setItem(key, JSON.stringify(obj))
