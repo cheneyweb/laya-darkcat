@@ -17,7 +17,7 @@
     "compressImageNoteList": [
         ""
     ],
-    "compressJs": true,
+    "compressJs": false,
     "compressJsFilter": [
         "$basePath/**/*.js"
     ],
@@ -56,5 +56,5 @@
     "compile": true,
     "onlyIndexJS": true,
     "projectType": "js",
-    "pubTime": 1568357828852
+    "pubTime": 1568360704800
 }
