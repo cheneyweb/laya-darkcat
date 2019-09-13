@@ -1,4 +1,4 @@
 .laya/chrome
 bundle.js
 .DS_Store
-./release
+/release
