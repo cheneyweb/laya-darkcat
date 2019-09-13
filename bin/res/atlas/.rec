@@ -14,7 +14,7 @@ R 8ECFCC5C mouse.mp3
 D sprite
 P 1816B6DF guide.png
 D ui
-R 6B203CD9 btn_cat.png
+P 6B203CD9 btn_cat.png
 P EBBB1A61 btn_gold.png
 P 923F0506 btn_mouse.png
 P 8F4D32D4 btn_pick.png
@@ -29,10 +29,10 @@ P A68ACA2F explode2.png
 P C4417DA6 explode3.png
 P DA1250E7 explode4.png
 D ani/evolution
-R FDD82B2B cat_12_1.png
-R 45A122A6 cat_12_2.png
-R 2C3A2CBD cat_12_3.png
-R A6FF92BD cat_12_4.png
+P FDD82B2B cat_12_1.png
+P 45A122A6 cat_12_2.png
+P 2C3A2CBD cat_12_3.png
+P A6FF92BD cat_12_4.png
 D ani/left
 P D64DC7AE cat_10_1.png
 P 7533950A cat_10_2.png
@@ -77,9 +77,9 @@ P 916DDC9E cat_9_1.png
 P 6F803230 cat_9_2.png
 P 2E9E416F cat_9_3.png
 P 1DEA2542 cat_9_4.png
-R 71601BF8 cat_b_1.png
-R FF03562A cat_b_2.png
-R 33444B60 cat_b_3.png
+P 71601BF8 cat_b_1.png
+P FF03562A cat_b_2.png
+P 33444B60 cat_b_3.png
 P C0FE71EB eat_10_1.png
 P 566ACDFA eat_10_2.png
 P 7D94BABD eat_10_3.png
@@ -113,7 +113,7 @@ P 304A806F eat_9_4.png
 P FF215DCE rat1.png
 P 6D42A12C rat2.png
 P 2AEBA80B rat3.png
-R D5E5C806 rat4.png
+P D5E5C806 rat4.png
 D ani/right
 P 0B65445A cat_10_1.png
 P D9F6645D cat_10_2.png
@@ -158,15 +158,15 @@ P 1CCAA68C cat_9_1.png
 P 3AE6733C cat_9_2.png
 P 554AB097 cat_9_3.png
 P 57623846 cat_9_4.png
-R 711BB1CF cat_b_1.png
-R 542F17DD cat_b_2.png
-R A656E119 cat_b_3.png
+P 711BB1CF cat_b_1.png
+P 542F17DD cat_b_2.png
+P A656E119 cat_b_3.png
 P FBE78107 eat_10_1.png
 P 8BEC6E42 eat_10_2.png
 P 11BF5B17 eat_10_3.png
-R BFE79182 eat_11_1.png
-R CB96CCD4 eat_11_2.png
-R 0EB1A131 eat_11_3.png
+P BFE79182 eat_11_1.png
+P CB96CCD4 eat_11_2.png
+P 0EB1A131 eat_11_3.png
 P 13F82498 eat_12_1.png
 P 9CDF760B eat_12_2.png
 P 0BE58CEC eat_12_3.png
@@ -176,7 +176,7 @@ P C573F754 eat_2_1.png
 P 9640F0BD eat_2_2.png
 P F24C4CA7 eat_3_1.png
 P F4BED60F eat_3_2.png
-R 51268EB0 eat_3_3.png
+P 51268EB0 eat_3_3.png
 P 87D2D9C7 eat_4_1.png
 P 94C034E0 eat_4_2.png
 P 933B99DC eat_5_1.png
@@ -195,7 +195,7 @@ P 82385AB5 eat_9_4.png
 P 6EE96C84 rat1.png
 P 5832CCF5 rat2.png
 P 5CBE891E rat3.png
-R 5D2B7464 rat4.png
+P 5D2B7464 rat4.png
 D ani/tease
 P 2F671565 tease_10_1.png
 P D9A46DE1 tease_10_2.png
