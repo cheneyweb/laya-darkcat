@@ -2,11 +2,10 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":7,
     "searchKey":"Scene,game",
     "props":{"width":640,"texture":"bg/bg_white.jpg","sceneColor":"#ffffff","name":"game","height":1336},
     "nodeParent":-1,
-    "maxID":52,
+    "maxID":53,
     "label":"game",
     "isOpen":true,
     "isDirectory":true,
@@ -108,23 +107,6 @@
         },
         {
             "x":15,
-            "type":"Script",
-            "switchAble":true,
-            "source":"src/script/GameDirector.js",
-            "searchKey":"Script,GameDirector",
-            "removeAble":true,
-            "props":{"soldier":"@Prefab:prefab/Cat.prefab","mouse":"@Prefab:prefab/Mouse.prefab","enemy":"@Prefab:prefab/Mouse.prefab","enabled":true,"cat":"@Prefab:prefab/Cat.prefab"},
-            "nodeParent":2,
-            "label":"GameDirector",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":6,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"UIView",
             "source":"GameUI.scene",
             "searchKey":"UIView,gameUI",
@@ -139,6 +121,23 @@
             "child":[
                 ],
             "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/script/GameDirector.js",
+            "searchKey":"Script,GameDirector",
+            "removeAble":true,
+            "props":{"soldier":"@Prefab:prefab/Cat.prefab","enemy":"@Prefab:prefab/Mouse.prefab"},
+            "nodeParent":2,
+            "label":"GameDirector",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":52,
+            "child":[
+                ]
         }],
     "animations":[
         {
