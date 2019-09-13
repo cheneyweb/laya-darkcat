@@ -26,6 +26,11 @@ export default class GameUI extends Laya.Scene {
         this.updateExp(Laya.store.state.player.progressValue)
 
         this.btnStart.label = '加载中...'
+        // Laya.MiniAdpter.init()
+        // Laya.MiniAdpter.nativefiles = [
+        //     "res/atlas/ani/effect.atlas",
+        // ]
+        // Laya.URL.basePath = "https://localhost:5501/"        
         Laya.loader.load([
             // "res/atlas/ani/left.atlas",
             // "res/atlas/ani/right.atlas",
