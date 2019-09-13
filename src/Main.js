@@ -18,8 +18,8 @@ class Main {
 		Laya.URL.exportSceneToJson = GameConfig.exportSceneToJson;
 
 		//开启多线程解码图片
-		Laya.WorkerLoader.workerPath = "libs/worker.js"
-		Laya.WorkerLoader.enable = true
+		// Laya.WorkerLoader.workerPath = "libs/worker.js"
+		// Laya.WorkerLoader.enable = true
 
 		//打开调试面板（通过IDE设置调试模式，或者url地址增加debug=true参数，均可打开调试面板）
 		if (GameConfig.debug || Laya.Utils.getQueryString("debug") == "true") Laya.enableDebugPanel();

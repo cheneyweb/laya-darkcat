@@ -85,7 +85,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"ui/btn_pick1.png",
+                                "value":"ui/btn_pick.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
