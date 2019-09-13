@@ -37,7 +37,7 @@ import Scene=Laya.Scene;]]>   </codeImportsTS>
    <designWidth>640   </designWidth>
    <designHeight>1336   </designHeight>
    <codeViewExportPath>src/view   </codeViewExportPath>
-   <picType>0   </picType>
+   <picType>1   </picType>
    <atlasType>1   </atlasType>
    <atlasScale/>
    <debugMode>false   </debugMode>
