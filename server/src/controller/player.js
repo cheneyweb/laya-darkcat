@@ -10,19 +10,33 @@ const ShareMap = {}
 const AdMap = {}
 
 // 等级配置
+// const LevelConfig = {
+//     1: { expMax: 3, price: 5 },
+//     2: { expMax: 10, price: 5 },
+//     3: { expMax: 20, price: 10 },
+//     4: { expMax: 100, price: 15 },
+//     5: { expMax: 200, price: 20 },
+//     6: { expMax: 300, price: 25 },
+//     7: { expMax: 400, price: 30 },
+//     8: { expMax: 500, price: 35 },
+//     9: { expMax: 600, price: 40 },
+//     10: { expMax: 700, price: 45 },
+//     11: { expMax: 800, price: 50 },
+//     12: { expMax: 1000, price: 100 },
+// }
 const LevelConfig = {
-    1: { expMax: 3, price: 5 },
-    2: { expMax: 10, price: 5 },
-    3: { expMax: 20, price: 10 },
-    4: { expMax: 100, price: 15 },
-    5: { expMax: 200, price: 20 },
-    6: { expMax: 300, price: 25 },
-    7: { expMax: 400, price: 30 },
-    8: { expMax: 500, price: 35 },
-    9: { expMax: 600, price: 40 },
-    10: { expMax: 700, price: 45 },
-    11: { expMax: 800, price: 50 },
-    12: { expMax: 1000, price: 100 },
+    1: { expMax: 1, price: 1 },
+    2: { expMax: 2, price: 2 },
+    3: { expMax: 3, price: 3 },
+    4: { expMax: 4, price: 4 },
+    5: { expMax: 5, price: 5 },
+    6: { expMax: 6, price: 6 },
+    7: { expMax: 7, price: 7 },
+    8: { expMax: 8, price: 8 },
+    9: { expMax: 9, price: 9 },
+    10: { expMax: 10, price: 10 },
+    11: { expMax: 11, price: 11 },
+    12: { expMax: 12, price: 12 },
 }
 
 function initPlayer(inparam) {
@@ -31,6 +45,7 @@ function initPlayer(inparam) {
     inparam.gold = 100
     delete inparam._id
     delete inparam.progressValue
+    delete inparam.price
 }
 
 function calcProgressValue(player) {
@@ -73,6 +88,7 @@ router.post('/login', async (ctx, next) => {
     }
     const token = jwt.sign(_.pick(player, ['_id', 'level']), config.auth.secret)
     player.progressValue = calcProgressValue(player)
+    player.price = LevelConfig[player.level].price
     ctx.body = { player, token }
 })
 
@@ -104,14 +120,13 @@ router.get('/earn', async (ctx, next) => {
         }
     }
     // 增加玩家金币，返回变更后数据
-    let price = `${LevelConfig[token.level].price}猫币/只`
     if (goldInc > 0) {
         let res = await mongodb.collection('player').findOneAndUpdate(
             { _id: ObjectId(token._id) },
             { $inc: { gold: goldInc } },
             { returnOriginal: false }
         )
-        ctx.body = res.value ? { player: res.value, price } : { err: true, msg: '登录失效!' }
+        ctx.body = res.value ? { player: res.value } : { err: true, msg: '登录失效!' }
     } else {
         ctx.body = { err: true, msg: '分享上限！' }
     }
@@ -159,6 +174,7 @@ router.get('/eat', async (ctx, next) => {
         resData.player.progressValue = 0
         resData.token = jwt.sign(_.pick(res.value, ['_id', 'level']), config.auth.secret)
     }
+    resData.price = `${LevelConfig[token.level].price}猫币/只`
     ctx.body = resData
 })
 

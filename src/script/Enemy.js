@@ -13,13 +13,17 @@ export default class Enemy extends Laya.Script {
         this._soldier = null
 
         this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
-        this.aniMouse = this.owner.getChildByName("aniMouse")   //运动动画
+        this.ani = this.owner.getChildByName("ani")             //运动动画
         this.owner.visible = true                               //初始可见
 
         this.free()                                             //初始速度        
     }
 
     onUpdate() {
+        // 玩家大于10级移除老鼠
+        if (this._store.state.player.level > 10 && this.owner.name == "mouse") {
+            this.owner.removeSelf()
+        }
         //如果走到边界
         this.checkRange()
     }
@@ -39,7 +43,11 @@ export default class Enemy extends Laya.Script {
 
     onDisable() {
         //敌人被移除时，回收敌人，方便下次复用，减少对象创建开销
-        Laya.Pool.recover("enemy", this.owner)
+        if (this._store.state.player.level > 10) {
+            Laya.Pool.recover("blackcat", this.owner)
+        } else {
+            Laya.Pool.recover("enemy", this.owner)
+        }
         Laya.store.actions.delEnemy(this.owner)
     }
 
@@ -86,7 +94,7 @@ export default class Enemy extends Laya.Script {
 
     // 设定速度和动画,根据速度调整方向
     _setVelocity() {
-        this.aniMouse.scaleX = this._velocity.x > 0 ? 1 : -1
+        this._velocity.x > 0 ? this.ani.scale(1, 1, true) : this.ani.scale(-1, 1, true)
         this.rigidBody.setVelocity(this._velocity)
     }
 }

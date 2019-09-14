@@ -4,7 +4,32 @@ class Main {
 	constructor() {
 		//挂载状态管理
 		Laya.store = store
-		Laya.store.actions.login()
+		if (Laya.Browser.onMiniGame) {
+			wx.showShareMenu({
+				withShareTicket: true
+			})
+			wx.onShareAppMessage(() => {
+				return {
+					title: '这猫长这样我也是醉了...',
+					imageUrl: canvas.toTempFilePathSync({
+						destWidth: 500,
+						destHeight: 400
+					})
+				}
+			})
+			wx.cloud.init()
+			Laya.MiniAdpter.window.wx.onShow(() => {
+				Laya.store.actions.login('wx')
+				//播放背景音乐
+				Laya.SoundManager.playMusic("sound/bg.mp3")
+			})
+			Laya.MiniAdpter.window.wx.onHide(() => {
+				console.warn("小游戏隐藏到后台")
+			})
+		} else {
+			Laya.store.actions.login()
+		}
+
 		//根据IDE设置初始化引擎		
 		if (window["Laya3D"]) Laya3D.init(GameConfig.width, GameConfig.height);
 		else Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);

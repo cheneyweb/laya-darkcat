@@ -24,6 +24,7 @@ export default class GameUI extends Laya.Scene {
         // 通过全局状态恢复数据
         this.labelGold.changeText(`猫币：x${Laya.store.state.player.gold}`)
         this.updateExp(Laya.store.state.player.progressValue)
+        this.updatePrice(Laya.store.state.player.price)
 
         this.btnStart.label = '加载中...'
         // Laya.MiniAdpter.init()
@@ -105,7 +106,6 @@ export default class GameUI extends Laya.Scene {
         Laya.store.actions.earn('ad').then(res => {
             if (!res.err) {
                 this.labelGold.changeText(`猫币：x${res.player.gold}`)
-                this.btnFood.label = res.price
             }
         })
     }
@@ -122,10 +122,13 @@ export default class GameUI extends Laya.Scene {
             Laya.store.actions.earn('share').then(res => {
                 if (!res.err) {
                     this.labelGold.changeText(`猫币：x${res.player.gold}`)
-                    this.btnFood.label = res.price
                 }
             })
         }
+    }
+
+    updatePrice(price) {
+        this.btnFood.label = price
     }
 
     updateExp(value) {

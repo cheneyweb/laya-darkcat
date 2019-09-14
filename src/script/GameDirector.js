@@ -5,6 +5,7 @@ import GameUI from "../view/GameUI"
 export default class GameDirector extends Laya.Script {
     /** @prop {name:enemy,tips:"敌人预置对象",type:Prefab}*/
     /** @prop {name:soldier,tips:"士兵预置对象",type:Prefab}*/
+    /** @prop {name:blackcat,tips:"黑猫预置对象",type:Prefab}*/
     constructor() {
         super()
         GameDirector.instance = this
@@ -66,7 +67,12 @@ export default class GameDirector extends Laya.Script {
 
     _createEnemy() {
         //使用对象池创建敌人
-        let enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
+        let enemy
+        if (this._store.state.player.level > 10) {
+            enemy = Laya.Pool.getItemByCreateFun("blackcat", this.blackcat.create, this.blackcat)
+        } else {
+            enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
+        }
         let areaHeight = Laya.stage.height - this._store.state.upRange - this._store.state.downRange
         enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
         this.spriteBox.addChild(enemy)

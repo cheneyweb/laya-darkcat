@@ -18,10 +18,14 @@ export default class Soldier extends Laya.Script {
         this.aniCat = this.owner.getChildByName("aniCat")           //运动动画
         this.aniEat = this.owner.getChildByName("aniEat")           //捕食动画
         this.aniTease = this.owner.getChildByName("aniTease")       //玩耍动画
+        this.aniCat.zOrder = 1
+        this.aniEat.zOrder = 1
+        this.aniTease.zOrder = 1
 
         // 捕食结束
         this.aniEat.on(Laya.Event.COMPLETE, null, () => {
             this.aniEat.visible = false
+            this.aniTease.visible = false
             this.aniCat.visible = true
             // 食物爆炸
             Laya.SoundManager.playSound("sound/destroy.wav")
@@ -35,6 +39,7 @@ export default class Soldier extends Laya.Script {
 
         // 玩耍结束
         this.aniTease.on(Laya.Event.COMPLETE, null, () => {
+            this.aniEat.visible = false
             this.aniTease.visible = false
             this.aniCat.visible = true
             // 猫恢复自由            
@@ -54,10 +59,10 @@ export default class Soldier extends Laya.Script {
         // 捕食
         if (other.label === "mouse") {
             if (!this._mouseCatched) {
-
                 Laya.SoundManager.playSound("sound/mouse.mp3")
-                this.aniEat.scaleX = this._velocity.x > 0 ? -1 : 1
+                this._velocity.x > 0 ? this.aniEat.scale(-1, 1, true) : this.aniEat.scale(1, 1, true)
                 this.aniCat.visible = false
+                this.aniTease.visible = false
                 this.aniEat.visible = true
                 this.aniEat.play(0, false)
 
@@ -69,6 +74,7 @@ export default class Soldier extends Laya.Script {
         // 玩耍
         else if (other.label === "guide") {
             this.aniCat.visible = false
+            this.aniEat.visible = false
             this.aniTease.visible = true
             this.aniTease.play(0, false)
             this._velocity = { x: 0, y: 0 }
@@ -90,6 +96,7 @@ export default class Soldier extends Laya.Script {
         Laya.store.actions.eat().then((res) => {
             // 更新经验值
             GameUI.instance.updateExp(res.player.progressValue)
+            GameUI.instance.updatePrice(res.price)
             // 升级
             if (res.player.level != this._level) {
                 this._isEvolution = true
@@ -104,10 +111,6 @@ export default class Soldier extends Laya.Script {
                 // 停止移动
                 this._velocity = { x: 0, y: 0 }
                 this._level = res.player.level
-                // 更换动画源
-                this.aniCat.source = `ani/cat/Cat${this._level}.ani`
-                this.aniEat.source = `ani/eat/Eat${this._level}.ani`
-                this.aniTease.source = `ani/tease/Cat${this._level}.ani`
             }
             this._setVelocity()
         })
@@ -169,9 +172,13 @@ export default class Soldier extends Laya.Script {
 
     // 设定速度和动画
     _setVelocity() {
+        // 更换动画源
+        this.aniCat.source = `ani/cat/Cat${this._level}.ani`
+        this.aniEat.source = `ani/eat/Eat${this._level}.ani`
+        this.aniTease.source = `ani/tease/Cat${this._level}.ani`
         // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {
-            this.aniCat.scaleX = this._velocity.x > 0 ? -1 : 1
+            this._velocity.x > 0 ? this.aniCat.scale(-1, 1, true) : this.aniCat.scale(1, 1, true)
         }
         this.rigidBody.setVelocity(this._velocity)
     }
@@ -189,6 +196,8 @@ export default class Soldier extends Laya.Script {
             ani.removeSelf()
             Laya.Pool.recover("evolution", ani)
         })
+        ani.zOrder = 1
+        ani.scale(2, 2, true)
         return ani
     }
 
@@ -200,6 +209,7 @@ export default class Soldier extends Laya.Script {
             ani.removeSelf()
             Laya.Pool.recover("explode", ani)
         })
+        ani.zOrder = 1
         return ani
     }
 }

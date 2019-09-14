@@ -2,8 +2,8 @@
 import Guide from "./script/Guide"
 import GameUI from "./view/GameUI"
 import GameDirector from "./script/GameDirector"
-import Soldier from "./script/Soldier"
 import Enemy from "./script/Enemy"
+import Soldier from "./script/Soldier"
 
 export default class GameConfig {
     static init() {
@@ -12,8 +12,8 @@ export default class GameConfig {
 		reg("script/Guide.js",Guide);
 		reg("view/GameUI.js",GameUI);
 		reg("script/GameDirector.js",GameDirector);
-		reg("script/Soldier.js",Soldier);
 		reg("script/Enemy.js",Enemy);
+		reg("script/Soldier.js",Soldier);
     }
 }
 GameConfig.width = 640;

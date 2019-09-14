@@ -74,10 +74,9 @@ const store = new Store({
     },
     actions: {
         // 玩家登录
-        login() {
+        login(type) {
             // 微信小游戏平台
-            if (Laya.Browser.onMiniGame) {
-                wx.cloud.init()
+            if (type == 'wx') {
                 wx.cloud.callFunction({ name: 'login', data: {} }).then(wxRes => {
                     let player = store.pGetItem('player') || store.state.player
                     player.openid = wxRes.result.openid
@@ -88,18 +87,6 @@ const store = new Store({
                     })
                 }).catch(console.error)
 
-                wx.showShareMenu({
-                    withShareTicket: true
-                })
-                wx.onShareAppMessage(() => {
-                    return {
-                        title: '这猫长这样我也是醉了...',
-                        imageUrl: canvas.toTempFilePathSync({
-                            destWidth: 500,
-                            destHeight: 400
-                        })
-                    }
-                })
                 // let button = wx.createUserInfoButton({
                 // 	type: 'text',
                 // 	text: '获取用户信息',
