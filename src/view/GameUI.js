@@ -130,7 +130,9 @@ export default class GameUI extends Laya.Scene {
     updatePrice(price) {
         this.btnFood.label = price
     }
-
+    updateBtnFood() {
+        this.btnFood.skin = 'ui/btn_cat.png'
+    }
     updateExp(value) {
         this.progressExp.value = value
     }

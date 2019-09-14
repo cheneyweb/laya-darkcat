@@ -112,6 +112,10 @@ export default class Soldier extends Laya.Script {
                 this._velocity = { x: 0, y: 0 }
                 this._level = res.player.level
             }
+            // 更换食物按钮
+            if (this._level > 10) {
+                GameUI.instance.updateBtnFood()
+            }
             this._setVelocity()
         })
     }
