@@ -27,6 +27,10 @@ export default class GameUI extends Laya.Scene {
         this.updatePrice(Laya.store.state.player.price)
 
         this.btnStart.label = '加载中...'
+
+        if (Laya.store.state.player.level > 10) {
+            this.updateBtnFood()
+        }
         // Laya.MiniAdpter.init()
         // Laya.MiniAdpter.nativefiles = [
         //     "res/atlas/ani/effect.atlas",
