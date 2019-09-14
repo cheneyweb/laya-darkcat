@@ -75,47 +75,51 @@ const store = new Store({
     actions: {
         // 玩家登录
         login(type) {
-            // 微信小游戏平台
-            if (type == 'wx') {
-                wx.cloud.callFunction({ name: 'login', data: {} }).then(wxRes => {
+            return new Promise((resolve, reject) => {
+                // 微信小游戏平台
+                if (type == 'wx') {
+                    wx.cloud.callFunction({ name: 'login', data: {} }).then(wxRes => {
+                        let player = store.pGetItem('player') || store.state.player
+                        player.openid = wxRes.result.openid
+                        store.axios.post('/xserver/player/login', player).then(loginRes => {
+                            store.state.player = loginRes.player
+                            store.state.token = loginRes.token
+                            store.pSetItem('player', loginRes.player)
+                            resolve(loginRes)
+                        })
+                    }).catch(console.error)
+
+                    // let button = wx.createUserInfoButton({
+                    // 	type: 'text',
+                    // 	text: '获取用户信息',
+                    // 	style: {
+                    // 		left: 10,
+                    // 		top: 76,
+                    // 		width: 200,
+                    // 		height: 40,
+                    // 		lineHeight: 40,
+                    // 		backgroundColor: '#ff0000',
+                    // 		color: '#ffffff',
+                    // 		textAlign: 'center',
+                    // 		fontSize: 16,
+                    // 		borderRadius: 4
+                    // 	}
+                    // })
+                    // button.onTap((res) => {
+                    // 	console.log(res)
+                    // })
+                }
+                // WEB平台 
+                else {
                     let player = store.pGetItem('player') || store.state.player
-                    player.openid = wxRes.result.openid
                     store.axios.post('/xserver/player/login', player).then(loginRes => {
                         store.state.player = loginRes.player
                         store.state.token = loginRes.token
                         store.pSetItem('player', loginRes.player)
+                        resolve(loginRes)
                     })
-                }).catch(console.error)
-
-                // let button = wx.createUserInfoButton({
-                // 	type: 'text',
-                // 	text: '获取用户信息',
-                // 	style: {
-                // 		left: 10,
-                // 		top: 76,
-                // 		width: 200,
-                // 		height: 40,
-                // 		lineHeight: 40,
-                // 		backgroundColor: '#ff0000',
-                // 		color: '#ffffff',
-                // 		textAlign: 'center',
-                // 		fontSize: 16,
-                // 		borderRadius: 4
-                // 	}
-                // })
-                // button.onTap((res) => {
-                // 	console.log(res)
-                // })
-            }
-            // WEB平台 
-            else {
-                let player = store.pGetItem('player') || store.state.player
-                store.axios.post('/xserver/player/login', player).then(loginRes => {
-                    store.state.player = loginRes.player
-                    store.state.token = loginRes.token
-                    store.pSetItem('player', loginRes.player)
-                })
-            }
+                }
+            })
         },
         // 玩家领取猫币
         earn(type) {

@@ -4,38 +4,43 @@ import GameDirector from "../script/GameDirector"
  */
 export default class GameUI extends Laya.Scene {
     constructor() {
-        super();
-        GameUI.instance = this;
+        super()
+        GameUI.instance = this
         //关闭多点触控
-        Laya.MouseManager.multiTouchEnabled = false;
+        Laya.MouseManager.multiTouchEnabled = false
+        if (Laya.Browser.onMiniGame) {
+            Laya.MiniAdpter.window.wx.onShow(() => {
+                Laya.store.actions.login('wx').then(res => {
+                    this._restoreUI()
+                })
+                //播放背景音乐
+                Laya.SoundManager.playMusic("sound/bg.mp3")
+            })
+            Laya.MiniAdpter.window.wx.onHide(() => {
+                console.log("小游戏隐藏到后台")
+            })
+        }
         //加载场景文件
-        this.loadScene("GameUI.scene");
+        this.loadScene("GameUI.scene")
     }
 
     onEnable() {
-        this._director = GameDirector.instance;
-        //点击释放食物
-        this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood);
-        //点击赚取金币
-        this.btnGold.on(Laya.Event.CLICK, this, this.earnGold);
-        //点击分享
-        this.btnShare.on(Laya.Event.CLICK, this, this.share);
+        this._store = Laya.store
+        this._director = GameDirector.instance
+        //通过全局状态恢复数据
+        this._restoreUI()
+        //加载资源，启动游戏
+        this._loadResource()
+    }
 
-        // 通过全局状态恢复数据
-        this.labelGold.changeText(`猫币：x${Laya.store.state.player.gold}`)
-        this.updateExp(Laya.store.state.player.progressValue)
-        this.updatePrice(Laya.store.state.player.price)
-
-        this.btnStart.label = '加载中...'
-
-        if (Laya.store.state.player.level > 10) {
-            this.updateBtnFood()
-        }
+    _loadResource() {
+        //加载资源 
         // Laya.MiniAdpter.init()
         // Laya.MiniAdpter.nativefiles = [
         //     "res/atlas/ani/effect.atlas",
         // ]
         // Laya.URL.basePath = "https://localhost:5501/"
+        this.btnStart.label = '加载中...'
         Laya.loader.load([
             // "res/atlas/ani/cat.atlas",
             // "res/atlas/ani/eat.atlas",
@@ -45,25 +50,42 @@ export default class GameUI extends Laya.Scene {
             "res/atlas/ani/evolution.atlas"],
             Laya.Handler.create(this, (e) => {
                 // 直接开始游戏
-                if (Laya.store.state.player.level > 1 || Laya.store.state.player.exp > 0) {
+                if (this._store.state.player.level > 1 || this._store.state.player.exp > 0) {
                     this._director._clickCount++
                     this.beginGame()
                 }
                 //点击开始游戏
                 else {
                     this.btnStart.label = '点击领养'
-                    this.btnStart.on(Laya.Event.CLICK, this, this.beginGame);
+                    this.btnStart.on(Laya.Event.CLICK, this, this.beginGame)
                 }
             }),
-            Laya.Handler.create(this, (e) => { this.btnStart.label = `加载中 ${(e * 100).toFixed(2)}%` }, null, false))
+            Laya.Handler.create(this, (e) => { this.btnStart.label = `加载中 ${(e * 100).toFixed(2)}%` }, null, false)
+        )
+        //点击释放食物
+        this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood)
+        //点击赚取金币
+        this.btnGold.on(Laya.Event.CLICK, this, this.earnGold)
+        //点击分享
+        this.btnShare.on(Laya.Event.CLICK, this, this.share)
+    }
+
+    /**通过全局状态恢复UI */
+    _restoreUI() {
+        this.labelGold.changeText(`猫币：x${this._store.state.player.gold}`)
+        this.updateExp(this._store.state.player.progressValue)
+        this.updatePrice(this._store.state.player.price)
+        if (this._store.state.player.level > 10) {
+            this.updateBtnFood()
+        }
     }
 
     /**开始游戏 */
     beginGame() {
-        this.btnStart.visible = false;
-        this.btnFood.visible = true;
-        this.btnGold.visible = true;
-        this.btnShare.visible = true;
+        this.btnStart.visible = false
+        this.btnFood.visible = true
+        this.btnGold.visible = true
+        this.btnShare.visible = true
 
         this.progressExp.visible = true
         this.labelGold.visible = true
@@ -75,10 +97,10 @@ export default class GameUI extends Laya.Scene {
 
     /**停止游戏 */
     endGame() {
-        this.btnStart.visible = true;
-        this.btnFood.visible = false;
-        this.btnGold.visible = false;
-        this.btnShare.visible = false;
+        this.btnStart.visible = true
+        this.btnFood.visible = false
+        this.btnGold.visible = false
+        this.btnShare.visible = false
 
         this.progressExp.visible = false
         this.labelGold.visible = false
@@ -92,10 +114,11 @@ export default class GameUI extends Laya.Scene {
         this._director.bg.texture = bg
     }
 
+    /**释放食物 */
     releaseFood() {
-        if (Laya.store.state.enemyMap.size < 10) {
+        if (this._store.state.enemyMap.size < 10) {
             Laya.SoundManager.playSound("sound/hit.wav")
-            Laya.store.actions.buy().then(res => {
+            this._store.actions.buy().then(res => {
                 if (!res.err) {
                     this.labelGold.changeText(`猫币：x${res.player.gold}`)
                     this._director.releaseFood()
@@ -106,14 +129,16 @@ export default class GameUI extends Laya.Scene {
         }
     }
 
+    /**看广告领金币 */
     earnGold() {
-        Laya.store.actions.earn('ad').then(res => {
+        this._store.actions.earn('ad').then(res => {
             if (!res.err) {
                 this.labelGold.changeText(`猫币：x${res.player.gold}`)
             }
         })
     }
 
+    /**分享 */
     share() {
         if (Laya.Browser.onMiniGame) {
             wx.shareAppMessage({
@@ -123,7 +148,7 @@ export default class GameUI extends Laya.Scene {
                     destHeight: 400
                 })
             })
-            Laya.store.actions.earn('share').then(res => {
+            this._store.actions.earn('share').then(res => {
                 if (!res.err) {
                     this.labelGold.changeText(`猫币：x${res.player.gold}`)
                 }
@@ -131,13 +156,13 @@ export default class GameUI extends Laya.Scene {
         }
     }
 
+    updateExp(value) {
+        this.progressExp.value = value
+    }
     updatePrice(price) {
         this.btnFood.label = price
     }
     updateBtnFood() {
         this.btnFood.skin = 'ui/btn_cat.png'
-    }
-    updateExp(value) {
-        this.progressExp.value = value
     }
 }

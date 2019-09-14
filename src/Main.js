@@ -4,6 +4,7 @@ class Main {
 	constructor() {
 		//挂载状态管理
 		Laya.store = store
+		//微信小游戏平台
 		if (Laya.Browser.onMiniGame) {
 			wx.showShareMenu({
 				withShareTicket: true
@@ -18,14 +19,7 @@ class Main {
 				}
 			})
 			wx.cloud.init()
-			Laya.MiniAdpter.window.wx.onShow(() => {
-				Laya.store.actions.login('wx')
-				//播放背景音乐
-				Laya.SoundManager.playMusic("sound/bg.mp3")
-			})
-			Laya.MiniAdpter.window.wx.onHide(() => {
-				console.warn("小游戏隐藏到后台")
-			})
+			Laya.store.actions.login('wx')			
 		} else {
 			Laya.store.actions.login()
 		}

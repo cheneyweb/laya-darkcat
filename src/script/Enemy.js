@@ -12,28 +12,29 @@ export default class Enemy extends Laya.Script {
         this._velocityRange = 1                                 //速度范围               
         this._soldier = null
 
-        this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
-        this.ani = this.owner.getChildByName("ani")             //运动动画
         this.owner.visible = true                               //初始可见
 
-        this.free()                                             //初始速度        
+        this.rigidBody = this.owner.getComponent(Laya.RigidBody)//运动体
+        this.ani = this.owner.getChildByName("ani")             //运动动画
+
+        this._free()                                            //初始速度        
     }
 
     onUpdate() {
         // 玩家大于10级移除老鼠
-        if (this._store.state.player.level > 10 && this.owner.name == "mouse") {
-            // this.owner.removeSelf()
-        }
+        // if (this._store.state.player.level > 10 && this.owner.name == "mouse") {
+        // this.owner.removeSelf()
+        // }
         //如果走到边界
-        this.checkRange()
+        this._checkRange()
     }
 
     onTriggerEnter(other, self, contact) {
-        let owner = this.owner
-        if (other.label == "soldier") {// 没有被抓捕或被抓捕的是自己
+        if (other.label == "soldier") {
             this._soldier = other.owner.getComponent(Laya.Script)
-            if ((!this._soldier._mouseCatched && !this._soldier._isEvolution) || this._soldier._mouseCatched == this) {
-                owner.removeSelf()
+            // 没有被抓捕或被抓捕的是自己
+            if (this._soldier.isFreedom() || this._soldier._mouseCatched == this) {
+                this.owner.removeSelf()
             }
         }
     }
@@ -52,7 +53,7 @@ export default class Enemy extends Laya.Script {
     }
 
     // 检查边界
-    checkRange() {
+    _checkRange() {
         // 移动到上边界
         if (this.owner.y < this._store.state.upRange) {
             this._velocity.y *= -1
@@ -84,7 +85,7 @@ export default class Enemy extends Laya.Script {
     }
 
     // 自由
-    free() {
+    _free() {
         this._velocity.x = Math.random() * this._velocityRange + this._velocityBase
         this._velocity.y = Math.random() * this._velocityRange + this._velocityBase
         this._velocity.x *= Math.random() > 0.5 ? 1 : -1
