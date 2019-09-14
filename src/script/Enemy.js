@@ -32,7 +32,7 @@ export default class Enemy extends Laya.Script {
         let owner = this.owner
         if (other.label == "soldier") {// 没有被抓捕或被抓捕的是自己
             this._soldier = other.owner.getComponent(Laya.Script)
-            if (!this._soldier._mouseCatched || this._soldier._mouseCatched == this) {
+            if ((!this._soldier._mouseCatched && !this._soldier._isEvolution) || this._soldier._mouseCatched == this) {
                 owner.removeSelf()
             }
         }

@@ -58,7 +58,7 @@ export default class Soldier extends Laya.Script {
     onTriggerEnter(other, self, contact) {
         // 捕食
         if (other.label === "mouse") {
-            if (!this._mouseCatched) {
+            if (!this._mouseCatched && !this._isEvolution) {
                 Laya.SoundManager.playSound("sound/mouse.mp3")
                 this._velocity.x > 0 ? this.aniEat.scale(-1, 1, true) : this.aniEat.scale(1, 1, true)
                 this.aniCat.visible = false
