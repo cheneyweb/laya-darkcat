@@ -25,18 +25,18 @@ const AdMap = {}
 //     12: { expMax: 1000, price: 100 },
 // }
 const LevelConfig = {
-    1: { expMax: 1, price: 1 },
-    2: { expMax: 2, price: 2 },
-    3: { expMax: 3, price: 3 },
-    4: { expMax: 4, price: 4 },
-    5: { expMax: 5, price: 5 },
-    6: { expMax: 6, price: 6 },
-    7: { expMax: 7, price: 7 },
-    8: { expMax: 8, price: 8 },
-    9: { expMax: 9, price: 9 },
-    10: { expMax: 10, price: 10 },
-    11: { expMax: 11, price: 11 },
-    12: { expMax: 12, price: 12 },
+    1: { expMax: 3, price: 3 },
+    2: { expMax: 4, price: 4 },
+    3: { expMax: 5, price: 5 },
+    4: { expMax: 6, price: 6 },
+    5: { expMax: 7, price: 7 },
+    6: { expMax: 8, price: 8 },
+    7: { expMax: 9, price: 9 },
+    8: { expMax: 10, price: 10 },
+    9: { expMax: 11, price: 11 },
+    10: { expMax: 12, price: 12 },
+    11: { expMax: 13, price: 13 },
+    12: { expMax: 1000, price: 1000 },
 }
 
 function initPlayer(inparam) {
@@ -107,8 +107,7 @@ router.get('/earn', async (ctx, next) => {
             ShareMap[playerToday] = 0
         }
         if (ShareMap[playerToday] || ShareMap[playerToday] == 0) {
-            if (ShareMap[playerToday] < 3) {
-                ShareMap[playerToday]++
+            if (ShareMap[playerToday]++ < 3) {
                 goldInc = 50
             }
         }
