@@ -18,9 +18,6 @@ export default class Soldier extends Laya.Script {
         this.aniCat = this.owner.getChildByName("aniCat")           //运动动画
         this.aniEat = this.owner.getChildByName("aniEat")           //捕食动画
         this.aniTease = this.owner.getChildByName("aniTease")       //玩耍动画
-        this.aniCat.zOrder = 1
-        this.aniEat.zOrder = 1
-        this.aniTease.zOrder = 1
 
         // 捕食结束
         this.aniEat.on(Laya.Event.COMPLETE, null, () => {
@@ -176,6 +173,8 @@ export default class Soldier extends Laya.Script {
 
     // 设定速度和动画
     _setVelocity() {
+        // 更新等级
+        this._level = this._store.state.player.level
         // 更换动画源
         this.aniCat.source = `ani/cat/Cat${this._level}.ani`
         this.aniEat.source = `ani/eat/Eat${this._level}.ani`
@@ -200,7 +199,6 @@ export default class Soldier extends Laya.Script {
             ani.removeSelf()
             Laya.Pool.recover("evolution", ani)
         })
-        ani.zOrder = 1
         ani.scale(2, 2, true)
         return ani
     }
@@ -213,7 +211,6 @@ export default class Soldier extends Laya.Script {
             ani.removeSelf()
             Laya.Pool.recover("explode", ani)
         })
-        ani.zOrder = 1
         return ani
     }
 }

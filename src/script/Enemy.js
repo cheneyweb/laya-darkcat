@@ -22,7 +22,7 @@ export default class Enemy extends Laya.Script {
     onUpdate() {
         // 玩家大于10级移除老鼠
         if (this._store.state.player.level > 10 && this.owner.name == "mouse") {
-            this.owner.removeSelf()
+            // this.owner.removeSelf()
         }
         //如果走到边界
         this.checkRange()
