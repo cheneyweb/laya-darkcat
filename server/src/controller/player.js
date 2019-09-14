@@ -88,7 +88,7 @@ router.post('/login', async (ctx, next) => {
     }
     const token = jwt.sign(_.pick(player, ['_id', 'level']), config.auth.secret)
     player.progressValue = calcProgressValue(player)
-    player.price = LevelConfig[player.level].price
+    player.price = `${LevelConfig[player.level].price}猫币/只`
     ctx.body = { player, token }
 })
 
