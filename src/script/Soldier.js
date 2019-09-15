@@ -38,6 +38,7 @@ export default class Soldier extends Laya.Script {
         if (other.label === "mouse") {
             if (this.isFreedom()) {
                 this._mouseCatched = other.owner.getComponent(Laya.Script)
+                Laya.SoundManager.setSoundVolume(0.1, "sound/mouse.mp3")
                 Laya.SoundManager.playSound("sound/mouse.mp3")
                 this._velocity.x > 0 ? this.aniEat.scale(-1, 1, true) : this.aniEat.scale(1, 1, true)
                 this.aniCat.visible = false
