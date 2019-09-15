@@ -41,7 +41,7 @@
         "",
         ""
     ],
-    "packfile": true,
+    "packfile": false,
     "packfileFilter": [
         ""
     ],
@@ -60,5 +60,5 @@
     "compile": true,
     "onlyIndexJS": true,
     "projectType": "js",
-    "pubTime": 1568517060437
+    "pubTime": 1568517989277
 }
