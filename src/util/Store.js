@@ -70,8 +70,8 @@ const store = new Store({
 
         token: null,
         player: { exp: 0, level: 0, gold: 0, progressValue: 0 },
-        enemyMap: new Map(),
-        shareTitle: '这猫长这样我也是醉了...'
+        shareTitle: '这猫长这样我也是醉了...',
+        enemyMap: new Map()
     },
     actions: {
         // 玩家登录
@@ -85,6 +85,7 @@ const store = new Store({
                         store.axios.post('/xserver/player/login', player).then(loginRes => {
                             store.state.player = loginRes.player
                             store.state.token = loginRes.token
+                            store.state.shareTitle = loginRes.shareTitle
                             store.pSetItem('player', loginRes.player)
                             resolve(loginRes)
                         })

@@ -63,6 +63,7 @@ router.post('/login', async (ctx, next) => {
     const inparam = ctx.request.body
     const mongodb = global.mongodb
     ctx.body = { err: false }
+    let shareTitle = '这猫长这样我也是醉了...'
     let player
     // 微信小游戏平台
     if (inparam.openid) {
@@ -89,7 +90,7 @@ router.post('/login', async (ctx, next) => {
     const token = jwt.sign(_.pick(player, ['_id', 'level']), config.auth.secret)
     player.progressValue = calcProgressValue(player)
     player.price = `${LevelConfig[player.level].price}猫币/只`
-    ctx.body = { player, token }
+    ctx.body = { player, token, shareTitle }
 })
 
 /**
