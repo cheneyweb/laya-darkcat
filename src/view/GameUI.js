@@ -8,6 +8,7 @@ export default class GameUI extends Laya.Scene {
         GameUI.instance = this
         //关闭多点触控
         Laya.MouseManager.multiTouchEnabled = false
+        //微信小游戏平台
         if (Laya.Browser.onMiniGame) {
             Laya.MiniAdpter.window.wx.onShow(() => {
                 Laya.store.actions.login('wx').then(res => {
@@ -27,8 +28,6 @@ export default class GameUI extends Laya.Scene {
     onEnable() {
         this._store = Laya.store
         this._director = GameDirector.instance
-        //通过全局状态恢复数据
-        this._restoreUI()
         //加载资源，启动游戏
         this._loadResource()
     }
@@ -92,6 +91,7 @@ export default class GameUI extends Laya.Scene {
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
 
+        this._restoreUI()//通过全局状态恢复数据
         this._director.startGame()
     }
 
@@ -142,7 +142,7 @@ export default class GameUI extends Laya.Scene {
     share() {
         if (Laya.Browser.onMiniGame) {
             wx.shareAppMessage({
-                title: '这猫长这样我也是醉了...',
+                title: this._store.state.shareTitle,
                 imageUrl: canvas.toTempFilePathSync({
                     destWidth: 500,
                     destHeight: 400

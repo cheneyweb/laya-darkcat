@@ -11,7 +11,7 @@ class Main {
 			})
 			wx.onShareAppMessage(() => {
 				return {
-					title: '这猫长这样我也是醉了...',
+					title: store.state.shareTitle,
 					imageUrl: canvas.toTempFilePathSync({
 						destWidth: 500,
 						destHeight: 400

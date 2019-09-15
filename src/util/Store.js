@@ -70,7 +70,8 @@ const store = new Store({
 
         token: null,
         player: { exp: 0, level: 0, gold: 0, progressValue: 0 },
-        enemyMap: new Map()
+        enemyMap: new Map(),
+        shareTitle: '这猫长这样我也是醉了...'
     },
     actions: {
         // 玩家登录
@@ -88,26 +89,6 @@ const store = new Store({
                             resolve(loginRes)
                         })
                     }).catch(console.error)
-
-                    // let button = wx.createUserInfoButton({
-                    // 	type: 'text',
-                    // 	text: '获取用户信息',
-                    // 	style: {
-                    // 		left: 10,
-                    // 		top: 76,
-                    // 		width: 200,
-                    // 		height: 40,
-                    // 		lineHeight: 40,
-                    // 		backgroundColor: '#ff0000',
-                    // 		color: '#ffffff',
-                    // 		textAlign: 'center',
-                    // 		fontSize: 16,
-                    // 		borderRadius: 4
-                    // 	}
-                    // })
-                    // button.onTap((res) => {
-                    // 	console.log(res)
-                    // })
                 }
                 // WEB平台 
                 else {
