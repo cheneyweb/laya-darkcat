@@ -19,7 +19,7 @@ class Main {
 				}
 			})
 			wx.cloud.init()
-			Laya.store.actions.login('wx')			
+			Laya.store.actions.login('wx')
 		} else {
 			Laya.store.actions.login()
 		}
@@ -56,7 +56,15 @@ class Main {
 	}
 
 	onConfigLoaded() {
-		//加载IDE指定的场景
+		//远程加载地址
+		// Laya.URL.basePath = "http://127.0.0.1:5500/"
+		//本地白名单暂不生效
+		// Laya.MiniAdpter.init()
+		// Laya.MiniAdpter.nativefiles = [
+		// 	"bg/bg_dark.jpg",
+		// 	"res/atlas/ani/effect.atlas",
+		// ]
+		//加载IDE指定的场景		
 		GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
 	}
 }

@@ -34,17 +34,17 @@ export default class GameUI extends Laya.Scene {
 
     _loadResource() {
         //加载资源 
-        // Laya.MiniAdpter.init()
-        // Laya.MiniAdpter.nativefiles = [
-        //     "res/atlas/ani/effect.atlas",
-        // ]
-        // Laya.URL.basePath = "https://localhost:5501/"
         this.btnStart.label = '加载中...'
         Laya.loader.load([
-            // "res/atlas/ani/cat.atlas",
+            // 以下几项因为已经内置于场景中，所以引擎会自动加载
+            // "res/atlas/sprite.atlas",
+            // "res/atlas/ui.atlas",
+
             // "res/atlas/ani/eat.atlas",
             // "res/atlas/ani/tease.atlas",
             // "res/atlas/ani/food.atlas",
+
+            // 以下几项需要动态加载
             "res/atlas/ani/effect.atlas",
             "res/atlas/ani/evolution.atlas"],
             Laya.Handler.create(this, (e) => {
