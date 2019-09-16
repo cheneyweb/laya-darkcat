@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":53,
+    "selecteID":54,
     "searchKey":"Scene,gameMain",
     "props":{"width":640,"texture":"bg/bg_white.jpg","sceneColor":"#ffffff","name":"gameMain","height":1336},
     "nodeParent":-1,
-    "maxID":54,
+    "maxID":60,
     "label":"gameMain",
     "isOpen":true,
     "isDirectory":true,
@@ -36,14 +36,13 @@
             "props":{"y":0,"x":0,"visible":false,"texture":"sprite/guide.png","name":"guide"},
             "nodeParent":2,
             "label":"guide",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":48,
             "child":[
                 {
-                    "x":30,
                     "type":"BoxCollider",
                     "switchAble":true,
                     "searchKey":"BoxCollider",
@@ -59,7 +58,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"RigidBody",
                     "switchAble":true,
                     "searchKey":"RigidBody",
@@ -75,7 +73,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/script/Guide.js",

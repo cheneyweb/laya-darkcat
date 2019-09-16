@@ -32,6 +32,11 @@ export default class GameUI extends Laya.Scene {
         this._loadResource()
     }
 
+    onStageClick(e) {
+        //停止事件冒泡，提高性能
+        e.stopPropagation()
+    }
+
     _loadResource() {
         //加载资源 
         this.btnStart.label = '加载中...'
@@ -65,13 +70,14 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood)
         //点击赚取金币
         this.btnGold.on(Laya.Event.CLICK, this, this.earnGold)
+        this.dialogTip.getChildByName('btnTip').on(Laya.Event.CLICK, this, this.earnGold)
         //点击分享
         this.btnShare.on(Laya.Event.CLICK, this, this.share)
     }
 
     /**通过全局状态恢复UI */
     _restoreUI() {
-        this.labelGold.changeText(`猫币：x${this._store.state.player.gold}`)
+        this.labelGold.changeText(`x${this._store.state.player.gold}`)
         this.updateExp(this._store.state.player.progressValue)
         this.updatePrice(this._store.state.player.price)
         if (this._store.state.player.level > 10) {
@@ -122,15 +128,13 @@ export default class GameUI extends Laya.Scene {
         if (this._store.state.enemyMap.size < 10) {
             Laya.SoundManager.playSound("sound/hit.wav")
             this._store.actions.buy(isRandom === true).then(res => {
-                console.log(res)
                 if (!res.err) {
-                    this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                    this.labelGold.changeText(`x${res.player.gold}`)
                     this._director.releaseFood()
                 } else {
                     this.btnFood.label = res.msg
-                    let dialog = new Laya.Dialog()
-                    dialog.addChild(new Laya.Image('sprite/review_dialogue_bgd.png'))
-                    dialog.show()
+                    this.dialogTip.visible = true
+                    this.dialogTip.show()
                 }
             })
         }
@@ -140,9 +144,10 @@ export default class GameUI extends Laya.Scene {
     earnGold() {
         this._store.actions.earn('ad').then(res => {
             if (!res.err) {
-                this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                this.labelGold.changeText(`x${res.player.gold}`)
             }
         })
+        this.dialogTip.close()
     }
 
     /**分享 */
@@ -157,7 +162,7 @@ export default class GameUI extends Laya.Scene {
             })
             this._store.actions.earn('share').then(res => {
                 if (!res.err) {
-                    this.labelGold.changeText(`猫币：x${res.player.gold}`)
+                    this.labelGold.changeText(`x${res.player.gold}`)
                 }
             })
         }

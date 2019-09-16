@@ -13,16 +13,19 @@ R FF0B6E8D hit.wav
 R E882C09E mouse.mp3
 R A83E41E9 tease.mp3
 D sprite
+P 82D67B64 gold.png
 P 1816B6DF guide.png
-R 21992762 review_dialogue_bgd.png
 P C2160EE6 title.png
 P 8704CBED title2.png
 D ui
 P B848757A btn_cat.png
+P 5CF9C6BE btn_close.png
 P B2966422 btn_gold.png
+P C26E7AB2 btn_gold2.png
 P 2952D9CC btn_mouse.png
 P 4334DEA1 btn_pick.png
 P 81F03DD8 btn_share.png
+P 176A0A47 dialog.png
 P 6135872F progress$bar.png
 P 39374AE5 progress.png
 D ani/cat

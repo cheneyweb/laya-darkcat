@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":28,
+    "selecteID":60,
     "searchKey":"Scene",
     "props":{"width":640,"sceneColor":"#ffffff","height":1336},
     "nodeParent":-1,
-    "maxID":29,
+    "maxID":61,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -43,20 +43,6 @@
         },
         {
             "x":15,
-            "type":"Label",
-            "searchKey":"Label,labelTip,labelTip",
-            "props":{"y":50,"x":0,"width":640,"visible":false,"var":"labelTip","name":"labelTip","fontSize":40,"color":"#CC3333","bold":true,"align":"center"},
-            "nodeParent":2,
-            "label":"labelTip",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":8,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"Button",
             "searchKey":"Button,btnFood,btnFood",
             "props":{"y":1160,"x":256,"visible":false,"var":"btnFood","stateNum":"2","skin":"ui/btn_mouse.png","name":"btnFood","labelSize":20,"labelPadding":"80","labelColors":"white,black","label":"5猫币/只"},
@@ -73,7 +59,7 @@
             "x":15,
             "type":"Button",
             "searchKey":"Button,btnGold,btnGold",
-            "props":{"y":80,"x":20,"visible":false,"var":"btnGold","stateNum":"2","skin":"ui/btn_gold.png","name":"btnGold","labelSize":15,"labelPadding":"25","labelColors":"white,black","label":"领猫币"},
+            "props":{"y":100,"x":20,"visible":false,"var":"btnGold","stateNum":"2","skin":"ui/btn_gold.png","name":"btnGold","labelSize":15,"labelPadding":"25","labelColors":"white,black","label":"领猫币"},
             "nodeParent":2,
             "label":"btnGold",
             "isDirectory":false,
@@ -87,7 +73,7 @@
             "x":15,
             "type":"Button",
             "searchKey":"Button,btnShare,btnShare",
-            "props":{"y":170,"x":20,"visible":false,"var":"btnShare","stateNum":"2","skin":"ui/btn_share.png","name":"btnShare","labelSize":15,"labelPadding":"25","labelColors":"white,black","label":"分享"},
+            "props":{"y":190,"x":20,"visible":false,"var":"btnShare","stateNum":"2","skin":"ui/btn_share.png","name":"btnShare","labelSize":15,"labelPadding":"25","labelColors":"white,black","label":"分享"},
             "nodeParent":2,
             "label":"btnShare",
             "isDirectory":false,
@@ -129,7 +115,7 @@
             "x":15,
             "type":"Label",
             "searchKey":"Label,labelGold,labelGold",
-            "props":{"y":55,"x":5.8154296875,"visible":false,"var":"labelGold","valign":"middle","text":"猫币：x100","name":"labelGold","fontSize":20,"color":"white","align":"center"},
+            "props":{"y":55,"x":57,"visible":false,"var":"labelGold","valign":"middle","text":"x100","name":"labelGold","fontSize":20,"color":"white","align":"center"},
             "nodeParent":2,
             "label":"labelGold",
             "isDirectory":false,
@@ -194,6 +180,91 @@
             "compId":28,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,gold",
+            "props":{"y":45,"x":16,"texture":"sprite/gold.png","name":"gold"},
+            "nodeParent":2,
+            "label":"gold",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":58,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Dialog",
+            "searchKey":"Dialog,dialogTip",
+            "props":{"y":485,"x":120,"visible":false,"var":"dialogTip","presetID":1,"preset":"laya/pages/prefab/DialogTip.prefab"},
+            "nodeParent":2,
+            "label":"dialogTip",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":60,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Texture",
+                    "searchKey":"Texture",
+                    "props":{"presetID":2,"preset":"laya/pages/prefab/DialogTip.prefab"},
+                    "nodeParent":60,
+                    "label":"Texture(DialogTip)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":55,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"presetID":3,"preset":"laya/pages/prefab/DialogTip.prefab"},
+                    "nodeParent":60,
+                    "label":"labelTip",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":57,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "searchKey":"Button,btnTip",
+                    "props":{"presetID":4,"preset":"laya/pages/prefab/DialogTip.prefab","name":"btnTip"},
+                    "nodeParent":60,
+                    "label":"btnTip",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":56,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "searchKey":"Button",
+                    "props":{"presetID":5,"preset":"laya/pages/prefab/DialogTip.prefab"},
+                    "nodeParent":60,
+                    "label":"Button(DialogTip)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":59,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {
