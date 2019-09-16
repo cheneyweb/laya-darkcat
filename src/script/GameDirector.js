@@ -24,7 +24,7 @@ export default class GameDirector extends Laya.Script {
 
     onUpdate() {
         //心跳
-        if (Date.now() - this._lastHeartTime > Math.random() * 5000 + 3000) {
+        if (Date.now() - this._lastHeartTime > Math.random() * 10000 + 5000) {
             this._lastHeartTime = Date.now()
             GameUI.instance.releaseFood(true)
         }
