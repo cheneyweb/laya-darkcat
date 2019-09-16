@@ -131,7 +131,6 @@ export default class GameUI extends Laya.Scene {
                     let dialog = new Dialog()
                     dialog.addChild(new Image('sprite/review_dialogue_bgd.png'))
                     dialog.show()
-                    console.log(213)
                 }
             })
         }

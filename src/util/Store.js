@@ -122,9 +122,9 @@ const store = new Store({
                 store.axios.get(`/xserver/player/buy?isRandom=${isRandom}`).then(res => {
                     if (!res.err) {
                         store.state.player = res.player
-                        resolve(res)
                         store.pSetItem('player', store.state.player)
                     }
+                    resolve(res)
                 })
             })
         },
