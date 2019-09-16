@@ -15,6 +15,7 @@ export default class GameDirector extends Laya.Script {
         this._store = Laya.store                                //全局状态
         this._started = false                                   //是否已经开始游戏
         this._clickCount = 0                                    //屏幕点击次数
+        this._lastHeartTime = Date.now()                        //上次心跳时间
 
         this.bg = this.owner.getChildByName("bg")               //背景
         this.spriteBox = this.owner.getChildByName("spriteBox") //敌人,士兵,子弹所在的容器
