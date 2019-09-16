@@ -122,13 +122,16 @@ export default class GameUI extends Laya.Scene {
         if (this._store.state.enemyMap.size < 10) {
             Laya.SoundManager.playSound("sound/hit.wav")
             this._store.actions.buy(isRandom === true).then(res => {
+                console.log(res)
                 if (!res.err) {
                     this.labelGold.changeText(`猫币：x${res.player.gold}`)
                     this._director.releaseFood()
                 } else {
                     this.btnFood.label = res.msg
                     let dialog = new Dialog()
+                    dialog.addChild(new Image('sprite/review_dialogue_bgd.png'))
                     dialog.show()
+                    console.log(213)
                 }
             })
         }

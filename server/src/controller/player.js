@@ -140,14 +140,13 @@ router.get('/buy', async (ctx, next) => {
     const mongodb = global.mongodb
     const inparam = ctx.request.query
     let price = inparam.isRandom == 'true' ? 0 : LevelConfig[token.level].price
-    console.log(inparam.isRandom)
-    console.log(price)
     // 扣减玩家金币，返回变更后数据
     let res = await mongodb.collection('player').findOneAndUpdate(
         { _id: ObjectId(token._id), gold: { $gte: price } },
         { $inc: { gold: -price } },
         { returnOriginal: false }
     )
+    console.log(res.value)
     ctx.body = res.value ? { player: res.value } : { err: true, msg: '猫币不足!' }
 })
 
