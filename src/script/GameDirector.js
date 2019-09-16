@@ -79,11 +79,11 @@ export default class GameDirector extends Laya.Script {
             enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
         }
         let areaHeight = Laya.stage.height - this._store.state.upRange - this._store.state.downRange
-        // if (Math.random() > 0.5) {
-            // enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
-        // } else {
+        if (Math.random() > 0.5) {
+            enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
+        } else {
             enemy.pos(Laya.stage.width, Math.random() * areaHeight + this._store.state.upRange)
-        // }
+        }
         this.spriteBox.addChild(enemy)
         this._store.actions.addEnemy(enemy)
     }
