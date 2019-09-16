@@ -94,6 +94,7 @@ export default class GameUI extends Laya.Scene {
 
         this.progressExp.visible = true
         this.labelGold.visible = true
+        this.imgGold.visible = true        
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
         this.titleLogo.visible = false
@@ -111,6 +112,7 @@ export default class GameUI extends Laya.Scene {
 
         this.progressExp.visible = false
         this.labelGold.visible = false
+        this.imgGold.visible = false
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
         this.titleLogo.visible = true
