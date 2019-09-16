@@ -90,7 +90,7 @@ export default class GameUI extends Laya.Scene {
         this.labelGold.visible = true
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
-        this.tiileLogo.visible = false
+        this.titleLogo.visible = false
 
         this._restoreUI()//通过全局状态恢复数据
         this._director.startGame()
@@ -107,7 +107,7 @@ export default class GameUI extends Laya.Scene {
         this.labelGold.visible = false
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
-        this.tiileLogo.visible = true
+        this.titleLogo.visible = true
 
         this._director.stopGame()
     }
