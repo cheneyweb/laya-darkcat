@@ -5,14 +5,17 @@ R 74646693 bg_blue.jpg
 R 2C7D9559 bg_dark.jpg
 R 923BE1DB bg_white.jpg
 D sound
-R D3E42109 alert.mp3
-R 268FE702 bg.mp3
+R 097E70F7 bgm.mp3
 R FF9649F3 cat.mp3
 R 1DC3ABD8 destroy.wav
+R 85213529 evo.mp3
 R FF0B6E8D hit.wav
-R 8ECFCC5C mouse.mp3
+R E882C09E mouse.mp3
+R A83E41E9 tease.mp3
 D sprite
 P 1816B6DF guide.png
+P C2160EE6 title.png
+P 8704CBED title2.png
 D ui
 P B848757A btn_cat.png
 P B2966422 btn_gold.png

@@ -38,8 +38,8 @@ export default class Soldier extends Laya.Script {
         if (other.label === "mouse") {
             if (this.isFreedom()) {
                 this._mouseCatched = other.owner.getComponent(Laya.Script)
-                Laya.SoundManager.setSoundVolume(0.1, "sound/mouse.mp3")
-                Laya.SoundManager.playSound("sound/mouse.mp3")
+                // Laya.SoundManager.setSoundVolume(0.1, "sound/mouse.mp3")
+                this._store.state.player.level > 10 ? Laya.SoundManager.playSound("sound/cat.mp3") : Laya.SoundManager.playSound("sound/mouse.mp3")
                 this._velocity.x > 0 ? this.aniEat.scale(-1, 1, true) : this.aniEat.scale(1, 1, true)
                 this.aniCat.visible = false
                 this.aniTease.visible = false
@@ -88,10 +88,10 @@ export default class Soldier extends Laya.Script {
         this.aniCat.visible = true
         // 食物爆炸
         Laya.SoundManager.playSound("sound/destroy.wav")
-        let explode = Laya.Pool.getItemByCreateFun("explode", this._createExplode, this)
-        explode.pos(this.owner.x, this.owner.y)
-        this.owner.parent.addChild(explode)
-        explode.play(0, false)
+        // let explode = Laya.Pool.getItemByCreateFun("explode", this._createExplode, this)
+        // explode.pos(this.owner.x, this.owner.y)
+        // this.owner.parent.addChild(explode)
+        // explode.play(0, false)
         // 若之前缓存了速度方向
         if (this._velocityTemp) {
             this._velocity = this._velocityTemp
@@ -104,7 +104,7 @@ export default class Soldier extends Laya.Script {
             // 升级
             if (res.token) {
                 this._isEvolution = true
-                Laya.SoundManager.playSound("sound/alert.mp3")
+                Laya.SoundManager.playSound("sound/evo.mp3")
                 // 更换背景
                 GameUI.instance.changeGameBG("bg/bg_blue.jpg")
                 // 进化动画
