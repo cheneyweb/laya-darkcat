@@ -146,7 +146,7 @@ router.get('/buy', async (ctx, next) => {
         { $inc: { gold: -price } },
         { returnOriginal: false }
     )
-    console.log(res.value)
+    console.log(res.value ? { player: res.value } : { err: true, msg: '猫币不足!' })
     ctx.body = res.value ? { player: res.value } : { err: true, msg: '猫币不足!' }
 })
 
