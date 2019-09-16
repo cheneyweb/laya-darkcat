@@ -139,7 +139,7 @@ router.get('/buy', async (ctx, next) => {
     const token = ctx.tokenVerify
     const mongodb = global.mongodb
     const inparam = ctx.request.query
-    let price = inparam.isRandom ? 0 : LevelConfig[token.level].price
+    let price = inparam.isRandom == 'true' ? 0 : LevelConfig[token.level].price
     console.log(inparam.isRandom)
     console.log(price)
     // 扣减玩家金币，返回变更后数据
