@@ -138,7 +138,8 @@ router.get('/earn', async (ctx, next) => {
 router.get('/buy', async (ctx, next) => {
     const token = ctx.tokenVerify
     const mongodb = global.mongodb
-    let price = LevelConfig[token.level].price
+    const inparam = ctx.request.query
+    let price = inparam.isRandom ? 0 : LevelConfig[token.level].price
     // 扣减玩家金币，返回变更后数据
     let res = await mongodb.collection('player').findOneAndUpdate(
         { _id: ObjectId(token._id), gold: { $gte: price } },

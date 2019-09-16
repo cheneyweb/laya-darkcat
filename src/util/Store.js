@@ -117,9 +117,9 @@ const store = new Store({
 
         },
         // 玩家购买
-        buy() {
+        buy(isRandom) {
             return new Promise((resolve, reject) => {
-                store.axios.get('/xserver/player/buy').then(res => {
+                store.axios.get(`/xserver/player/buy?isRandom=${isRandom}`).then(res => {
                     if (!res.err) {
                         store.state.player = res.player
                         resolve(res)

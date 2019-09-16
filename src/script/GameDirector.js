@@ -22,6 +22,11 @@ export default class GameDirector extends Laya.Script {
     }
 
     onUpdate() {
+        //心跳
+        if (Date.now() - this._lastHeartTime > Math.random() * 5000 + 3000) {
+            this._lastHeartTime = Date.now()
+            GameUI.instance.releaseFood(true)
+        }
     }
 
     onStageClick(e) {
@@ -74,7 +79,11 @@ export default class GameDirector extends Laya.Script {
             enemy = Laya.Pool.getItemByCreateFun("enemy", this.enemy.create, this.enemy)
         }
         let areaHeight = Laya.stage.height - this._store.state.upRange - this._store.state.downRange
-        enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
+        // if (Math.random() > 0.5) {
+            // enemy.pos(enemy.width, Math.random() * areaHeight + this._store.state.upRange)
+        // } else {
+            enemy.pos(Laya.stage.width, Math.random() * areaHeight + this._store.state.upRange)
+        // }
         this.spriteBox.addChild(enemy)
         this._store.actions.addEnemy(enemy)
     }
