@@ -128,8 +128,8 @@ export default class GameUI extends Laya.Scene {
                     this._director.releaseFood()
                 } else {
                     this.btnFood.label = res.msg
-                    let dialog = new Dialog()
-                    dialog.addChild(new Image('sprite/review_dialogue_bgd.png'))
+                    let dialog = new Laya.Dialog()
+                    dialog.addChild(new Laya.Image('sprite/review_dialogue_bgd.png'))
                     dialog.show()
                 }
             })
