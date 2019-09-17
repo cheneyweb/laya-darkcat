@@ -109,7 +109,7 @@ router.get('/earn', async (ctx, next) => {
         }
         if (ShareMap[playerToday] || ShareMap[playerToday] == 0) {
             if (ShareMap[playerToday]++ < 3) {
-                goldInc = 50
+                goldInc = 500
             }
         }
     } else if (inparam.type == 'ad') {
