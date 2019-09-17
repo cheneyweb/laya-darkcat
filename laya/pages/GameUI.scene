@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":58,
+    "selecteID":63,
     "searchKey":"Scene",
     "props":{"width":640,"sceneColor":"#ffffff","height":1336},
     "nodeParent":-1,
-    "maxID":61,
+    "maxID":64,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -85,6 +85,20 @@
         },
         {
             "x":15,
+            "type":"Button",
+            "searchKey":"Button,btnDiary,btnDiary",
+            "props":{"y":1178.5,"x":28.6845703125,"visible":false,"var":"btnDiary","stateNum":"2","skin":"ui/btn_diary.png","name":"btnDiary","labelSize":20,"labelPadding":"65","labelColors":"white,black","labelAlign":"center","label":"日记本"},
+            "nodeParent":2,
+            "label":"btnDiary",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":63,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
             "type":"Label",
             "searchKey":"Label,labelLaw,labelLaw",
             "props":{"y":1000,"x":197,"visible":false,"var":"labelLaw","text":"抵制不良游戏,拒绝盗版游戏\\n注意自我保护,谨防受骗上当\\n适度游戏益脑,沉迷游戏伤身\\n合理安排时间,享受健康生活","name":"labelLaw","fontSize":20,"color":"grey","align":"center"},
@@ -153,7 +167,6 @@
             "compId":25,
             "child":[
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,labelProgress,labelProgress",
                     "props":{"y":8,"x":120,"var":"labelProgress","valign":"middle","text":"变异基因","name":"labelProgress","fontSize":15,"color":"white","align":"center"},
@@ -209,7 +222,6 @@
             "compId":60,
             "child":[
                 {
-                    "x":30,
                     "type":"Texture",
                     "searchKey":"Texture",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/DialogTip.prefab"},
@@ -223,7 +235,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"presetID":3,"preset":"laya/pages/prefab/DialogTip.prefab"},
@@ -237,7 +248,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button,btnTip",
                     "props":{"presetID":4,"preset":"laya/pages/prefab/DialogTip.prefab","name":"btnTip"},
@@ -252,7 +262,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":5,"preset":"laya/pages/prefab/DialogTip.prefab"},
@@ -265,6 +274,34 @@
                     "child":[
                         ]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Dialog",
+            "searchKey":"Dialog,dialogDiary",
+            "props":{"y":279,"x":0,"visible":false,"var":"dialogDiary"},
+            "nodeParent":2,
+            "label":"dialogDiary",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":61,
+            "child":[
+                {
+                    "type":"Texture",
+                    "searchKey":"Texture",
+                    "props":{"skin":"ui/dialog_diary.png"},
+                    "nodeParent":61,
+                    "label":"Texture",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":62,
+                    "child":[
+                        ]
+                }],
+            "$HIDDEN":true
         }],
     "animations":[
         {

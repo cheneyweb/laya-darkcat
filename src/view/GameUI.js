@@ -91,6 +91,7 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.visible = true
         this.btnGold.visible = true
         this.btnShare.visible = true
+        this.btnDiary.visible = true
 
         this.progressExp.visible = true
         this.labelGold.visible = true
@@ -109,6 +110,7 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.visible = false
         this.btnGold.visible = false
         this.btnShare.visible = false
+        this.btnDiary.visible = false        
 
         this.progressExp.visible = false
         this.labelGold.visible = false

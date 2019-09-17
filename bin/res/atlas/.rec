@@ -20,12 +20,14 @@ P 8704CBED title2.png
 D ui
 P B848757A btn_cat.png
 P 5CF9C6BE btn_close.png
+P EC308184 btn_diary.png
 P B2966422 btn_gold.png
 P C26E7AB2 btn_gold2.png
 P 2952D9CC btn_mouse.png
 P 4334DEA1 btn_pick.png
 P 81F03DD8 btn_share.png
-P 176A0A47 dialog.png
+R A3C08366 dialog_diary.png
+P 176A0A47 dialog_tip.png
 P 6135872F progress$bar.png
 P 39374AE5 progress.png
 D ani/cat
