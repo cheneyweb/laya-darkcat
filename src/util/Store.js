@@ -75,10 +75,10 @@ const store = new Store({
     },
     actions: {
         // 玩家登录
-        login(type) {
+        login(plat) {
             return new Promise((resolve, reject) => {
                 // 微信小游戏平台
-                if (type == 'wx') {
+                if (plat == 'wx') {
                     wx.cloud.callFunction({ name: 'login', data: {} }).then(wxRes => {
                         let player = store.pGetItem('player') || store.state.player
                         player.openid = wxRes.result.openid

@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":63,
+    "selecteID":61,
     "searchKey":"Scene",
     "props":{"width":640,"sceneColor":"#ffffff","height":1336},
     "nodeParent":-1,
-    "maxID":64,
+    "maxID":72,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -273,13 +273,14 @@
                     "compId":59,
                     "child":[
                         ]
-                }]
+                }],
+            "$HIDDEN":false
         },
         {
             "x":15,
             "type":"Dialog",
             "searchKey":"Dialog,dialogDiary",
-            "props":{"y":279,"x":0,"visible":false,"var":"dialogDiary"},
+            "props":{"y":280,"x":20,"visible":false,"var":"dialogDiary","presetID":1,"preset":"laya/pages/prefab/DialogDiary.prefab"},
             "nodeParent":2,
             "label":"dialogDiary",
             "isOpen":false,
@@ -289,19 +290,91 @@
             "compId":61,
             "child":[
                 {
+                    "x":30,
                     "type":"Texture",
                     "searchKey":"Texture",
-                    "props":{"skin":"ui/dialog_diary.png"},
+                    "props":{"presetID":2,"preset":"laya/pages/prefab/DialogDiary.prefab"},
                     "nodeParent":61,
-                    "label":"Texture",
+                    "label":"Texture(DialogDiary)",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":62,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"presetID":3,"preset":"laya/pages/prefab/DialogDiary.prefab"},
+                    "nodeParent":61,
+                    "label":"imgCat",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":64,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "searchKey":"Button",
+                    "props":{"presetID":4,"preset":"laya/pages/prefab/DialogDiary.prefab"},
+                    "nodeParent":61,
+                    "label":"btnLeft",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":65,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "searchKey":"Button",
+                    "props":{"presetID":5,"preset":"laya/pages/prefab/DialogDiary.prefab"},
+                    "nodeParent":61,
+                    "label":"btnRight",
+                    "isOpen":false,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":66,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"presetID":6,"preset":"laya/pages/prefab/DialogDiary.prefab"},
+                    "nodeParent":61,
+                    "label":"labelDiary",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":70,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Button",
+                    "searchKey":"Button",
+                    "props":{"presetID":7,"preset":"laya/pages/prefab/DialogDiary.prefab"},
+                    "nodeParent":61,
+                    "label":"cancel",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":71,
+                    "child":[
+                        ]
                 }],
-            "$HIDDEN":true
+            "$HIDDEN":false
         }],
     "animations":[
         {

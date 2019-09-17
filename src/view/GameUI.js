@@ -73,6 +73,9 @@ export default class GameUI extends Laya.Scene {
         this.dialogTip.getChildByName('btnTip').on(Laya.Event.CLICK, this, this.earnGold)
         //点击分享
         this.btnShare.on(Laya.Event.CLICK, this, this.share)
+        //点击日记
+        this.btnDiary.on(Laya.Event.CLICK, this, this.diaryOpen)
+        this.dialogDiary.closeHandler = new Laya.Handler(this, this.diaryClose)
     }
 
     /**通过全局状态恢复UI */
@@ -95,13 +98,18 @@ export default class GameUI extends Laya.Scene {
 
         this.progressExp.visible = true
         this.labelGold.visible = true
-        this.imgGold.visible = true        
+        this.imgGold.visible = true
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
         this.titleLogo.visible = false
 
-        this._restoreUI()//通过全局状态恢复数据
-        this._director.startGame()
+        let plat = Laya.Browser.onMiniGame ? 'wx' : null
+        Laya.store.actions.login(plat).then(res => {    
+            this._restoreUI()
+            this._director.startGame()
+        })
+         //播放背景音乐
+         Laya.SoundManager.playMusic("sound/bgm.mp3")
     }
 
     /**停止游戏 */
@@ -110,7 +118,7 @@ export default class GameUI extends Laya.Scene {
         this.btnFood.visible = false
         this.btnGold.visible = false
         this.btnShare.visible = false
-        this.btnDiary.visible = false        
+        this.btnDiary.visible = false
 
         this.progressExp.visible = false
         this.labelGold.visible = false
@@ -170,6 +178,16 @@ export default class GameUI extends Laya.Scene {
                 }
             })
         }
+    }
+
+    /**日记 */
+    diaryOpen() {
+        Laya.SoundManager.playMusic("sound/bgm2.mp3")
+        this.dialogDiary.visible = true
+        this.dialogDiary.show()
+    }
+    diaryClose() {
+        Laya.SoundManager.playMusic("sound/bgm.mp3")
     }
 
     updateExp(value) {

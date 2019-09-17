@@ -54,8 +54,6 @@ export default class GameDirector extends Laya.Script {
         this._started = true
         this.bg.visible = true
         this._createSoldier()
-        //播放背景音乐
-        Laya.SoundManager.playMusic("sound/bgm.mp3")
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */

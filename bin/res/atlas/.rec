@@ -6,6 +6,7 @@ R 2C7D9559 bg_dark.jpg
 R 923BE1DB bg_white.jpg
 D sound
 R 097E70F7 bgm.mp3
+R 268FE702 bgm2.mp3
 R FF9649F3 cat.mp3
 R 1DC3ABD8 destroy.wav
 R 85213529 evo.mp3
@@ -23,10 +24,12 @@ P 5CF9C6BE btn_close.png
 P EC308184 btn_diary.png
 P B2966422 btn_gold.png
 P C26E7AB2 btn_gold2.png
+P 8D183FF6 btn_left.png
 P 2952D9CC btn_mouse.png
 P 4334DEA1 btn_pick.png
+P 5A483D41 btn_right.png
 P 81F03DD8 btn_share.png
-R A3C08366 dialog_diary.png
+R F11E688D dialog_diary.png
 P 176A0A47 dialog_tip.png
 P 6135872F progress$bar.png
 P 39374AE5 progress.png
