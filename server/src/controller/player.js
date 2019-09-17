@@ -42,7 +42,7 @@ const LevelConfig = {
 function initPlayer(inparam) {
     inparam.exp = 0
     inparam.level = 1
-    inparam.gold = 1000
+    inparam.gold = 500
     delete inparam._id
     delete inparam.progressValue
     delete inparam.price
