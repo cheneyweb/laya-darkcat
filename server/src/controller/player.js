@@ -116,7 +116,7 @@ router.get('/earn', async (ctx, next) => {
         // 大于30秒可领取
         if (!AdMap[token._id] || AdMap[token._id] - Date.now() > 30000) {
             AdMap[token._id] = Date.now()
-            goldInc = 100
+            goldInc = 500
         }
     }
     // 增加玩家金币，返回变更后数据
