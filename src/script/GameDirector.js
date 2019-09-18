@@ -13,7 +13,7 @@ export default class GameDirector extends Laya.Script {
 
     onEnable() {
         this._store = Laya.store                                //全局状态
-        this._started = false                                   //是否已经开始游戏
+        this._isRunning = false                                 //是否正在游戏
         this._clickCount = 0                                    //屏幕点击次数
         this._lastHeartTime = Date.now()                        //上次心跳时间
 
@@ -24,7 +24,7 @@ export default class GameDirector extends Laya.Script {
 
     onUpdate() {
         //心跳
-        if (this._started && Date.now() - this._lastHeartTime > (Math.random() * 20000 + 10000)) {
+        if (this._isRunning && Date.now() - this._lastHeartTime > (Math.random() * 20000 + 10000)) {
             this._lastHeartTime = Date.now()
             GameUI.instance.releaseFood(true)
         }
@@ -33,7 +33,7 @@ export default class GameDirector extends Laya.Script {
     onStageClick(e) {
         //停止事件冒泡，提高性能
         e.stopPropagation()
-        if (this._started) {
+        if (this._isRunning) {
             //显示鼠标指引
             if (this._clickCount++ > 0 && e.stageY > this._store.state.upRange && e.stageY < (Laya.stage.height - this._store.state.downRange)) {
                 if (this.cat) {
@@ -51,14 +51,23 @@ export default class GameDirector extends Laya.Script {
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
     startGame() {
-        this._started = true
+        this._isRunning = true
         this.bg.visible = true
         this._createSoldier()
     }
 
+    /**暂停游戏*/
+    pauseGame() {
+        this._isRunning = false
+    }
+    /**暂停游戏*/
+    continueGame() {
+        this._isRunning = true
+    }
+
     /**结束游戏，通过非激活本脚本停止游戏 */
     stopGame() {
-        this._started = false
+        this._isRunning = false
         this.bg.visible = false
         this.guide.visible = false
         this.spriteBox.removeChildren()

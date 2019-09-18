@@ -184,8 +184,12 @@ export default class GameUI extends Laya.Scene {
     }
 
     /**日记 */
+    // diaryEffect() {
+    //     Laya.Tween.to(this.btnDiary, { y: this.btnDiary.y - 100 }, 1000, Laya.Ease.bounceIn, Laya.Handler.create(this, ()=>{this.btnDiary.y-=100}), 1000);
+    // }
     diaryOpen() {
         Laya.SoundManager.playMusic("sound/bgm2.mp3")
+        this._director.pauseGame()        
         this._store.actions.restoreStoryIndex()
         this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${this._store.state.player.level}.ani`
         this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[this._store.state.player.level - 1]
@@ -194,6 +198,7 @@ export default class GameUI extends Laya.Scene {
     }
     diaryClose() {
         Laya.SoundManager.playMusic("sound/bgm.mp3")
+        this._director.continueGame()
     }
     diaryLeft() {
         let storyIndex = this._store.actions.moveStoryIndex(-1)
