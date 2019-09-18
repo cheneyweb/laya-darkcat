@@ -10,34 +10,34 @@ const ShareMap = {}
 const AdMap = {}
 
 // 等级配置
-const LevelConfig = {
-    1: { expMax: 10, price: 50 },
-    2: { expMax: 20, price: 50 },
-    3: { expMax: 40, price: 50 },
-    4: { expMax: 80, price: 50 },
-    5: { expMax: 160, price: 50 },
-    6: { expMax: 240, price: 50 },
-    7: { expMax: 500, price: 50 },
-    8: { expMax: 1000, price: 50 },
-    9: { expMax: 2000, price: 50 },
-    10: { expMax: 4000, price: 100 },
-    11: { expMax: 8000, price: 100 },
-    12: { expMax: 20000, price: 100 },
-}
 // const LevelConfig = {
-//     1: { expMax: 3, price: 3 },
-//     2: { expMax: 4, price: 4 },
-//     3: { expMax: 5, price: 5 },
-//     4: { expMax: 6, price: 6 },
-//     5: { expMax: 7, price: 7 },
-//     6: { expMax: 8, price: 8 },
-//     7: { expMax: 9, price: 9 },
-//     8: { expMax: 10, price: 10 },
-//     9: { expMax: 11, price: 11 },
-//     10: { expMax: 12, price: 12 },
-//     11: { expMax: 13, price: 13 },
-//     12: { expMax: 1000, price: 1000 },
+//     1: { expMax: 10, price: 50 },
+//     2: { expMax: 20, price: 50 },
+//     3: { expMax: 40, price: 50 },
+//     4: { expMax: 80, price: 50 },
+//     5: { expMax: 160, price: 50 },
+//     6: { expMax: 240, price: 50 },
+//     7: { expMax: 500, price: 50 },
+//     8: { expMax: 1000, price: 50 },
+//     9: { expMax: 2000, price: 50 },
+//     10: { expMax: 4000, price: 100 },
+//     11: { expMax: 8000, price: 100 },
+//     12: { expMax: 20000, price: 100 },
 // }
+const LevelConfig = {
+    1: { expMax: 3, price: 3 },
+    2: { expMax: 4, price: 4 },
+    3: { expMax: 5, price: 5 },
+    4: { expMax: 6, price: 6 },
+    5: { expMax: 7, price: 7 },
+    6: { expMax: 8, price: 8 },
+    7: { expMax: 9, price: 9 },
+    8: { expMax: 10, price: 10 },
+    9: { expMax: 11, price: 11 },
+    10: { expMax: 12, price: 12 },
+    11: { expMax: 13, price: 13 },
+    12: { expMax: 1000, price: 1000 },
+}
 
 function initPlayer(inparam) {
     inparam.exp = 0
