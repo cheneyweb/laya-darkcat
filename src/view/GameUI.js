@@ -186,7 +186,9 @@ export default class GameUI extends Laya.Scene {
     /**日记 */
     diaryOpen() {
         Laya.SoundManager.playMusic("sound/bgm2.mp3")
-        this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[0]
+        this._store.actions.restoreStoryIndex()
+        this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${this._store.state.player.level}.ani`
+        this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[this._store.state.player.level - 1]
         this.dialogDiary.visible = true
         this.dialogDiary.show()
     }

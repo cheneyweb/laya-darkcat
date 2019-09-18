@@ -169,6 +169,9 @@ const store = new Store({
             store.state.storyIndex = index
             return store.state.storyIndex
         },
+        restoreStoryIndex() {
+            store.state.storyIndex = store.state.player.level - 1
+        },
         // 添加敌人
         addEnemy(enemy) {
             store.state.enemyMap.set(enemy, enemy)
