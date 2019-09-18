@@ -76,6 +76,9 @@ export default class GameUI extends Laya.Scene {
         //点击日记
         this.btnDiary.on(Laya.Event.CLICK, this, this.diaryOpen)
         this.dialogDiary.closeHandler = new Laya.Handler(this, this.diaryClose)
+        //点击日记左右移动
+        this.dialogDiary.getChildByName('btnLeft').on(Laya.Event.CLICK, this, this.diaryLeft)
+        this.dialogDiary.getChildByName('btnRight').on(Laya.Event.CLICK, this, this.diaryRight)
     }
 
     /**通过全局状态恢复UI */
@@ -104,12 +107,12 @@ export default class GameUI extends Laya.Scene {
         this.titleLogo.visible = false
 
         let plat = Laya.Browser.onMiniGame ? 'wx' : null
-        Laya.store.actions.login(plat).then(res => {    
+        Laya.store.actions.login(plat).then(res => {
             this._restoreUI()
             this._director.startGame()
         })
-         //播放背景音乐
-         Laya.SoundManager.playMusic("sound/bgm.mp3")
+        //播放背景音乐
+        Laya.SoundManager.playMusic("sound/bgm.mp3")
     }
 
     /**停止游戏 */
@@ -183,11 +186,22 @@ export default class GameUI extends Laya.Scene {
     /**日记 */
     diaryOpen() {
         Laya.SoundManager.playMusic("sound/bgm2.mp3")
+        this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[0]
         this.dialogDiary.visible = true
         this.dialogDiary.show()
     }
     diaryClose() {
         Laya.SoundManager.playMusic("sound/bgm.mp3")
+    }
+    diaryLeft() {
+        let storyIndex = this._store.actions.moveStoryIndex(-1)
+        this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${storyIndex + 1}.ani`
+        this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[storyIndex]
+    }
+    diaryRight() {
+        let storyIndex = this._store.actions.moveStoryIndex(1)
+        this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${storyIndex + 1}.ani`
+        this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[storyIndex]
     }
 
     updateExp(value) {
