@@ -6,6 +6,8 @@ export default class GameDirector extends Laya.Script {
     /** @prop {name:enemy,tips:"敌人预置对象",type:Prefab}*/
     /** @prop {name:soldier,tips:"士兵预置对象",type:Prefab}*/
     /** @prop {name:blackcat,tips:"黑猫预置对象",type:Prefab}*/
+    /** @prop {name:goldpile,tips:"金堆预置对象",type:Prefab}*/
+    /** @prop {name:goldpack,tips:"金袋预置对象",type:Prefab}*/
     constructor() {
         super()
         GameDirector.instance = this
@@ -27,6 +29,7 @@ export default class GameDirector extends Laya.Script {
         if (this._isRunning && Date.now() - this._lastHeartTime > (Math.random() * 20000 + 10000)) {
             this._lastHeartTime = Date.now()
             GameUI.instance.releaseFood(true)
+            this.releaseGold()
         }
     }
 
@@ -77,6 +80,27 @@ export default class GameDirector extends Laya.Script {
     releaseFood() {
         this._createEnemy()
     }
+
+    /**释放金币 */
+    releaseGold() {
+        this._createGold()
+    }
+
+    _createGold() {
+        //使用对象池创建金币
+        let gold
+        if (Math.random() < 0.5) {
+            gold = Laya.Pool.getItemByCreateFun("goldpile", this.goldpile.create, this.goldpile)
+        } else {
+            gold = Laya.Pool.getItemByCreateFun("goldpack", this.goldpack.create, this.goldpack)
+        }
+        let areaWidth = Laya.stage.width - gold.width
+        let areaHeight = Laya.stage.height - this._store.state.upRange - this._store.state.downRange
+        gold.pos(Math.random() * areaWidth + gold.width, Math.random() * areaHeight + this._store.state.upRange)
+        this.spriteBox.addChild(gold)
+        this._store.actions.addGold(gold)
+    }
+
 
     _createEnemy() {
         //使用对象池创建敌人

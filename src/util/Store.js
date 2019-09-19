@@ -86,7 +86,8 @@ const store = new Store({
         token: null,
         player: { exp: 0, level: 0, gold: 0, progressValue: 0 },
         shareTitle: '这猫长这样我也是醉了...',
-        enemyMap: new Map()
+        enemyMap: new Map(),
+        goldMap: new Map()        
     },
     actions: {
         // 玩家登录
@@ -179,6 +180,14 @@ const store = new Store({
         // 删除敌人
         delEnemy(enemy) {
             store.state.enemyMap.delete(enemy)
+        },
+        // 添加金币
+        addGold(gold) {
+            store.state.goldMap.set(gold, gold)
+        },
+        // 删除金币
+        delGold(gold) {
+            store.state.goldMap.delete(gold)
         }
     }
 })

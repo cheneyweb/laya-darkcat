@@ -43,6 +43,7 @@ function initPlayer(inparam) {
     inparam.exp = 0
     inparam.level = 1
     inparam.gold = 500
+    inparam.lastLogin = Date.now()
     delete inparam._id
     delete inparam.progressValue
     delete inparam.price
@@ -72,6 +73,9 @@ router.post('/login', async (ctx, next) => {
             initPlayer(inparam)
             res = await mongodb.collection('player').insertOne(inparam)
             player = { ...inparam, _id: res.insertedId }
+        } else {
+            player.lastLogin = Date.now()
+            mongodb.collection('player').findOneAndUpdate({ _id: ObjectId(player._id) }, { $set: { lastLogin: player.lastLogin } })
         }
     }
     // WEB平台，查询玩家是否存在，不存在则自动创建
@@ -81,6 +85,9 @@ router.post('/login', async (ctx, next) => {
             initPlayer(inparam)
             res = await mongodb.collection('player').insertOne(inparam)
             player = { ...inparam, _id: res.insertedId }
+        } else {
+            player.lastLogin = Date.now()
+            mongodb.collection('player').findOneAndUpdate({ _id: ObjectId(player._id) }, { $set: { lastLogin: player.lastLogin } })
         }
     } else {
         initPlayer(inparam)

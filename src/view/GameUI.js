@@ -154,6 +154,7 @@ export default class GameUI extends Laya.Scene {
             })
         }
     }
+    
 
     /**看广告领金币 */
     earnGold() {

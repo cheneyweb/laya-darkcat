@@ -10,8 +10,10 @@ R 268FE702 bgm2.mp3
 R FF9649F3 cat.mp3
 R 1DC3ABD8 destroy.wav
 R 85213529 evo.mp3
+R A1D4A446 gold.mp3
 R FF0B6E8D hit.wav
 R E882C09E mouse.mp3
+R 2CD52817 page.mp3
 R A83E41E9 tease.mp3
 D sprite
 P 82D67B64 gold.png
@@ -128,6 +130,10 @@ P 8A607320 rat1.png
 P EB1BEA6B rat2.png
 P 6BC8673E rat3.png
 P 519C9FED rat4.png
+D ani/gold
+P 98656B11 package.png
+P BC5D7A15 pile1.png
+P 6C6E2813 pile2.png
 D ani/tease
 P D22B4197 tease_10_1.png
 P 980072A2 tease_10_2.png
