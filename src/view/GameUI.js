@@ -142,13 +142,12 @@ export default class GameUI extends Laya.Scene {
     releaseFood(isRandom) {
         if (this._store.state.enemyMap.size < 10) {
             Laya.SoundManager.playSound("sound/hit.wav")
-            this._store.actions.buy(isRandom === true).then(res => {
+            this._store.actions.buy(isRandom).then(res => {
                 if (!res.err) {
                     this.labelGold.changeText(`x${res.player.gold}`)
                     this._director.releaseFood()
                     // 如果触发掉落金币
-                    console.log(`接受到的结果:${res.isGold}`)
-                    if (res.isGold) {
+                    if (res.isGold == 1) {
                         this._director.releaseGold()
                     }
                 } else {

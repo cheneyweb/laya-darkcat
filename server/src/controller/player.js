@@ -149,12 +149,11 @@ router.get('/buy', async (ctx, next) => {
     const mongodb = global.mongodb
     const inparam = ctx.request.query
     let price = LevelConfig[token.level].price
-    let isGold = false
+    let isGold = 0
     // 触发随机事件
-    if (inparam.isRandom == true) {
-        console.log(`这是随机事件:${inparam.isRandom}`)
+    if (inparam.isRandom == 1) {
         price = 0
-        isGold = Math.random() < 0.5 ? true : false // 50%概率触发金币掉落
+        isGold = Math.random() < 0.5 ? 1 : 0 // 50%概率触发金币掉落
     }
     // 扣减玩家金币，返回变更后数据
     let res = await mongodb.collection('player').findOneAndUpdate(
