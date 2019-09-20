@@ -48,8 +48,10 @@ export default class GameUI extends Laya.Scene {
             // "res/atlas/ani/eat.atlas",
             // "res/atlas/ani/tease.atlas",
             // "res/atlas/ani/food.atlas",
-
+            "bg/bg_dark.jpg",
+            "bg/bg_blue.jpg",
             // 以下几项需要动态加载
+            "res/atlas/ani/gold.atlas",
             "res/atlas/ani/effect.atlas",
             "res/atlas/ani/evolution.atlas"],
             Laya.Handler.create(this, (e) => {
@@ -109,7 +111,7 @@ export default class GameUI extends Laya.Scene {
         let plat = Laya.Browser.onMiniGame ? 'wx' : null
         Laya.store.actions.login(plat).then(res => {
             this._restoreUI()
-            this._director.startGame()
+            this._director.run()
         })
         //播放背景音乐
         Laya.SoundManager.playMusic("sound/bgm.mp3")
@@ -130,7 +132,7 @@ export default class GameUI extends Laya.Scene {
         this.labelCopyright.visible = false
         this.titleLogo.visible = true
 
-        this._director.stopGame()
+        this._director.stop()
     }
 
     /**更换游戏背景 */

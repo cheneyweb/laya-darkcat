@@ -51,7 +51,7 @@ export default class GameDirector extends Laya.Script {
     }
 
     /**开始游戏，通过激活本脚本方式开始游戏*/
-    startGame() {
+    run() {
         this._isRunning = true
         this.bg.visible = true
         this._createSoldier()
@@ -67,7 +67,7 @@ export default class GameDirector extends Laya.Script {
     }
 
     /**结束游戏，通过非激活本脚本停止游戏 */
-    stopGame() {
+    stop() {
         this._isRunning = false
         this.bg.visible = false
         this.guide.visible = false
