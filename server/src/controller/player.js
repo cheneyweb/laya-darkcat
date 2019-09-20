@@ -151,7 +151,7 @@ router.get('/buy', async (ctx, next) => {
     let price = LevelConfig[token.level].price
     let isGold = false
     // 触发随机事件
-    if (inparam.isRandom) {
+    if (inparam.isRandom == true) {
         console.log(`这是随机事件:${inparam.isRandom}`)
         price = 0
         isGold = Math.random() < 0.5 ? true : false // 50%概率触发金币掉落
