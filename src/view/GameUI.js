@@ -146,6 +146,10 @@ export default class GameUI extends Laya.Scene {
                 if (!res.err) {
                     this.labelGold.changeText(`x${res.player.gold}`)
                     this._director.releaseFood()
+                    // 如果触发金币
+                    if (res.isGold) {
+                        this._director.releaseGold()
+                    }
                 } else {
                     this.btnFood.label = res.msg
                     this.dialogTip.visible = true
@@ -154,7 +158,7 @@ export default class GameUI extends Laya.Scene {
             })
         }
     }
-    
+
 
     /**看广告领金币 */
     earnGold() {
@@ -190,7 +194,7 @@ export default class GameUI extends Laya.Scene {
     // }
     diaryOpen() {
         Laya.SoundManager.playMusic("sound/bgm2.mp3")
-        this._director.pauseGame()        
+        this._director.pauseGame()
         this._store.actions.restoreStoryIndex()
         this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${this._store.state.player.level}.ani`
         this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[this._store.state.player.level - 1]

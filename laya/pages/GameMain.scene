@@ -126,7 +126,7 @@
             "source":"src/script/GameDirector.js",
             "searchKey":"Script,GameDirector",
             "removeAble":true,
-            "props":{"soldier":"@Prefab:prefab/Cat.prefab","goldpile":"@Prefab:prefab/GoldPile.prefab","goldpack":"@Prefab:prefab/GoldPack.prefab","enemy":"@Prefab:prefab/Mouse.prefab","blackcat":"@Prefab:prefab/BlackCat.prefab"},
+            "props":{"soldier":"@Prefab:prefab/Cat.prefab","goldpack":"@Prefab:prefab/GoldPack.prefab","enemy":"@Prefab:prefab/Mouse.prefab","blackcat":"@Prefab:prefab/BlackCat.prefab"},
             "nodeParent":2,
             "label":"GameDirector",
             "isDirectory":false,
