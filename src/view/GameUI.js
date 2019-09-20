@@ -147,7 +147,7 @@ export default class GameUI extends Laya.Scene {
                     this.labelGold.changeText(`x${res.player.gold}`)
                     this._director.releaseFood()
                     // 如果触发掉落金币
-                    if (res.isGold == 1) {
+                    if (res.isGold == 1 && this._store.state.goldMap.size < 3) {
                         this._director.releaseGold()
                     }
                 } else {
