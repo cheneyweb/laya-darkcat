@@ -146,7 +146,7 @@ export default class GameUI extends Laya.Scene {
                 if (!res.err) {
                     this.labelGold.changeText(`x${res.player.gold}`)
                     this._director.releaseFood()
-                    // 如果触发金币
+                    // 如果触发掉落金币
                     if (res.isGold) {
                         this._director.releaseGold()
                     }
@@ -161,8 +161,8 @@ export default class GameUI extends Laya.Scene {
 
 
     /**看广告领金币 */
-    earnGold() {
-        this._store.actions.earn('ad').then(res => {
+    earnGold(type = 'ad') {
+        this._store.actions.earn(type).then(res => {
             if (!res.err) {
                 this.labelGold.changeText(`x${res.player.gold}`)
             }

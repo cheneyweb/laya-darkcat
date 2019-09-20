@@ -125,6 +125,8 @@ router.get('/earn', async (ctx, next) => {
             AdMap[token._id] = Date.now()
             goldInc = 500
         }
+    } else if (inparam.type == 'pick') {
+        goldInc = _.random(10, 100)
     }
     // 增加玩家金币，返回变更后数据
     if (goldInc > 0) {
@@ -151,7 +153,7 @@ router.get('/buy', async (ctx, next) => {
     // 触发随机事件
     if (inparam.isRandom) {
         price = 0
-        isGold = Math.random() < 0.5 ? true : false // 50%概率触发金币掉落
+        goldCount = Math.random() < 0.5 ? true : false // 50%概率触发金币掉落
     }
     // 扣减玩家金币，返回变更后数据
     let res = await mongodb.collection('player').findOneAndUpdate(
