@@ -101,23 +101,22 @@ export default class GameUI extends Laya.Scene {
     /**开始游戏 */
     beginGame() {
         this.btnStart.visible = false
-        this.btnFood.visible = true
-        this.btnGold.visible = true
-        this.btnShare.visible = true
-        this.btnDiary.visible = true
-
-        this.progressExp.visible = true
-        this.labelGold.visible = true
-        this.imgGold.visible = true
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
         this.titleLogo.visible = false
-
         let plat = Laya.Browser.onMiniGame ? 'wx' : null
         Laya.store.actions.login(plat).then(res => {
-            this._director.run()
             this._restoreUI()
+            this.btnFood.visible = true
+            this.btnGold.visible = true
+            this.btnShare.visible = true
+            this.btnDiary.visible = true
+
+            this.progressExp.visible = true
+            this.labelGold.visible = true
+            this.imgGold.visible = true
         })
+        this._director.run()
         //播放背景音乐
         Laya.SoundManager.playMusic("sound/bgm.mp3")
     }
