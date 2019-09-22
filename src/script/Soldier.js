@@ -172,12 +172,12 @@ export default class Soldier extends Laya.Script {
 
     // 设定速度和动画
     _setVelocity() {
-        // 更换动画源
-        this.aniCat.source = `ani/cat/Cat${this._store.state.player.level}.ani`
-        this.aniEat.source = `ani/eat/Eat${this._store.state.player.level}.ani`
-        this.aniTease.source = `ani/tease/Cat${this._store.state.player.level}.ani`
-        // 根据速度调整方向
         if (this._velocity.x || this._velocity.y) {
+            // 更换动画源
+            this.aniCat.source = `ani/cat/Cat${this._store.state.player.level}.ani`
+            this.aniEat.source = `ani/eat/Eat${this._store.state.player.level}.ani`
+            this.aniTease.source = `ani/tease/Cat${this._store.state.player.level}.ani`
+            // 根据速度调整方向
             this._velocity.x > 0 ? this.aniCat.scale(-1, 1, true) : this.aniCat.scale(1, 1, true)
         }
         this.rigidBody.setVelocity(this._velocity)
