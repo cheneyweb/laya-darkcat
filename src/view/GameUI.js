@@ -93,6 +93,11 @@ export default class GameUI extends Laya.Scene {
         }
     }
 
+    /**捡起金币后文字消失 */
+    _pickGold() {
+        this.textGold.visible = false
+    }
+
     /**开始游戏 */
     beginGame() {
         this.btnStart.visible = false
@@ -110,8 +115,8 @@ export default class GameUI extends Laya.Scene {
 
         let plat = Laya.Browser.onMiniGame ? 'wx' : null
         Laya.store.actions.login(plat).then(res => {
-            this._restoreUI()
             this._director.run()
+            this._restoreUI()
         })
         //播放背景音乐
         Laya.SoundManager.playMusic("sound/bgm.mp3")
@@ -163,18 +168,23 @@ export default class GameUI extends Laya.Scene {
 
 
     /**看广告领金币 */
-    earnGold(type) {
+    earnGold(type, option) {
         type = type == 'pick' ? 'pick' : 'ad'
-        this.dialogTip.close()
-        return new Promise((resolve, reject) => {
-            this._store.actions.earn(type).then(res => {
-                if (!res.err) {
-                    this.labelGold.changeText(`x${res.player.gold}`)
+        this._store.actions.earn(type).then(res => {
+            if (!res.err) {
+                if (type == 'pick') {
+                    this.textGold.text = `猫币+${res.goldInc}`
+                    this.textGold.pos(option.x, option.y)
+                    this.textGold.visible = true
+                    Laya.Tween.to(this.textGold, { y: this.textGold.y - 120, scaleX: 1.5, scaleY: 1.5 }, 800, Laya.Ease.linearOut, Laya.Handler.create(this, this._pickGold))
                 }
-                resolve(res)
-            })
+                this.labelGold.changeText(`x${res.player.gold}`)
+            }
         })
+        this.dialogTip.close()
     }
+
+
 
     /**分享 */
     share() {

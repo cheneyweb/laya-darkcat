@@ -120,6 +120,7 @@ export default class GameDirector extends Laya.Script {
         } else {
             this.cat.pos(Laya.stage.width / 2, Laya.stage.height / 2)
         }
+        // this.spriteBox.addChild(this.cat)
         this.owner.addChild(this.cat)
     }
 }

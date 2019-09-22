@@ -30,20 +30,6 @@
         },
         {
             "x":15,
-            "type":"Text",
-            "searchKey":"Text,textGold",
-            "props":{"y":-10,"x":-36.962890625,"visible":false,"text":"猫币+10","presetID":6,"preset":"laya/pages/prefab/GoldPack.prefab","name":"textGold","fontSize":20,"color":"white"},
-            "nodeParent":64,
-            "label":"textGold",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":69,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"BoxCollider",
             "switchAble":true,
             "searchKey":"BoxCollider",

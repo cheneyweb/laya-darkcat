@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":74,
+    "selecteID":75,
     "searchKey":"Scene",
-    "props":{"width":640,"sceneColor":"#ffffff","height":1336},
+    "props":{"width":640,"sceneColor":"#ffffff","runtime":"view/GameUI.js","height":1336},
     "nodeParent":-1,
-    "maxID":75,
+    "maxID":76,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -286,14 +286,13 @@
             "nodeParent":2,
             "maxID":73,
             "label":"dialogDiary",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":74,
             "child":[
                 {
-                    "x":30,
                     "type":"Texture",
                     "searchKey":"Texture",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -307,7 +306,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Animation",
                     "searchKey":"Animation",
                     "props":{"presetID":8,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -321,7 +319,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":4,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -335,7 +332,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":5,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -350,7 +346,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"presetID":6,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -364,7 +359,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":7,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -387,6 +381,20 @@
                     "action":0
                 }],
             "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Text",
+            "searchKey":"Text,textGold",
+            "props":{"visible":false,"var":"textGold","fontSize":20,"color":"#FFFF33"},
+            "nodeParent":2,
+            "label":"textGold",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":75,
+            "child":[
+                ]
         }],
     "animations":[
         {
