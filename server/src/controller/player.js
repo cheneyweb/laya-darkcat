@@ -135,7 +135,7 @@ router.get('/earn', async (ctx, next) => {
             { $inc: { gold: goldInc } },
             { returnOriginal: false }
         )
-        ctx.body = res.value ? { player: res.value } : { err: true, msg: '登录失效!' }
+        ctx.body = res.value ? { player: res.value, goldInc } : { err: true, msg: '登录失效!' }
     } else {
         ctx.body = { err: true, msg: '分享上限！' }
     }

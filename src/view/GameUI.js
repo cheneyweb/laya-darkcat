@@ -165,12 +165,15 @@ export default class GameUI extends Laya.Scene {
     /**看广告领金币 */
     earnGold(type) {
         type = type == 'pick' ? 'pick' : 'ad'
-        this._store.actions.earn(type).then(res => {
-            if (!res.err) {
-                this.labelGold.changeText(`x${res.player.gold}`)
-            }
-        })
         this.dialogTip.close()
+        return new Promise((resolve, reject) => {
+            this._store.actions.earn(type).then(res => {
+                if (!res.err) {
+                    this.labelGold.changeText(`x${res.player.gold}`)
+                }
+                resolve(res)
+            })
+        })
     }
 
     /**分享 */
