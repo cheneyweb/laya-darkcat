@@ -117,7 +117,7 @@ export default class GameUI extends Laya.Scene {
             this._restoreUI(res)
             this.btnFood.visible = true
             this.btnGold.visible = true
-            this.btnShare.visible = true
+            if (plat) this.btnShare.visible = true
             this.btnDiary.visible = true
 
             this.progressExp.visible = true
@@ -191,6 +191,7 @@ export default class GameUI extends Laya.Scene {
         } else if (type == 'gift') {
             this.dialogGift.close()
             this.btnGift.visible = false
+            Laya.SoundManager.playSound("sound/gold.mp3")
         }
     }
 
