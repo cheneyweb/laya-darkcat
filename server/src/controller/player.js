@@ -8,6 +8,7 @@ const ObjectId = require('mongodb').ObjectID
 
 const ShareMap = {}
 const AdMap = {}
+const GiftMap = {}
 
 // 等级配置
 const LevelConfig = {
@@ -112,6 +113,11 @@ router.post('/login', async (ctx, next) => {
         let minute = parseInt((Date.now() - lastLogin) / 1000 / 60)
         goldInc = LevelConfig[player.level].goldInc * minute >= LevelConfig[player.level].goldIncMax ? LevelConfig[player.level].goldIncMax : LevelConfig[player.level].goldInc * time
     }
+    if (GiftMap[player._id]) {
+        GiftMap[player._id] = goldInc = GiftMap[player._id] >= goldInc ? GiftMap[player._id] : goldInc
+    } else {
+        GiftMap[player._id] = goldInc
+    }
 
     ctx.body = { player, token, shareTitle, goldInc }
 })
@@ -142,7 +148,12 @@ router.get('/earn', async (ctx, next) => {
             goldInc = LevelConfig[player.level].adGold
         }
     } else if (inparam.type == 'pick') {
+        // 随机拾取奖励
         goldInc = _.random(10, 100)
+    } else if (inparam.type == 'gift') {
+        // 今日奖励
+        goldInc = GiftMap[token._id] || 0
+        delete GiftMap[token._id]
     }
     // 增加玩家金币，返回变更后数据
     if (goldInc > 0) {

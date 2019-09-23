@@ -12,7 +12,7 @@ export default class GameUI extends Laya.Scene {
         if (Laya.Browser.onMiniGame) {
             Laya.MiniAdpter.window.wx.onShow(() => {
                 Laya.store.actions.login('wx').then(res => {
-                    this._restoreUI()
+                    this._restoreUI(res)
                 })
                 //播放背景音乐
                 Laya.SoundManager.playMusic("sound/bgm.mp3")
@@ -81,16 +81,21 @@ export default class GameUI extends Laya.Scene {
         //点击日记左右移动
         this.dialogDiary.getChildByName('btnLeft').on(Laya.Event.CLICK, this, this.diaryLeft)
         this.dialogDiary.getChildByName('btnRight').on(Laya.Event.CLICK, this, this.diaryRight)
+        //点击今日奖励
+        this.btnGift.on(Laya.Event.CLICK, this, this.giftOpen)
+        this.dialogGift.getChildByName('btnGift').on(Laya.Event.CLICK, this, this.earnGold)
     }
 
     /**通过全局状态恢复UI */
-    _restoreUI() {
+    _restoreUI(res) {
         this.labelGold.changeText(`x${this._store.state.player.gold}`)
         this.updateExp(this._store.state.player.progressValue)
         this.updatePrice(this._store.state.player.price)
         if (this._store.state.player.level > 10) {
             this.updateBtnFood()
         }
+        this.dialogGift.getChildByName('labelTip').changeText(`猫币奖励 x${res.goldInc}`)
+        this.btnGift.visible = true
     }
 
     /**捡起金币后文字消失 */
@@ -106,7 +111,7 @@ export default class GameUI extends Laya.Scene {
         this.titleLogo.visible = false
         let plat = Laya.Browser.onMiniGame ? 'wx' : null
         Laya.store.actions.login(plat).then(res => {
-            this._restoreUI()
+            this._restoreUI(res)
             this.btnFood.visible = true
             this.btnGold.visible = true
             this.btnShare.visible = true
@@ -164,7 +169,6 @@ export default class GameUI extends Laya.Scene {
             })
         }
     }
-
 
     /**看广告领金币 */
     earnGold(type, option) {
@@ -229,6 +233,11 @@ export default class GameUI extends Laya.Scene {
         let storyIndex = this._store.actions.moveStoryIndex(1)
         this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${storyIndex + 1}.ani`
         this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[storyIndex]
+    }
+    giftOpen() {
+        this._director.pauseGame()
+        this.dialogGift.visible = true
+        this.dialogGift.show()
     }
 
     updateExp(value) {
