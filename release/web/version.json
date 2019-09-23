@@ -1,6 +1,6 @@
 {
   "GameMain.json": "GameMain-dc09472a70.json",
-  "GameUI.json": "GameUI-ef32d83c09.json",
+  "GameUI.json": "GameUI-73f00a1153.json",
   "ani/BlackCat.ani": "ani/BlackCat-06e8c677d4.ani",
   "ani/Bomb.ani": "ani/Bomb-2ad2bc358d.ani",
   "ani/Explode.ani": "ani/Explode-e0c73847d2.ani",
@@ -49,7 +49,7 @@
   "bg/bg_white.jpg": "bg/bg_white-4446020439.jpg",
   "fileconfig.json": "fileconfig-ff34c0fe51.json",
   "index.js": "index-85e10f0052.js",
-  "js/bundle.js": "js/bundle-c3299dfd4c.js",
+  "js/bundle.js": "js/bundle-08a43221fd.js",
   "libs/laya.core.js": "libs/laya-1fedd469ed.core.js",
   "libs/laya.physics.js": "libs/laya-7b8dc5b264.physics.js",
   "libs/laya.ui.js": "libs/laya-c1bc438939.ui.js",
