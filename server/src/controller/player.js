@@ -143,10 +143,10 @@ router.get('/earn', async (ctx, next) => {
         }
     } else if (inparam.type == 'ad') {
         // 大于30秒可领取
-        if (!AdMap[token._id] || AdMap[token._id] - Date.now() > 30000) {
-            AdMap[token._id] = Date.now()
+        // if (!AdMap[token._id] || AdMap[token._id] - Date.now() > 30000) {
+            // AdMap[token._id] = Date.now()
             goldInc = LevelConfig[player.level].adGold
-        }
+        // }
     } else if (inparam.type == 'pick') {
         // 随机拾取奖励
         goldInc = _.random(10, 100)

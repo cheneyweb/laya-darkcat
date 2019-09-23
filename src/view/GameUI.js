@@ -63,7 +63,7 @@ export default class GameUI extends Laya.Scene {
                 //点击开始游戏
                 else {
                     this.btnStart.label = '点击领养'
-                    this.btnStart.on(Laya.Event.CLICK, this, this.beginGame)
+                    this.btnStart.on(Laya.Event.CLICK, this, this.beginGame, [true])
                 }
             }),
             Laya.Handler.create(this, (e) => { this.btnStart.label = `加载中 ${(e * 100).toFixed(2)}%` }, null, false)
@@ -107,7 +107,7 @@ export default class GameUI extends Laya.Scene {
     }
 
     /**开始游戏 */
-    beginGame() {
+    beginGame(isFirst) {
         this.btnStart.visible = false
         this.labelLaw.visible = false
         this.labelCopyright.visible = false
@@ -127,6 +127,8 @@ export default class GameUI extends Laya.Scene {
         this._director.run()
         //播放背景音乐
         Laya.SoundManager.playMusic("sound/bgm.mp3")
+        //主动打开显示日志
+        isFirst && this.diaryOpen()
     }
 
     /**停止游戏 */
