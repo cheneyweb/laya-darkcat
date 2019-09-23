@@ -10,34 +10,34 @@ const ShareMap = {}
 const AdMap = {}
 
 // 等级配置
-// const LevelConfig = {
-//     1: { expMax: 10, price: 50 },
-//     2: { expMax: 20, price: 50 },
-//     3: { expMax: 40, price: 50 },
-//     4: { expMax: 80, price: 50 },
-//     5: { expMax: 160, price: 50 },
-//     6: { expMax: 240, price: 50 },
-//     7: { expMax: 500, price: 50 },
-//     8: { expMax: 1000, price: 50 },
-//     9: { expMax: 2000, price: 50 },
-//     10: { expMax: 4000, price: 100 },
-//     11: { expMax: 8000, price: 100 },
-//     12: { expMax: 20000, price: 100 },
-// }
 const LevelConfig = {
-    1: { expMax: 3, price: 3 },
-    2: { expMax: 4, price: 4 },
-    3: { expMax: 5, price: 5 },
-    4: { expMax: 6, price: 6 },
-    5: { expMax: 7, price: 7 },
-    6: { expMax: 8, price: 8 },
-    7: { expMax: 9, price: 9 },
-    8: { expMax: 10, price: 10 },
-    9: { expMax: 11, price: 11 },
-    10: { expMax: 12, price: 12 },
-    11: { expMax: 13, price: 13 },
-    12: { expMax: 1000, price: 1000 },
+    1: { expMax: 10, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
+    2: { expMax: 20, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
+    3: { expMax: 40, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
+    4: { expMax: 80, price: 50, goldInc: 4, goldIncMax: 2000, adGold: 500 },
+    5: { expMax: 160, price: 50, goldInc: 8, goldIncMax: 4000, adGold: 500 },
+    6: { expMax: 240, price: 100, goldInc: 20, goldIncMax: 10000, adGold: 500 },
+    7: { expMax: 500, price: 200, goldInc: 80, goldIncMax: 40000, adGold: 1000 },
+    8: { expMax: 1000, price: 400, goldInc: 150, goldIncMax: 80000, adGold: 2000 },
+    9: { expMax: 2000, price: 800, goldInc: 375, goldIncMax: 180000, adGold: 3000 },
+    10: { expMax: 4000, price: 2000, goldInc: 800, goldIncMax: 400000, adGold: 4000 },
+    11: { expMax: 8000, price: 3000, goldInc: 800, goldIncMax: 400000, adGold: 4000 },
+    12: { expMax: 20000, price: 3000, goldInc: 800, goldIncMax: 400000, adGold: 4000 },
 }
+// const LevelConfig = {
+//     1: { expMax: 3, price: 3 },
+//     2: { expMax: 4, price: 4 },
+//     3: { expMax: 5, price: 5 },
+//     4: { expMax: 6, price: 6 },
+//     5: { expMax: 7, price: 7 },
+//     6: { expMax: 8, price: 8 },
+//     7: { expMax: 9, price: 9 },
+//     8: { expMax: 10, price: 10 },
+//     9: { expMax: 11, price: 11 },
+//     10: { expMax: 12, price: 12 },
+//     11: { expMax: 13, price: 13 },
+//     12: { expMax: 1000, price: 1000 },
+// }
 
 function initPlayer(inparam) {
     inparam.exp = 0
@@ -47,6 +47,8 @@ function initPlayer(inparam) {
     delete inparam._id
     delete inparam.progressValue
     delete inparam.price
+
+    return true
 }
 
 function calcProgressValue(player) {
@@ -66,14 +68,17 @@ router.post('/login', async (ctx, next) => {
     ctx.body = { err: false }
     let shareTitle = '这猫长这样我也是醉了...'
     let player
+    let isNewPlayer = false
+    let lastLogin = 0
     // 微信小游戏平台
     if (inparam.openid) {
         player = await mongodb.collection('player').findOne({ openid: inparam.openid })
         if (!player) {
-            initPlayer(inparam)
+            isNewPlayer = initPlayer(inparam)
             res = await mongodb.collection('player').insertOne(inparam)
             player = { ...inparam, _id: res.insertedId }
         } else {
+            lastLogin = player.lastLogin
             player.lastLogin = Date.now()
             mongodb.collection('player').findOneAndUpdate({ _id: ObjectId(player._id) }, { $set: { lastLogin: player.lastLogin } })
         }
@@ -82,22 +87,33 @@ router.post('/login', async (ctx, next) => {
     else if (inparam._id) {
         player = await mongodb.collection('player').findOne({ _id: ObjectId(inparam._id) })
         if (!player) {
-            initPlayer(inparam)
+            isNewPlayer = initPlayer(inparam)
             res = await mongodb.collection('player').insertOne(inparam)
             player = { ...inparam, _id: res.insertedId }
         } else {
+            lastLogin = player.lastLogin
             player.lastLogin = Date.now()
             mongodb.collection('player').findOneAndUpdate({ _id: ObjectId(player._id) }, { $set: { lastLogin: player.lastLogin } })
         }
     } else {
-        initPlayer(inparam)
+        isNewPlayer = initPlayer(inparam)
         let res = await mongodb.collection('player').insertOne(inparam)
         player = { ...inparam, _id: res.insertedId }
     }
     const token = jwt.sign(_.pick(player, ['_id', 'level']), config.auth.secret)
     player.progressValue = calcProgressValue(player)
     player.price = `${LevelConfig[player.level].price}猫币/只`
-    ctx.body = { player, token, shareTitle }
+
+    // 首登奖励和上线奖励
+    let goldInc = 0
+    if (isNewPlayer) {
+        goldInc = 500
+    } else if (lastLogin) {
+        let minute = parseInt((Date.now() - lastLogin) / 1000 / 60)
+        goldInc = LevelConfig[player.level].goldInc * minute >= LevelConfig[player.level].goldIncMax ? LevelConfig[player.level].goldIncMax : LevelConfig[player.level].goldInc * time
+    }
+
+    ctx.body = { player, token, shareTitle, goldInc }
 })
 
 /**
@@ -116,14 +132,14 @@ router.get('/earn', async (ctx, next) => {
         }
         if (ShareMap[playerToday] || ShareMap[playerToday] == 0) {
             if (ShareMap[playerToday]++ < 3) {
-                goldInc = 500
+                goldInc = LevelConfig[player.level].adGold
             }
         }
     } else if (inparam.type == 'ad') {
         // 大于30秒可领取
         if (!AdMap[token._id] || AdMap[token._id] - Date.now() > 30000) {
             AdMap[token._id] = Date.now()
-            goldInc = 500
+            goldInc = LevelConfig[player.level].adGold
         }
     } else if (inparam.type == 'pick') {
         goldInc = _.random(10, 100)

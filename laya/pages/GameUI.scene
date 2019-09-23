@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":75,
+    "selecteID":76,
     "searchKey":"Scene",
     "props":{"width":640,"sceneColor":"#ffffff","runtime":"view/GameUI.js","height":1336},
     "nodeParent":-1,
-    "maxID":76,
+    "maxID":78,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -286,13 +286,14 @@
             "nodeParent":2,
             "maxID":73,
             "label":"dialogDiary",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":74,
             "child":[
                 {
+                    "x":30,
                     "type":"Texture",
                     "searchKey":"Texture",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -306,6 +307,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Animation",
                     "searchKey":"Animation",
                     "props":{"presetID":8,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -319,6 +321,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":4,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -332,6 +335,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":5,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -346,6 +350,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"presetID":6,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -359,6 +364,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Button",
                     "searchKey":"Button",
                     "props":{"presetID":7,"preset":"laya/pages/prefab/DialogDiary.prefab"},
@@ -395,6 +401,34 @@
             "compId":75,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,btnGift,btnGift",
+            "props":{"y":1183.5,"x":520,"width":90,"visible":false,"var":"btnGift","name":"btnGift","labelSize":20,"labelPadding":"60","labelColors":"white,black","label":"今日奖励","height":90},
+            "nodeParent":2,
+            "label":"btnGift",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":76,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Animation",
+                    "searchKey":"Animation",
+                    "props":{"y":45,"x":45,"width":0,"source":"ani/gold/GoldPack.ani","scaleY":1.5,"scaleX":1.5,"rotation":0,"height":0,"autoPlay":true},
+                    "nodeParent":76,
+                    "label":"Animation",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":77,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {
