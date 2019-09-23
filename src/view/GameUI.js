@@ -71,8 +71,8 @@ export default class GameUI extends Laya.Scene {
         //点击释放食物
         this.btnFood.on(Laya.Event.CLICK, this, this.releaseFood)
         //点击赚取金币
-        this.btnGold.on(Laya.Event.CLICK, this, this.earnGold)
-        this.dialogTip.getChildByName('btnTip').on(Laya.Event.CLICK, this, this.earnGold)
+        this.btnGold.on(Laya.Event.CLICK, this, this.earnGold, ['ad'])
+        this.dialogTip.getChildByName('btnTip').on(Laya.Event.CLICK, this, this.earnGold, ['ad'])
         //点击分享
         this.btnShare.on(Laya.Event.CLICK, this, this.share)
         //点击日记
@@ -83,7 +83,8 @@ export default class GameUI extends Laya.Scene {
         this.dialogDiary.getChildByName('btnRight').on(Laya.Event.CLICK, this, this.diaryRight)
         //点击今日奖励
         this.btnGift.on(Laya.Event.CLICK, this, this.giftOpen)
-        this.dialogGift.getChildByName('btnGift').on(Laya.Event.CLICK, this, this.earnGold)
+        this.dialogGift.getChildByName('btnGift').on(Laya.Event.CLICK, this, this.earnGold, ['gift'])
+        this.dialogGift.closeHandler = new Laya.Handler(this, this.giftClose)
     }
 
     /**通过全局状态恢复UI */
@@ -94,8 +95,10 @@ export default class GameUI extends Laya.Scene {
         if (this._store.state.player.level > 10) {
             this.updateBtnFood()
         }
-        this.dialogGift.getChildByName('labelTip').changeText(`猫币奖励 x${res.goldInc}`)
-        this.btnGift.visible = true
+        if (res.goldInc) {
+            this.dialogGift.getChildByName('labelTip').changeText(`猫币奖励 x${res.goldInc}`)
+            this.btnGift.visible = true
+        }
     }
 
     /**捡起金币后文字消失 */
@@ -172,7 +175,6 @@ export default class GameUI extends Laya.Scene {
 
     /**看广告领金币 */
     earnGold(type, option) {
-        type = type == 'pick' ? 'pick' : 'ad'
         this._store.actions.earn(type).then(res => {
             if (!res.err) {
                 if (type == 'pick') {
@@ -184,7 +186,12 @@ export default class GameUI extends Laya.Scene {
                 this.labelGold.changeText(`x${res.player.gold}`)
             }
         })
-        this.dialogTip.close()
+        if (type == 'ad') {
+            this.dialogTip.close()
+        } else if (type == 'gift') {
+            this.dialogGift.close()
+            this.btnGift.visible = false
+        }
     }
 
 
@@ -234,10 +241,14 @@ export default class GameUI extends Laya.Scene {
         this.dialogDiary.getChildByName('aniCat').source = `ani/cat/Cat${storyIndex + 1}.ani`
         this.dialogDiary.getChildByName('labelDiary').text = this._store.state.storyArr[storyIndex]
     }
+
     giftOpen() {
         this._director.pauseGame()
         this.dialogGift.visible = true
         this.dialogGift.show()
+    }
+    giftClose() {
+        this._director.continueGame()
     }
 
     updateExp(value) {
