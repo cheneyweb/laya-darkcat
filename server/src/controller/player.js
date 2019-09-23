@@ -111,7 +111,7 @@ router.post('/login', async (ctx, next) => {
         goldInc = 500
     } else if (lastLogin) {
         let minute = parseInt((Date.now() - lastLogin) / 1000 / 60)
-        goldInc = LevelConfig[player.level].goldInc * minute >= LevelConfig[player.level].goldIncMax ? LevelConfig[player.level].goldIncMax : LevelConfig[player.level].goldInc * time
+        goldInc = LevelConfig[player.level].goldInc * minute >= LevelConfig[player.level].goldIncMax ? LevelConfig[player.level].goldIncMax : LevelConfig[player.level].goldInc * minute
     }
     if (GiftMap[player._id]) {
         GiftMap[player._id] = goldInc = GiftMap[player._id] >= goldInc ? GiftMap[player._id] : goldInc
