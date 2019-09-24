@@ -22,7 +22,7 @@ const LevelConfig = {
     8: { expMax: 1000, price: 50, goldInc: 20, goldIncMax: 10000, adGold: 1500 },
     9: { expMax: 2000, price: 50, goldInc: 42, goldIncMax: 20000, adGold: 2000 },
     10: { expMax: 4000, price: 50, goldInc: 83, goldIncMax: 40000, adGold: 4000 },
-    11: { expMax: 6000, price: 500, goldInc: 104, goldIncMax: 50000, adGold: 5000 },
+    11: { expMax: 6000, price: 200, goldInc: 104, goldIncMax: 50000, adGold: 5000 },
     12: { expMax: 20000, price: 500, goldInc: 104, goldIncMax: 50000, adGold: 5000 },
 }
 // const LevelConfig = {
