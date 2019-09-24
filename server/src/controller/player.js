@@ -13,17 +13,17 @@ const GiftMap = {}
 // 等级配置
 const LevelConfig = {
     1: { expMax: 10, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
-    2: { expMax: 20, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
-    3: { expMax: 40, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
-    4: { expMax: 80, price: 50, goldInc: 4, goldIncMax: 2000, adGold: 500 },
-    5: { expMax: 160, price: 50, goldInc: 8, goldIncMax: 4000, adGold: 500 },
-    6: { expMax: 240, price: 100, goldInc: 20, goldIncMax: 10000, adGold: 500 },
-    7: { expMax: 500, price: 200, goldInc: 80, goldIncMax: 40000, adGold: 1000 },
-    8: { expMax: 1000, price: 400, goldInc: 150, goldIncMax: 80000, adGold: 2000 },
-    9: { expMax: 2000, price: 800, goldInc: 375, goldIncMax: 180000, adGold: 3000 },
-    10: { expMax: 4000, price: 2000, goldInc: 800, goldIncMax: 400000, adGold: 4000 },
-    11: { expMax: 8000, price: 3000, goldInc: 800, goldIncMax: 400000, adGold: 4000 },
-    12: { expMax: 20000, price: 3000, goldInc: 800, goldIncMax: 400000, adGold: 4000 },
+    2: { expMax: 30, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
+    3: { expMax: 60, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
+    4: { expMax: 100, price: 50, goldInc: 2, goldIncMax: 1000, adGold: 500 },
+    5: { expMax: 200, price: 50, goldInc: 4, goldIncMax: 2000, adGold: 500 },
+    6: { expMax: 400, price: 50, goldInc: 8, goldIncMax: 4000, adGold: 500 },
+    7: { expMax: 800, price: 50, goldInc: 16, goldIncMax: 8000, adGold: 1000 },
+    8: { expMax: 1000, price: 50, goldInc: 20, goldIncMax: 10000, adGold: 1500 },
+    9: { expMax: 2000, price: 50, goldInc: 42, goldIncMax: 20000, adGold: 2000 },
+    10: { expMax: 4000, price: 50, goldInc: 83, goldIncMax: 40000, adGold: 4000 },
+    11: { expMax: 6000, price: 500, goldInc: 104, goldIncMax: 50000, adGold: 5000 },
+    12: { expMax: 20000, price: 500, goldInc: 104, goldIncMax: 50000, adGold: 5000 },
 }
 // const LevelConfig = {
 //     1: { expMax: 3, price: 3 },
@@ -138,14 +138,14 @@ router.get('/earn', async (ctx, next) => {
         }
         if (ShareMap[playerToday] || ShareMap[playerToday] == 0) {
             if (ShareMap[playerToday]++ < 3) {
-                goldInc = LevelConfig[player.level].adGold
+                goldInc = LevelConfig[token.level].adGold
             }
         }
     } else if (inparam.type == 'ad') {
         // 大于30秒可领取
         // if (!AdMap[token._id] || AdMap[token._id] - Date.now() > 30000) {
             // AdMap[token._id] = Date.now()
-            goldInc = LevelConfig[player.level].adGold
+            goldInc = LevelConfig[token.level].adGold
         // }
     } else if (inparam.type == 'pick') {
         // 随机拾取奖励
